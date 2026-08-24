@@ -27,8 +27,8 @@ from .models import PRESENCE_UNKNOWN
 from .notify import notify, write_csv, write_report
 from .providers import ProviderClient, write_unresolved_csv
 from .resolve import IdResolver
-from .spin import extract_titles_from_csv_path, write_spin_html
-from .watchlist import load_watchlist
+from .spin import build_spin_films, write_spin_html
+from .watchlist import load_watchlist, scrape_looks_usable, write_watchlist_csv
 
 logger = logging.getLogger(__name__)
 
@@ -165,6 +165,9 @@ def run_render_html(config_path: Path) -> int:
     html_report = base / paths.get("html_report", "report.html")
     spin_html = base / paths.get("spin_html", "spin.html")
     watchlist = base / paths.get("watchlist", "watchlist.csv")
+    id_cache = base / paths.get("id_cache", "cache/id_cache.json")
+    spin_meta = base / "cache" / "spin_meta.json"
+    taste_cache = base / "cache" / "taste_enrichment.json"
     if csv_report.exists():
         payload = payload_from_csv(csv_report)
         write_html_report(html_report, payload)
@@ -173,12 +176,64 @@ def run_render_html(config_path: Path) -> int:
         logger.warning("Missing %s; skipped report.html", csv_report)
 
     if watchlist.exists():
-        titles = extract_titles_from_csv_path(watchlist)
-        write_spin_html(spin_html, titles, source_label="Default watchlist")
+        films = load_watchlist(watchlist)
+        api_key = None
+        http = None
+        try:
+            from .config import load_config
+
+            cfg = load_config(config_path)
+            api_key = cfg.tmdb_api_key
+            http = HttpClient(delay_seconds=cfg.request_delay_seconds)
+        except (FileNotFoundError, ValueError):
+            # Offline rebuild: use whatever metadata is already cached.
+            pass
+        spin_films = build_spin_films(
+            films,
+            streaming_csv=csv_report if csv_report.exists() else None,
+            id_cache_path=id_cache if id_cache.exists() else None,
+            meta_path=spin_meta,
+            taste_cache_path=taste_cache if taste_cache.exists() else None,
+            tmdb_api_key=api_key,
+            http=http,
+        )
+        write_spin_html(spin_html, spin_films, source_label="Default watchlist")
         logger.info("Wrote %s", spin_html.resolve())
     else:
         logger.warning("Missing %s; skipped spin.html", watchlist)
     return 0
+
+
+def _load_watchlist_films(config, args, http) -> list:
+    """Prefer a live public Letterboxd scrape; fall back to the committed CSV."""
+    watchlist_path = Path(args.watchlist) if args.watchlist else config.paths.watchlist
+    csv_films = []
+    if watchlist_path.exists():
+        csv_films = load_watchlist(watchlist_path)
+
+    username = (config.letterboxd_user or "").strip()
+    should_scrape = bool(args.scrape or username)
+    if should_scrape and username:
+        try:
+            scraped = load_watchlist(None, username=username, http=http)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("Letterboxd scrape failed; using committed CSV: %s", exc)
+            scraped = []
+        if scrape_looks_usable(scraped, len(csv_films)):
+            write_watchlist_csv(watchlist_path, scraped)
+            return scraped
+        if scraped:
+            logger.warning(
+                "Scrape returned %d films vs %d in CSV; keeping the committed export.",
+                len(scraped),
+                len(csv_films),
+            )
+
+    if csv_films:
+        return csv_films
+    raise ValueError(
+        "No watchlist available. Commit watchlist.csv or set LETTERBOXD_USER."
+    )
 
 
 def run(argv: list[str] | None = None) -> int:
@@ -207,16 +262,8 @@ def run(argv: list[str] | None = None) -> int:
     except Exception as exc:  # noqa: BLE001 - startup warning should not hard-fail
         logger.warning("Could not validate provider names against TMDB: %s", exc)
 
-    watchlist_path = Path(args.watchlist) if args.watchlist else config.paths.watchlist
-    username = config.letterboxd_user if args.scrape or not watchlist_path.exists() else None
-
     try:
-        if args.scrape:
-            films = load_watchlist(None, username=config.letterboxd_user, http=http)
-        elif watchlist_path.exists():
-            films = load_watchlist(watchlist_path, http=http)
-        else:
-            films = load_watchlist(None, username=username, http=http)
+        films = _load_watchlist_films(config, args, http)
     except Exception as exc:  # noqa: BLE001
         logger.error("Failed to load watchlist: %s", exc)
         return 2
@@ -290,10 +337,20 @@ def run(argv: list[str] | None = None) -> int:
     )
     write_html_from_films(config.paths.html_report, availability, diff)
     try:
-        spin_titles = extract_titles_from_csv_path(config.paths.watchlist)
+        spin_meta = config.paths.id_cache.parent / "spin_meta.json"
+        taste_cache = config.paths.id_cache.parent / "taste_enrichment.json"
+        spin_films = build_spin_films(
+            films,
+            streaming_csv=config.paths.csv_report,
+            id_cache_path=config.paths.id_cache,
+            meta_path=spin_meta,
+            taste_cache_path=taste_cache if taste_cache.exists() else None,
+            tmdb_api_key=config.tmdb_api_key,
+            http=http,
+        )
         write_spin_html(
             config.paths.spin_html,
-            spin_titles,
+            spin_films,
             source_label="Default watchlist",
         )
     except Exception as exc:  # noqa: BLE001 - spin page is optional UX

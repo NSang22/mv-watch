@@ -114,6 +114,34 @@ def _parse_csv_rows(reader: csv.DictReader) -> list[WatchlistFilm]:
     return films
 
 
+def write_watchlist_csv(path: Path, films: list[WatchlistFilm]) -> None:
+    """Persist a watchlist in Letterboxd export shape so later runs stay in sync."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["Date", "Name", "Year", "Letterboxd URI"])
+        writer.writeheader()
+        for film in films:
+            writer.writerow(
+                {
+                    "Date": film.date_added or "",
+                    "Name": film.name,
+                    "Year": film.year if film.year is not None else "",
+                    "Letterboxd URI": film.letterboxd_uri,
+                }
+            )
+    logger.info("Wrote %d films to %s", len(films), path)
+
+
+def scrape_looks_usable(scraped: list[WatchlistFilm], previous_count: int) -> bool:
+    """Reject an empty or obviously truncated public-watchlist scrape."""
+    if not scraped:
+        return False
+    if previous_count <= 0:
+        return True
+    return len(scraped) >= max(5, int(previous_count * 0.2))
+
+
 def scrape_watchlist(username: str, http: HttpClient) -> list[WatchlistFilm]:
     """Page through a public Letterboxd watchlist until a page has no posters.
 

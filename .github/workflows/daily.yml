@@ -60,7 +60,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state.json watchlist_streaming.csv report.md report.html index.html spin.html recommend.html conflicts.csv unresolved.csv unmatched.csv cache/id_cache.json || true
+          git add state.json watchlist.csv watchlist_streaming.csv report.md report.html index.html spin.html recommend.html conflicts.csv unresolved.csv unmatched.csv cache/id_cache.json cache/spin_meta.json || true
           if git diff --staged --quiet; then
             echo "No output changes to commit."
           else

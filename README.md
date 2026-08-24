@@ -17,10 +17,18 @@ find you instead of the other way around.
 Live site: **https://nsang22.github.io/mv-watch/**
 
 GitHub Pages serves `index.html` (same cinema viewer as `report.html`), plus
-`spin.html` and `recommend.html`. The daily Action refreshes availability and
-redeploys. Taste picks update when you run `recommend` locally and push.
+`spin.html` and `recommend.html`. The daily Action:
 
-The published site is public even if you later make the repository private.
+- scrapes your public Letterboxd watchlist (when `LETTERBOXD_USER` is set) so
+  watched/removed titles drop off the site
+- refreshes TMDB availability
+- rebuilds Tonight's Spin with length / genre / decade / service filters
+- redeploys Pages
+
+Taste picks still update when you run `recommend` locally and push.
+
+The published site is public. Keep the Letterboxd watchlist public too if you
+want automatic sync.
 
 ## Quick start
 
@@ -242,9 +250,9 @@ Workflow: `.github/workflows/daily.yml`
 Repo secrets to set:
 
 - `TMDB_API_KEY` (required)
+- `LETTERBOXD_USER` (recommended; public username so CI refreshes the watchlist)
 - `NTFY_TOPIC` (optional)
 - `STREAMING_AVAILABILITY_API_KEY` (optional)
-- `LETTERBOXD_USER` (optional; only if you drop the CSV and scrape)
 
 ## Tests
 

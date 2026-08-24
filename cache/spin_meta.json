@@ -1,0 +1,899 @@
+{
+  "1004076": {
+    "decade": 2020,
+    "genres": [],
+    "runtime": 11,
+    "year": 2022
+  },
+  "1018": {
+    "decade": 2000,
+    "genres": [
+      "Thriller",
+      "Drama",
+      "Mystery"
+    ],
+    "runtime": 147,
+    "year": 2001
+  },
+  "10315": {
+    "decade": 2000,
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy",
+      "Family"
+    ],
+    "runtime": 87,
+    "year": 2009
+  },
+  "1033148": {
+    "decade": 2020,
+    "genres": [
+      "Drama"
+    ],
+    "runtime": 119,
+    "year": 2025
+  },
+  "11216": {
+    "decade": 1980,
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "runtime": 124,
+    "year": 1988
+  },
+  "1124566": {
+    "decade": 2020,
+    "genres": [
+      "Drama",
+      "Comedy"
+    ],
+    "runtime": 133,
+    "year": 2025
+  },
+  "120": {
+    "decade": 2000,
+    "genres": [
+      "Adventure",
+      "Fantasy",
+      "Action"
+    ],
+    "runtime": 179,
+    "year": 2001
+  },
+  "120467": {
+    "decade": 2010,
+    "genres": [
+      "Comedy",
+      "Drama"
+    ],
+    "runtime": 100,
+    "year": 2014
+  },
+  "121": {
+    "decade": 2000,
+    "genres": [
+      "Adventure",
+      "Fantasy",
+      "Action"
+    ],
+    "runtime": 179,
+    "year": 2002
+  },
+  "1213": {
+    "decade": 1990,
+    "genres": [
+      "Thriller",
+      "Crime",
+      "Drama"
+    ],
+    "runtime": 140,
+    "year": 1999
+  },
+  "1272": {
+    "decade": 2000,
+    "genres": [
+      "Science Fiction",
+      "Thriller"
+    ],
+    "runtime": 108,
+    "year": 2007
+  },
+  "129": {
+    "decade": 2000,
+    "genres": [
+      "Animation",
+      "Family",
+      "Fantasy"
+    ],
+    "runtime": 125,
+    "year": 2001
+  },
+  "13": {
+    "decade": 1990,
+    "genres": [
+      "Comedy",
+      "Drama",
+      "Romance"
+    ],
+    "runtime": 142,
+    "year": 1994
+  },
+  "1325734": {
+    "decade": 2020,
+    "genres": [
+      "Romance",
+      "Comedy",
+      "Drama"
+    ],
+    "runtime": 105,
+    "year": 2026
+  },
+  "1339713": {
+    "decade": 2020,
+    "genres": [
+      "Horror",
+      "Thriller"
+    ],
+    "runtime": 109,
+    "year": 2026
+  },
+  "146233": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Thriller",
+      "Crime"
+    ],
+    "runtime": 153,
+    "year": 2013
+  },
+  "15": {
+    "decade": 1940,
+    "genres": [
+      "Mystery",
+      "Drama"
+    ],
+    "runtime": 119,
+    "year": 1941
+  },
+  "153": {
+    "decade": 2000,
+    "genres": [
+      "Drama",
+      "Comedy",
+      "Romance"
+    ],
+    "runtime": 102,
+    "year": 2003
+  },
+  "170": {
+    "decade": 2000,
+    "genres": [
+      "Horror",
+      "Thriller",
+      "Science Fiction"
+    ],
+    "runtime": 113,
+    "year": 2002
+  },
+  "184": {
+    "decade": 1990,
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ],
+    "runtime": 154,
+    "year": 1997
+  },
+  "185": {
+    "decade": 1970,
+    "genres": [
+      "Science Fiction",
+      "Crime"
+    ],
+    "runtime": 137,
+    "year": 1971
+  },
+  "194": {
+    "decade": 2000,
+    "genres": [
+      "Comedy",
+      "Romance"
+    ],
+    "runtime": 122,
+    "year": 2001
+  },
+  "194662": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Comedy"
+    ],
+    "runtime": 120,
+    "year": 2014
+  },
+  "207": {
+    "decade": 1980,
+    "genres": [
+      "Drama"
+    ],
+    "runtime": 129,
+    "year": 1989
+  },
+  "22538": {
+    "decade": 2010,
+    "genres": [
+      "Action",
+      "Comedy",
+      "Romance"
+    ],
+    "runtime": 113,
+    "year": 2010
+  },
+  "238": {
+    "decade": 1970,
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "runtime": 175,
+    "year": 1972
+  },
+  "24": {
+    "decade": 2000,
+    "genres": [
+      "Action",
+      "Crime"
+    ],
+    "runtime": 111,
+    "year": 2003
+  },
+  "25237": {
+    "decade": 1980,
+    "genres": [
+      "Drama",
+      "War",
+      "Horror",
+      "History"
+    ],
+    "runtime": 142,
+    "year": 1985
+  },
+  "273481": {
+    "decade": 2010,
+    "genres": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "runtime": 122,
+    "year": 2015
+  },
+  "279": {
+    "decade": 1980,
+    "genres": [
+      "Drama",
+      "History",
+      "Music"
+    ],
+    "runtime": 160,
+    "year": 1984
+  },
+  "300668": {
+    "decade": 2010,
+    "genres": [
+      "Science Fiction",
+      "Horror"
+    ],
+    "runtime": 115,
+    "year": 2018
+  },
+  "3175": {
+    "decade": 1970,
+    "genres": [
+      "Drama",
+      "History"
+    ],
+    "runtime": 188,
+    "year": 1975
+  },
+  "334": {
+    "decade": 1990,
+    "genres": [
+      "Drama"
+    ],
+    "runtime": 189,
+    "year": 1999
+  },
+  "335984": {
+    "decade": 2010,
+    "genres": [
+      "Science Fiction",
+      "Drama"
+    ],
+    "runtime": 164,
+    "year": 2017
+  },
+  "339403": {
+    "decade": 2010,
+    "genres": [
+      "Action",
+      "Crime"
+    ],
+    "runtime": 113,
+    "year": 2017
+  },
+  "348": {
+    "decade": 1970,
+    "genres": [
+      "Horror",
+      "Science Fiction"
+    ],
+    "runtime": 117,
+    "year": 1979
+  },
+  "350": {
+    "decade": 2000,
+    "genres": [
+      "Drama",
+      "Comedy"
+    ],
+    "runtime": 109,
+    "year": 2006
+  },
+  "369972": {
+    "decade": 2010,
+    "genres": [
+      "History",
+      "Drama"
+    ],
+    "runtime": 141,
+    "year": 2018
+  },
+  "400617": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "runtime": 130,
+    "year": 2017
+  },
+  "406": {
+    "decade": 1990,
+    "genres": [
+      "Drama"
+    ],
+    "runtime": 98,
+    "year": 1995
+  },
+  "426": {
+    "decade": 1950,
+    "genres": [
+      "Mystery",
+      "Romance",
+      "Thriller"
+    ],
+    "runtime": 128,
+    "year": 1958
+  },
+  "429197": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Comedy",
+      "History"
+    ],
+    "runtime": 132,
+    "year": 2018
+  },
+  "429200": {
+    "decade": 2010,
+    "genres": [
+      "Crime",
+      "Thriller",
+      "Drama"
+    ],
+    "runtime": 102,
+    "year": 2017
+  },
+  "4348": {
+    "decade": 2000,
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "runtime": 128,
+    "year": 2005
+  },
+  "44214": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Thriller",
+      "Horror"
+    ],
+    "runtime": 108,
+    "year": 2010
+  },
+  "4553": {
+    "decade": 2000,
+    "genres": [
+      "Thriller",
+      "Drama"
+    ],
+    "runtime": 102,
+    "year": 2004
+  },
+  "458723": {
+    "decade": 2010,
+    "genres": [
+      "Horror",
+      "Mystery",
+      "Thriller"
+    ],
+    "runtime": 116,
+    "year": 2019
+  },
+  "466272": {
+    "decade": 2010,
+    "genres": [
+      "Comedy",
+      "Drama",
+      "Thriller"
+    ],
+    "runtime": 162,
+    "year": 2019
+  },
+  "466420": {
+    "decade": 2020,
+    "genres": [
+      "Crime",
+      "History",
+      "Drama"
+    ],
+    "runtime": 206,
+    "year": 2023
+  },
+  "475557": {
+    "decade": 2010,
+    "genres": [
+      "Crime",
+      "Thriller",
+      "Drama"
+    ],
+    "runtime": 122,
+    "year": 2019
+  },
+  "487558": {
+    "decade": 2010,
+    "genres": [
+      "Crime",
+      "Comedy",
+      "Drama",
+      "History"
+    ],
+    "runtime": 136,
+    "year": 2018
+  },
+  "493922": {
+    "decade": 2010,
+    "genres": [
+      "Horror",
+      "Mystery",
+      "Thriller"
+    ],
+    "runtime": 128,
+    "year": 2018
+  },
+  "4951": {
+    "decade": 1990,
+    "genres": [
+      "Comedy",
+      "Romance",
+      "Drama"
+    ],
+    "runtime": 97,
+    "year": 1999
+  },
+  "497": {
+    "decade": 1990,
+    "genres": [
+      "Fantasy",
+      "Drama",
+      "Crime"
+    ],
+    "runtime": 189,
+    "year": 1999
+  },
+  "503919": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Fantasy",
+      "Thriller"
+    ],
+    "runtime": 109,
+    "year": 2019
+  },
+  "515001": {
+    "decade": 2010,
+    "genres": [
+      "Comedy",
+      "War",
+      "Drama"
+    ],
+    "runtime": 108,
+    "year": 2019
+  },
+  "530385": {
+    "decade": 2010,
+    "genres": [
+      "Horror",
+      "Drama",
+      "Mystery"
+    ],
+    "runtime": 147,
+    "year": 2019
+  },
+  "531428": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "runtime": 121,
+    "year": 2019
+  },
+  "533444": {
+    "decade": 2010,
+    "genres": [
+      "Romance",
+      "Drama"
+    ],
+    "runtime": 136,
+    "year": 2019
+  },
+  "539": {
+    "decade": 1960,
+    "genres": [
+      "Horror",
+      "Thriller",
+      "Mystery"
+    ],
+    "runtime": 109,
+    "year": 1960
+  },
+  "560016": {
+    "decade": 2020,
+    "genres": [
+      "Thriller",
+      "Crime",
+      "Action"
+    ],
+    "runtime": 122,
+    "year": 2024
+  },
+  "598": {
+    "decade": 2000,
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "runtime": 129,
+    "year": 2002
+  },
+  "603": {
+    "decade": 1990,
+    "genres": [
+      "Action",
+      "Science Fiction"
+    ],
+    "runtime": 136,
+    "year": 1999
+  },
+  "615643": {
+    "decade": 2020,
+    "genres": [
+      "Drama"
+    ],
+    "runtime": 115,
+    "year": 2021
+  },
+  "619730": {
+    "decade": 2020,
+    "genres": [
+      "Thriller",
+      "Mystery",
+      "Horror",
+      "Science Fiction"
+    ],
+    "runtime": 123,
+    "year": 2022
+  },
+  "62": {
+    "decade": 1960,
+    "genres": [
+      "Science Fiction",
+      "Mystery",
+      "Adventure"
+    ],
+    "runtime": 149,
+    "year": 1968
+  },
+  "627": {
+    "decade": 1990,
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "runtime": 94,
+    "year": 1996
+  },
+  "64720": {
+    "decade": 2010,
+    "genres": [
+      "Thriller",
+      "Drama",
+      "Horror"
+    ],
+    "runtime": 120,
+    "year": 2011
+  },
+  "648878": {
+    "decade": 2020,
+    "genres": [
+      "Western",
+      "Comedy",
+      "Crime"
+    ],
+    "runtime": 148,
+    "year": 2025
+  },
+  "661539": {
+    "decade": 2020,
+    "genres": [
+      "Drama",
+      "Music"
+    ],
+    "runtime": 141,
+    "year": 2024
+  },
+  "670": {
+    "decade": 2000,
+    "genres": [
+      "Thriller",
+      "Mystery"
+    ],
+    "runtime": 120,
+    "year": 2003
+  },
+  "68718": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Western"
+    ],
+    "runtime": 165,
+    "year": 2012
+  },
+  "694": {
+    "decade": 1980,
+    "genres": [
+      "Horror",
+      "Thriller"
+    ],
+    "runtime": 144,
+    "year": 1980
+  },
+  "696506": {
+    "decade": 2020,
+    "genres": [
+      "Science Fiction",
+      "Comedy",
+      "Adventure"
+    ],
+    "runtime": 137,
+    "year": 2025
+  },
+  "718930": {
+    "decade": 2020,
+    "genres": [
+      "Action",
+      "Comedy",
+      "Thriller"
+    ],
+    "runtime": 126,
+    "year": 2022
+  },
+  "730251": {
+    "decade": 2020,
+    "genres": [
+      "Drama",
+      "Science Fiction"
+    ],
+    "runtime": 113,
+    "year": 2024
+  },
+  "746036": {
+    "decade": 2020,
+    "genres": [
+      "Action",
+      "Comedy",
+      "Romance"
+    ],
+    "runtime": 127,
+    "year": 2024
+  },
+  "747188": {
+    "decade": 2020,
+    "genres": [
+      "Comedy",
+      "Drama"
+    ],
+    "runtime": 105,
+    "year": 2023
+  },
+  "76341": {
+    "decade": 2010,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Science Fiction"
+    ],
+    "runtime": 121,
+    "year": 2015
+  },
+  "769": {
+    "decade": 1990,
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "runtime": 145,
+    "year": 1990
+  },
+  "78": {
+    "decade": 1980,
+    "genres": [
+      "Science Fiction",
+      "Drama",
+      "Thriller"
+    ],
+    "runtime": 118,
+    "year": 1982
+  },
+  "786892": {
+    "decade": 2020,
+    "genres": [
+      "Action",
+      "Science Fiction",
+      "Adventure"
+    ],
+    "runtime": 149,
+    "year": 2024
+  },
+  "807": {
+    "decade": 1990,
+    "genres": [
+      "Crime",
+      "Mystery",
+      "Thriller"
+    ],
+    "runtime": 127,
+    "year": 1995
+  },
+  "840430": {
+    "decade": 2020,
+    "genres": [
+      "Drama",
+      "Comedy"
+    ],
+    "runtime": 133,
+    "year": 2023
+  },
+  "843": {
+    "decade": 2000,
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "runtime": 99,
+    "year": 2000
+  },
+  "84892": {
+    "decade": 2010,
+    "genres": [
+      "Drama"
+    ],
+    "runtime": 103,
+    "year": 2012
+  },
+  "857": {
+    "decade": 1990,
+    "genres": [
+      "War",
+      "Drama",
+      "History"
+    ],
+    "runtime": 169,
+    "year": 1998
+  },
+  "872": {
+    "decade": 1950,
+    "genres": [
+      "Comedy",
+      "Romance"
+    ],
+    "runtime": 103,
+    "year": 1952
+  },
+  "911430": {
+    "decade": 2020,
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "runtime": 156,
+    "year": 2025
+  },
+  "933260": {
+    "decade": 2020,
+    "genres": [
+      "Horror",
+      "Science Fiction"
+    ],
+    "runtime": 141,
+    "year": 2024
+  },
+  "936075": {
+    "decade": 2020,
+    "genres": [
+      "Music",
+      "Drama"
+    ],
+    "runtime": 128,
+    "year": 2026
+  },
+  "9693": {
+    "decade": 2000,
+    "genres": [
+      "Science Fiction",
+      "Thriller",
+      "Action"
+    ],
+    "runtime": 109,
+    "year": 2006
+  },
+  "97367": {
+    "decade": 2010,
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "runtime": 140,
+    "year": 2013
+  },
+  "974576": {
+    "decade": 2020,
+    "genres": [
+      "Drama",
+      "Thriller"
+    ],
+    "runtime": 120,
+    "year": 2024
+  },
+  "98": {
+    "decade": 2000,
+    "genres": [
+      "Action",
+      "Drama",
+      "Adventure"
+    ],
+    "runtime": 155,
+    "year": 2000
+  }
+}
