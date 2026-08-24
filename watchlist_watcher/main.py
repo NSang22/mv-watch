@@ -8,6 +8,9 @@ import shutil
 import sys
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+from .anomaly import assess_departure_anomaly
 from .config import load_config
 from .diff import (
     apply_last_changed,
@@ -17,14 +20,20 @@ from .diff import (
     save_state,
     utc_now_iso,
 )
-from .enrich import ExpiryEnricher, enrichment_enabled
+from .enrich import ExpiryEnricher, enrichment_enabled, write_conflicts_csv
 from .http_util import HttpClient
+from .html_report import payload_from_csv, write_html_from_films, write_html_report
+from .models import PRESENCE_UNKNOWN
 from .notify import notify, write_csv, write_report
-from .providers import ProviderClient
+from .providers import ProviderClient, write_unresolved_csv
 from .resolve import IdResolver
+from .spin import extract_titles_from_csv_path, write_spin_html
 from .watchlist import load_watchlist
 
 logger = logging.getLogger(__name__)
+
+# Load .env from the working directory when present. Real env vars still win.
+load_dotenv(override=False)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -33,7 +42,8 @@ def build_parser() -> argparse.ArgumentParser:
         prog="watchlist-watcher",
         description=(
             "Cross-reference a Letterboxd watchlist with TMDB streaming "
-            "availability and notify when films arrive on your services."
+            "availability and notify when films arrive on your services. "
+            "Also: `recommend` to rank available watchlist titles by taste."
         ),
     )
     parser.add_argument(
@@ -62,12 +72,38 @@ def build_parser() -> argparse.ArgumentParser:
         help="Compute reports without writing state.json or sending notifications",
     )
     parser.add_argument(
+        "--render-html",
+        action="store_true",
+        help="Rebuild report.html from watchlist_streaming.csv (no TMDB calls)",
+    )
+    parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
         help="Enable debug logging",
     )
     return parser
+
+
+def dispatch(argv: list[str] | None = None) -> int:
+    """CLI entry. Supports `recommend` as a first-word subcommand."""
+    raw = list(sys.argv[1:] if argv is None else argv)
+    if raw and raw[0] == "recommend":
+        from .recommend import run_recommend_cli
+
+        config = "config.yaml"
+        rest = raw[1:]
+        cleaned: list[str] = []
+        i = 0
+        while i < len(rest):
+            if rest[i] == "--config" and i + 1 < len(rest):
+                config = rest[i + 1]
+                i += 2
+                continue
+            cleaned.append(rest[i])
+            i += 1
+        return run_recommend_cli(cleaned, config_path=Path(config))
+    return run(raw)
 
 
 def _setup_logging(verbose: bool) -> None:
@@ -115,6 +151,36 @@ def run_list_providers(config_path: Path) -> int:
     return 0
 
 
+def run_render_html(config_path: Path) -> int:
+    """Rebuild the HTML viewer and spin wheel from local CSV files."""
+    import yaml
+
+    raw = {}
+    if config_path.exists():
+        with config_path.open(encoding="utf-8") as handle:
+            raw = yaml.safe_load(handle) or {}
+    paths = raw.get("paths") or {}
+    base = config_path.parent.resolve()
+    csv_report = base / paths.get("csv_report", "watchlist_streaming.csv")
+    html_report = base / paths.get("html_report", "report.html")
+    spin_html = base / paths.get("spin_html", "spin.html")
+    watchlist = base / paths.get("watchlist", "watchlist.csv")
+    if csv_report.exists():
+        payload = payload_from_csv(csv_report)
+        write_html_report(html_report, payload)
+        logger.info("Wrote %s", html_report.resolve())
+    else:
+        logger.warning("Missing %s; skipped report.html", csv_report)
+
+    if watchlist.exists():
+        titles = extract_titles_from_csv_path(watchlist)
+        write_spin_html(spin_html, titles, source_label="Default watchlist")
+        logger.info("Wrote %s", spin_html.resolve())
+    else:
+        logger.warning("Missing %s; skipped spin.html", watchlist)
+    return 0
+
+
 def run(argv: list[str] | None = None) -> int:
     """Run the full watchlist check. Returns a process exit code."""
     parser = build_parser()
@@ -126,6 +192,8 @@ def run(argv: list[str] | None = None) -> int:
         _ensure_config(config_path)
         if args.list_providers:
             return run_list_providers(config_path)
+        if args.render_html:
+            return run_render_html(config_path)
         config = load_config(config_path)
     except (FileNotFoundError, ValueError) as exc:
         logger.error("%s", exc)
@@ -169,7 +237,7 @@ def run(argv: list[str] | None = None) -> int:
     enricher = ExpiryEnricher(config, http)
     used_enrichment = enrichment_enabled(config)
     try:
-        enricher.enrich_all(availability)
+        conflicts = enricher.enrich_all(availability)
     except KeyboardInterrupt:
         logger.error("Interrupted during enrichment.")
         return 130
@@ -192,16 +260,44 @@ def run(argv: list[str] | None = None) -> int:
         if used_enrichment
         else [],
     )
+
+    anomaly = assess_departure_anomaly(
+        diff,
+        watchlist_size=len(films),
+        max_departure_films=config.max_departure_films,
+        max_departure_fraction=config.max_departure_fraction,
+    )
+    if anomaly.anomalous:
+        write_unresolved_csv(config.paths.unresolved, providers.unresolved)
+        if conflicts:
+            write_conflicts_csv(config.paths.conflicts, conflicts)
+        logger.error("%s", anomaly.message)
+        print(anomaly.message, file=sys.stderr)
+        return 3
+
     run_ts = utc_now_iso()
     apply_last_changed(availability, previous, diff, run_ts)
 
     write_csv(config.paths.csv_report, availability)
+    if conflicts:
+        write_conflicts_csv(config.paths.conflicts, conflicts)
+    write_unresolved_csv(config.paths.unresolved, providers.unresolved)
     write_report(
         config.paths.markdown_report,
         availability,
         diff,
         enrichment_used=used_enrichment,
     )
+    write_html_from_films(config.paths.html_report, availability, diff)
+    try:
+        spin_titles = extract_titles_from_csv_path(config.paths.watchlist)
+        write_spin_html(
+            config.paths.spin_html,
+            spin_titles,
+            source_label="Default watchlist",
+        )
+    except Exception as exc:  # noqa: BLE001 - spin page is optional UX
+        logger.warning("Could not write spin.html: %s", exc)
 
     next_state = build_next_state(
         availability,
@@ -211,7 +307,7 @@ def run(argv: list[str] | None = None) -> int:
     # Preserve last_changed inside state for stable CSV stamps.
     for item in availability:
         entry = next_state["films"].get(str(item.tmdb_id))
-        if entry is not None:
+        if entry is not None and item.presence_status != PRESENCE_UNKNOWN:
             entry["last_changed"] = item.last_changed
 
     if args.dry_run:
@@ -239,7 +335,7 @@ def run(argv: list[str] | None = None) -> int:
 
 def main() -> None:
     """Console script entrypoint."""
-    sys.exit(run())
+    sys.exit(dispatch())
 
 
 if __name__ == "__main__":

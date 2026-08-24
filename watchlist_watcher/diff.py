@@ -8,7 +8,12 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 
-from .models import DiffEvent, DiffResult, FilmAvailability
+from .models import (
+    PRESENCE_UNKNOWN,
+    DiffEvent,
+    DiffResult,
+    FilmAvailability,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -45,23 +50,48 @@ def my_service_names(availability: FilmAvailability) -> set[str]:
     return {hit.canonical_name for hit in availability.on_my_services}
 
 
+def is_unknown(item: FilmAvailability) -> bool:
+    """Return True when this run could not verify providers for the film."""
+    return item.presence_status == PRESENCE_UNKNOWN
+
+
 def build_next_state(
     current: list[FilmAvailability],
     previous: dict[str, Any],
     *,
     leaving_soon_alerts: Optional[dict[str, str]] = None,
 ) -> dict[str, Any]:
-    """Construct the state blob for the next successful run."""
+    """Construct the state blob for the next successful run.
+
+    Unknown lookups never overwrite state. Prior provider sets are carried
+    forward until a verified present/absent snapshot arrives.
+    """
+    prev_films: dict[str, Any] = previous.get("films") or {}
     films: dict[str, Any] = {}
+
     for item in current:
-        films[str(item.tmdb_id)] = {
+        key = str(item.tmdb_id)
+        if is_unknown(item):
+            prior = prev_films.get(key)
+            if prior is not None:
+                films[key] = dict(prior)
+                logger.info(
+                    "Carrying forward prior state for %s (tmdb_id=%s); lookup was unknown.",
+                    item.film.name,
+                    item.tmdb_id,
+                )
+            continue
+
+        films[key] = {
             "providers": sorted(my_service_names(item)),
             "title": item.film.name,
             "year": item.film.year,
             "letterboxd_uri": item.film.letterboxd_uri,
             "expires_on": item.expires_on,
             "expiry_by_service": item.expiry_by_service,
+            "presence_status": item.presence_status,
         }
+
     return {
         "last_run": utc_now_iso(),
         "films": films,
@@ -82,6 +112,8 @@ def compute_diff(
 
     Distinguishes arrivals, departures, new-to-watchlist titles, leaving-soon
     warnings, and the cold-start path (no per-film arrival flood).
+
+    Unknown lookups never produce departures or arrivals.
     """
     prev_films: dict[str, Any] = previous.get("films") or {}
     cold_start = not prev_films
@@ -90,10 +122,17 @@ def compute_diff(
     alerted: dict[str, str] = dict(previous.get("leaving_soon_alerts") or {})
 
     result = DiffResult(cold_start=cold_start)
-    current_ids = {str(item.tmdb_id) for item in current}
+    # Track IDs that remain represented in next state (verified + carried unknown).
+    tracked_ids: set[str] = set()
 
     for item in current:
         key = str(item.tmdb_id)
+        if is_unknown(item):
+            if key in prev_films:
+                tracked_ids.add(key)
+            continue
+
+        tracked_ids.add(key)
         now_providers = my_service_names(item)
         prev_entry = prev_films.get(key)
 
@@ -127,18 +166,24 @@ def compute_diff(
                     detail=f"Arrived on {provider}",
                 )
             )
-        for provider in sorted(prev_providers - now_providers):
+        lost = sorted(prev_providers - now_providers)
+        if lost:
+            # One line per film. Losing every prior provider at once is usually a
+            # bad lookup, not a coordinated multi-catalog removal.
+            suspect = set(lost) == prev_providers and len(prev_providers) > 0
+            services = ", ".join(lost)
+            detail = f"Left {services}"
+            if suspect:
+                detail += " [SUSPECT: lost all prior providers at once]"
             result.departures.append(
                 DiffEvent(
                     kind="departure",
                     title=item.film.name,
                     year=item.film.year,
                     tmdb_id=item.tmdb_id,
-                    provider=provider,
-                    detail=(
-                        f"Departed from {provider} "
-                        "(detected after the fact via TMDB snapshot)"
-                    ),
+                    provider=services,
+                    detail=detail,
+                    suspect=suspect,
                 )
             )
 
@@ -181,14 +226,18 @@ def compute_diff(
                 alerted[f"{item.tmdb_id}:{provider}:{marked}"] = today.isoformat()
 
     if cold_start:
-        on_services = sum(1 for item in current if my_service_names(item))
+        on_services = sum(
+            1
+            for item in current
+            if not is_unknown(item) and my_service_names(item)
+        )
         result.arrivals = []
         result.departures = []
         result.leaving_soon = []
         result.new_to_watchlist = []
         logger.info(
             "Cold start: recorded %d films (%d on your services). No arrival alerts.",
-            len(current),
+            sum(1 for item in current if not is_unknown(item)),
             on_services,
         )
 
@@ -196,7 +245,7 @@ def compute_diff(
     pruned = {
         key: value
         for key, value in alerted.items()
-        if key.split(":", 1)[0] in current_ids
+        if key.split(":", 1)[0] in tracked_ids
     }
     return result, pruned
 
@@ -213,11 +262,16 @@ def apply_last_changed(
         changed_ids.add(event.tmdb_id)
     if diff.cold_start:
         for item in current:
-            item.last_changed = run_ts
+            if not is_unknown(item):
+                item.last_changed = run_ts
         return
 
     prev_films = previous.get("films") or {}
     for item in current:
+        if is_unknown(item):
+            prev = prev_films.get(str(item.tmdb_id)) or {}
+            item.last_changed = prev.get("last_changed") or previous.get("last_run")
+            continue
         if item.tmdb_id in changed_ids:
             item.last_changed = run_ts
         else:

@@ -1,0 +1,1574 @@
+{
+  "films": {
+    "1004076": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/uNIA",
+      "providers": [],
+      "title": "T\u00c3\u0081R",
+      "year": 2022
+    },
+    "1018": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/297o",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Mulholland Drive",
+      "year": 2001
+    },
+    "10315": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/1WyQ",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Fantastic Mr. Fox",
+      "year": 2009
+    },
+    "1033148": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/D5cI",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Die My Love",
+      "year": 2025
+    },
+    "1062722": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/Ecsg",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Frankenstein",
+      "year": 2025
+    },
+    "1078605": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/EMTM",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
+      "title": "Weapons",
+      "year": 2025
+    },
+    "1091": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/294O",
+      "presence_status": "verified-present",
+      "providers": [
+        "YouTube Free"
+      ],
+      "title": "The Thing",
+      "year": 1982
+    },
+    "11036": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/1UNE",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
+      "title": "The Notebook",
+      "year": 2004
+    },
+    "111": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/2b7g",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
+      "title": "Scarface",
+      "year": 1983
+    },
+    "11216": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/1UlA",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Cinema Paradiso",
+      "year": 1988
+    },
+    "1124566": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/GwcG",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Sentimental Value",
+      "year": 2025
+    },
+    "120": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2b5O",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "year": 2001
+    },
+    "120467": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/3ZqO",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Grand Budapest Hotel",
+      "year": 2014
+    },
+    "121": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2b5E",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Lord of the Rings: The Two Towers",
+      "year": 2002
+    },
+    "1213": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2924",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Talented Mr. Ripley",
+      "year": 1999
+    },
+    "1272": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/28Xy",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Sunshine",
+      "year": 2007
+    },
+    "129": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2b4m",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Spirited Away",
+      "year": 2001
+    },
+    "13": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/728",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Forrest Gump",
+      "year": 1994
+    },
+    "1325734": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/OA2w",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Drama",
+      "year": 2026
+    },
+    "1339713": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/PNqo",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Obsession",
+      "year": 2025
+    },
+    "141": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/2b2A",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Tubi",
+        "YouTube Free"
+      ],
+      "title": "Donnie Darko",
+      "year": 2001
+    },
+    "146233": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/4E5i",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Prisoners",
+      "year": 2013
+    },
+    "15": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/71O",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Citizen Kane",
+      "year": 1941
+    },
+    "153": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2b0E",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Lost in Translation",
+      "year": 2003
+    },
+    "1578": {
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Tubi": "2026-10-01"
+      },
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/28yI",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla",
+        "Tubi",
+        "YouTube Free"
+      ],
+      "title": "Raging Bull",
+      "year": 1980
+    },
+    "170": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aXU",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "28 Days Later",
+      "year": 2002
+    },
+    "181886": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/5xtO",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla",
+        "Tubi"
+      ],
+      "title": "Enemy",
+      "year": 2013
+    },
+    "184": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aVO",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Jackie Brown",
+      "year": 1997
+    },
+    "185": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aVE",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "A Clockwork Orange",
+      "year": 1971
+    },
+    "194": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aUc",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Am\u00c3\u00a9lie",
+      "year": 2001
+    },
+    "194662": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/5RFA",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Birdman or (The Unexpected Virtue of Ignorance)",
+      "year": 2014
+    },
+    "207": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aSg",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Dead Poets Society",
+      "year": 1989
+    },
+    "210577": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/6hQu",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Gone Girl",
+      "year": 2014
+    },
+    "22538": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/1Aq6",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Scott Pilgrim vs. the World",
+      "year": 2010
+    },
+    "238": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aNK",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Godfather",
+      "year": 1972
+    },
+    "24": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/70w",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Kill Bill: Vol. 1",
+      "year": 2003
+    },
+    "242582": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/780m",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Netflix"
+      ],
+      "title": "Nightcrawler",
+      "year": 2014
+    },
+    "25237": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/1w9q",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Come and See",
+      "year": 1985
+    },
+    "264660": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/7T2k",
+      "presence_status": "verified-present",
+      "providers": [
+        "YouTube Free"
+      ],
+      "title": "Ex Machina",
+      "year": 2015
+    },
+    "27205": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/1skk",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "YouTube Free"
+      ],
+      "title": "Inception",
+      "year": 2010
+    },
+    "273481": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/8i7u",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Sicario",
+      "year": 2015
+    },
+    "275": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/2aHM",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Netflix",
+        "Tubi"
+      ],
+      "title": "Fargo",
+      "year": 1996
+    },
+    "279": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aH8",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Amadeus",
+      "year": 1984
+    },
+    "286217": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/8SeG",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
+      "title": "The Martian",
+      "year": 2015
+    },
+    "300668": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/9yzm",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Annihilation",
+      "year": 2018
+    },
+    "3175": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/25A2",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Barry Lyndon",
+      "year": 1975
+    },
+    "334": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aze",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Magnolia",
+      "year": 1999
+    },
+    "334541": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/b2L0",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
+      "title": "Manchester by the Sea",
+      "year": 2016
+    },
+    "335984": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/b8wK",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Blade Runner 2049",
+      "year": 2017
+    },
+    "339403": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/bhF2",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Baby Driver",
+      "year": 2017
+    },
+    "345": {
+      "expires_on": "2026-09-01",
+      "expiry_by_service": {
+        "Tubi": "2026-09-01"
+      },
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2axs",
+      "presence_status": "verified-present",
+      "providers": [
+        "Tubi"
+      ],
+      "title": "Eyes Wide Shut",
+      "year": 1999
+    },
+    "348": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2awY",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Alien",
+      "year": 1979
+    },
+    "350": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2awE",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Devil Wears Prada",
+      "year": 2006
+    },
+    "361292": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/cioI",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
+      "title": "Suspiria",
+      "year": 2018
+    },
+    "369972": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/cPym",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "First Man",
+      "year": 2018
+    },
+    "376867": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/d6bE",
+      "presence_status": "verified-present",
+      "providers": [
+        "YouTube Free"
+      ],
+      "title": "Moonlight",
+      "year": 2016
+    },
+    "391713": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/dGNE",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla",
+        "Tubi",
+        "YouTube Free"
+      ],
+      "title": "Lady Bird",
+      "year": 2017
+    },
+    "400617": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/e4uc",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Phantom Thread",
+      "year": 2017
+    },
+    "406": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2as8",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "La Haine",
+      "year": 1995
+    },
+    "423": {
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Tubi": "2026-10-01"
+      },
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aqc",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Tubi"
+      ],
+      "title": "The Pianist",
+      "year": 2002
+    },
+    "4232": {
+      "expires_on": "2026-08-24",
+      "expiry_by_service": {
+        "Netflix": "2026-08-24",
+        "Tubi": "2026-09-01"
+      },
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/24EC",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla",
+        "Netflix",
+        "Tubi"
+      ],
+      "title": "Scream",
+      "year": 1996
+    },
+    "424": {
+      "expires_on": "2026-09-01",
+      "expiry_by_service": {
+        "Netflix": "2026-09-01"
+      },
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2aq2",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Schindler's List",
+      "year": 1993
+    },
+    "426": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2apI",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Vertigo",
+      "year": 1958
+    },
+    "429197": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/fcFY",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Vice",
+      "year": 2018
+    },
+    "429200": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/fcFu",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Good Time",
+      "year": 2017
+    },
+    "4348": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/24u8",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Pride & Prejudice",
+      "year": 2005
+    },
+    "44214": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/Sw0",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Black Swan",
+      "year": 2010
+    },
+    "4553": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/248c",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Machinist",
+      "year": 2004
+    },
+    "458723": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/gnV6",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Us",
+      "year": 2019
+    },
+    "466272": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/gH0O",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Once Upon a Time... in Hollywood",
+      "year": 2019
+    },
+    "466420": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/gHp0",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Killers of the Flower Moon",
+      "year": 2023
+    },
+    "46738": {
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Tubi": "2026-10-01"
+      },
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/Msm",
+      "presence_status": "verified-present",
+      "providers": [
+        "Tubi"
+      ],
+      "title": "Incendies",
+      "year": 2010
+    },
+    "475557": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/h4cS",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Joker",
+      "year": 2019
+    },
+    "487558": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/hxL8",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "BlacKkKlansman",
+      "year": 2018
+    },
+    "492188": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/hJAw",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Marriage Story",
+      "year": 2019
+    },
+    "4922": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/23Fk",
+      "presence_status": "verified-present",
+      "providers": [
+        "Hoopla"
+      ],
+      "title": "The Curious Case of Benjamin Button",
+      "year": 2008
+    },
+    "493922": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/hNVe",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Hereditary",
+      "year": 2018
+    },
+    "4951": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/23AO",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "10 Things I Hate About You",
+      "year": 1999
+    },
+    "497": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2agG",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Green Mile",
+      "year": 1999
+    },
+    "500": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2agc",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
+      "title": "Reservoir Dogs",
+      "year": 1992
+    },
+    "503919": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/icFU",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Lighthouse",
+      "year": 2019
+    },
+    "515001": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/iEBG",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Jojo Rabbit",
+      "year": 2019
+    },
+    "524": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/2ads",
+      "presence_status": "verified-present",
+      "providers": [
+        "YouTube Free"
+      ],
+      "title": "Casino",
+      "year": 1995
+    },
+    "530385": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/jhxe",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Midsommar",
+      "year": 2019
+    },
+    "530915": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/jj4y",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "1917",
+      "year": 2019
+    },
+    "531428": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/jkPq",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019
+    },
+    "533444": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/jpmy",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Waves",
+      "year": 2019
+    },
+    "539": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2ab2",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Psycho",
+      "year": 1960
+    },
+    "560016": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/kvsO",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Monkey Man",
+      "year": 2024
+    },
+    "59436": {
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Tubi": "2026-10-01"
+      },
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/i4a",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Tubi"
+      ],
+      "title": "Midnight in Paris",
+      "year": 2011
+    },
+    "597": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/2a2k",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla",
+        "YouTube Free"
+      ],
+      "title": "Titanic",
+      "year": 1997
+    },
+    "598": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2a2a",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "City of God",
+      "year": 2002
+    },
+    "603": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2a1m",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Matrix",
+      "year": 1999
+    },
+    "60308": {
+      "expires_on": "2026-09-01",
+      "expiry_by_service": {
+        "Netflix": "2026-09-01"
+      },
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/glS",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Moneyball",
+      "year": 2011
+    },
+    "615643": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/mL9M",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Minari",
+      "year": 2020
+    },
+    "619730": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/mViu",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Don't Worry Darling",
+      "year": 2022
+    },
+    "62": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2bf0",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "2001: A Space Odyssey",
+      "year": 1968
+    },
+    "627": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29XY",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Trainspotting",
+      "year": 1996
+    },
+    "629": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/29XE",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla"
+      ],
+      "title": "The Usual Suspects",
+      "year": 1995
+    },
+    "640": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/29VS",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla"
+      ],
+      "title": "Catch Me If You Can",
+      "year": 2002
+    },
+    "641": {
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Tubi": "2026-10-01"
+      },
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/29VI",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla",
+        "Tubi"
+      ],
+      "title": "Requiem for a Dream",
+      "year": 2000
+    },
+    "646380": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/o0Hc",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Don't Look Up",
+      "year": 2021
+    },
+    "64720": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/DQ",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Take Shelter",
+      "year": 2011
+    },
+    "648878": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/o6MC",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Eddington",
+      "year": 2025
+    },
+    "655": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/29Ts",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Tubi"
+      ],
+      "title": "Paris, Texas",
+      "year": 1984
+    },
+    "660120": {
+      "expires_on": "2027-06-14",
+      "expiry_by_service": {
+        "Tubi": "2027-06-14"
+      },
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/oyws",
+      "presence_status": "verified-present",
+      "providers": [
+        "Tubi"
+      ],
+      "title": "The Worst Person in the World",
+      "year": 2021
+    },
+    "661539": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/oBYa",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "A Complete Unknown",
+      "year": 2024
+    },
+    "670": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29R2",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Oldboy",
+      "year": 2003
+    },
+    "680": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29Pq",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
+      "title": "Pulp Fiction",
+      "year": 1994
+    },
+    "68718": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2cCk",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Django Unchained",
+      "year": 2012
+    },
+    "694": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29Nu",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Shining",
+      "year": 1980
+    },
+    "696506": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/q1Dk",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Mickey 17",
+      "year": 2025
+    },
+    "718930": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/qW26",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Bullet Train",
+      "year": 2022
+    },
+    "730251": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/rnUa",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Happyend",
+      "year": 2024
+    },
+    "7345": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/20Z2",
+      "presence_status": "verified-present",
+      "providers": [
+        "Hoopla"
+      ],
+      "title": "There Will Be Blood",
+      "year": 2007
+    },
+    "7446": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/20WM",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "YouTube Free"
+      ],
+      "title": "Tropic Thunder",
+      "year": 2008
+    },
+    "746036": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/s0Bm",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Fall Guy",
+      "year": 2024
+    },
+    "747188": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/s3ds",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Asteroid City",
+      "year": 2023
+    },
+    "762504": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/sDCe",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Nope",
+      "year": 2022
+    },
+    "76341": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2DjO",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Mad Max: Fury Road",
+      "year": 2015
+    },
+    "769": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29FA",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "GoodFellas",
+      "year": 1990
+    },
+    "773": {
+      "expires_on": "2026-09-01",
+      "expiry_by_service": {
+        "Netflix": "2026-09-01"
+      },
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/29EW",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Netflix"
+      ],
+      "title": "Little Miss Sunshine",
+      "year": 2006
+    },
+    "78": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2bcA",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Blade Runner",
+      "year": 1982
+    },
+    "786892": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/tABk",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Furiosa: A Mad Max Saga",
+      "year": 2024
+    },
+    "8051": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/20E4",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "Hoopla"
+      ],
+      "title": "Punch-Drunk Love",
+      "year": 2002
+    },
+    "807": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29zs",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Se7en",
+      "year": 1995
+    },
+    "8363": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-09T04:28:10+00:00",
+      "letterboxd_uri": "https://boxd.it/20hO",
+      "presence_status": "verified-present",
+      "providers": [
+        "Tubi"
+      ],
+      "title": "Superbad",
+      "year": 2007
+    },
+    "840430": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/vHza",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Holdovers",
+      "year": 2023
+    },
+    "843": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29tE",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "In the Mood for Love",
+      "year": 2000
+    },
+    "84892": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2ZA8",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Perks of Being a Wallflower",
+      "year": 2012
+    },
+    "857": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29ro",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Saving Private Ryan",
+      "year": 1998
+    },
+    "858024": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/woVy",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Hamnet",
+      "year": 2025
+    },
+    "872": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/29oY",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Singin' in the Rain",
+      "year": 1952
+    },
+    "911430": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/yjVM",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "F1",
+      "year": 2025
+    },
+    "915935": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/yuDE",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "Anatomy of a Fall",
+      "year": 2023
+    },
+    "925": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-11T04:28:03+00:00",
+      "letterboxd_uri": "https://boxd.it/29gA",
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video",
+        "YouTube Free"
+      ],
+      "title": "Do the Right Thing",
+      "year": 1989
+    },
+    "933260": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/zanS",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Substance",
+      "year": 2024
+    },
+    "936075": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/zi5M",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Michael",
+      "year": 2026
+    },
+    "9693": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/1Y2i",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Children of Men",
+      "year": 2006
+    },
+    "97367": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/3mDu",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "The Place Beyond the Pines",
+      "year": 2012
+    },
+    "974576": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/AO8q",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Conclave",
+      "year": 2024
+    },
+    "98": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-08T22:13:30+00:00",
+      "letterboxd_uri": "https://boxd.it/2b9m",
+      "presence_status": "verified-absent",
+      "providers": [],
+      "title": "Gladiator",
+      "year": 2000
+    }
+  },
+  "last_run": "2026-08-11T04:28:03+00:00",
+  "leaving_soon_alerts": {
+    "4232:Netflix:14": "2026-08-10"
+  }
+}

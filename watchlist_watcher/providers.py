@@ -2,18 +2,28 @@
 
 from __future__ import annotations
 
+import csv
 import fnmatch
 import logging
+from pathlib import Path
 from typing import Any, Iterable, Optional
+
+import requests
 
 from .config import AppConfig, ServiceConfig
 from .http_util import HttpClient, HTTPStatusError, TransientHTTPError
 from .models import (
     PAY_BUCKETS,
+    PRESENCE_UNKNOWN,
+    PRESENCE_VERIFIED_ABSENT,
+    PRESENCE_VERIFIED_PRESENT,
     WATCHABLE_BUCKETS,
     FilmAvailability,
     ProviderHit,
     ResolvedFilm,
+    UnresolvedLookup,
+    WatchlistFilm,
+    confidence_for_provider,
 )
 
 logger = logging.getLogger(__name__)
@@ -76,6 +86,7 @@ class ProviderClient:
         self.http = http
         self.failures = 0
         self.attempts = 0
+        self.unresolved: list[UnresolvedLookup] = []
 
     def list_region_providers(self) -> list[dict[str, Any]]:
         """Return TMDB movie providers for the configured region."""
@@ -103,15 +114,27 @@ class ProviderClient:
             )
 
     def fetch_all(self, resolved: list[ResolvedFilm]) -> list[FilmAvailability]:
-        """Fetch providers for every resolved film, caching progress on interrupt."""
+        """Fetch providers for every resolved film.
+
+        Always returns an entry per film with a tmdb_id. Failed or ambiguous
+        lookups are marked unknown rather than coerced into empty absence.
+        """
         results: list[FilmAvailability] = []
+        self.unresolved = []
         try:
             for item in resolved:
                 if item.tmdb_id is None:
+                    self.unresolved.append(
+                        UnresolvedLookup(
+                            title=item.film.name,
+                            year=item.film.year,
+                            tmdb_id=None,
+                            letterboxd_uri=item.film.letterboxd_uri,
+                            reason="skipped_no_tmdb_id",
+                        )
+                    )
                     continue
-                availability = self.fetch_one(item)
-                if availability is not None:
-                    results.append(availability)
+                results.append(self.fetch_one(item))
         except KeyboardInterrupt:
             logger.warning(
                 "Interrupted during provider fetch after %d films. Progress is kept in memory for this run.",
@@ -120,8 +143,12 @@ class ProviderClient:
             raise
         return results
 
-    def fetch_one(self, item: ResolvedFilm) -> Optional[FilmAvailability]:
-        """Fetch and normalize providers for one resolved film."""
+    def fetch_one(self, item: ResolvedFilm) -> FilmAvailability:
+        """Fetch and normalize providers for one resolved film.
+
+        Never maps 429/timeouts/errors onto an empty verified-absent result.
+        Retries happen inside HttpClient; exhaustion becomes unknown.
+        """
         assert item.tmdb_id is not None
         self.attempts += 1
         try:
@@ -130,16 +157,53 @@ class ProviderClient:
                 params={"api_key": self.config.tmdb_api_key},
             )
         except (TransientHTTPError, HTTPStatusError) as exc:
-            self.failures += 1
-            logger.error(
-                "TMDB providers failed for %s (tmdb_id=%s): %s",
-                item.film.name,
+            return self._unknown(
+                item.film,
                 item.tmdb_id,
-                exc,
+                reason=f"http_error:{exc.status_code}",
+                detail=str(exc),
             )
-            return None
+        except (requests.Timeout, requests.ConnectionError) as exc:
+            return self._unknown(
+                item.film,
+                item.tmdb_id,
+                reason="network_error",
+                detail=str(exc),
+            )
+        except Exception as exc:  # noqa: BLE001 - any failure is unknown, not absence
+            return self._unknown(
+                item.film,
+                item.tmdb_id,
+                reason="exception",
+                detail=f"{type(exc).__name__}: {exc}",
+            )
 
-        region = (data.get("results") or {}).get(self.config.region) or {}
+        results = data.get("results")
+        if not isinstance(results, dict):
+            return self._unknown(
+                item.film,
+                item.tmdb_id,
+                reason="missing_results",
+                detail="response missing results object",
+            )
+
+        if self.config.region not in results:
+            return self._unknown(
+                item.film,
+                item.tmdb_id,
+                reason="missing_region",
+                detail=f"results missing region key {self.config.region}",
+            )
+
+        region = results[self.config.region]
+        if not isinstance(region, dict):
+            return self._unknown(
+                item.film,
+                item.tmdb_id,
+                reason="invalid_region_payload",
+                detail=f"region {self.config.region} is not an object",
+            )
+
         watch_link = region.get("link") or (
             f"https://www.themoviedb.org/movie/{item.tmdb_id}/watch"
             f"?locale={self.config.region}"
@@ -164,6 +228,7 @@ class ProviderClient:
                             raw_name=hit.raw_name,
                             bucket=bucket,
                             tier=matched.tier,
+                            confidence=confidence_for_provider(matched.name),
                         )
                     )
 
@@ -174,14 +239,55 @@ class ProviderClient:
                 if hit is not None:
                     target.append(hit)
 
+        on_my = self._dedupe_hits(on_my)
+        presence = (
+            PRESENCE_VERIFIED_PRESENT if on_my else PRESENCE_VERIFIED_ABSENT
+        )
         return FilmAvailability(
             film=item.film,
             tmdb_id=item.tmdb_id,
             watch_link=watch_link,
             streaming=self._dedupe_hits(streaming),
-            on_my_services=self._dedupe_hits(on_my),
+            on_my_services=on_my,
             rent=self._dedupe_hits(rent),
             buy=self._dedupe_hits(buy),
+            presence_status=presence,
+        )
+
+    def _unknown(
+        self,
+        film: WatchlistFilm,
+        tmdb_id: int,
+        *,
+        reason: str,
+        detail: str,
+    ) -> FilmAvailability:
+        self.failures += 1
+        logger.error(
+            "TMDB providers UNKNOWN for %s (tmdb_id=%s): %s (%s)",
+            film.name,
+            tmdb_id,
+            reason,
+            detail,
+        )
+        self.unresolved.append(
+            UnresolvedLookup(
+                title=film.name,
+                year=film.year,
+                tmdb_id=tmdb_id,
+                letterboxd_uri=film.letterboxd_uri,
+                reason=reason,
+            )
+        )
+        return FilmAvailability(
+            film=film,
+            tmdb_id=tmdb_id,
+            watch_link=(
+                f"https://www.themoviedb.org/movie/{tmdb_id}/watch"
+                f"?locale={self.config.region}"
+            ),
+            presence_status=PRESENCE_UNKNOWN,
+            unresolved_reason=reason,
         )
 
     def _to_hit(
@@ -200,12 +306,14 @@ class ProviderClient:
                 raw_name=raw,
                 bucket=bucket,
                 tier=matched.tier,
+                confidence=confidence_for_provider(matched.name),
             )
         return ProviderHit(
             canonical_name=raw,
             raw_name=raw,
             bucket=bucket,
             tier=default_tier,
+            confidence=confidence_for_provider(raw),
         )
 
     @staticmethod
@@ -226,3 +334,23 @@ class ProviderClient:
         if self.attempts == 0:
             return 0.0
         return self.failures / self.attempts
+
+
+def write_unresolved_csv(path: Path, unresolved: list[UnresolvedLookup]) -> None:
+    """Write unresolved.csv for unknown/skipped provider lookups this run."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = ["Name", "Year", "TMDB ID", "Letterboxd URI", "Reason"]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for item in unresolved:
+            writer.writerow(
+                {
+                    "Name": item.title,
+                    "Year": item.year if item.year is not None else "",
+                    "TMDB ID": item.tmdb_id if item.tmdb_id is not None else "",
+                    "Letterboxd URI": item.letterboxd_uri,
+                    "Reason": item.reason,
+                }
+            )
+    logger.info("Wrote %d unresolved lookups to %s", len(unresolved), path)

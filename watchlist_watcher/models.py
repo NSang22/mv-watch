@@ -8,6 +8,22 @@ from typing import Optional
 
 WATCHABLE_BUCKETS = ("flatrate", "free", "ads")
 PAY_BUCKETS = ("rent", "buy")
+ADS_FREE_BUCKETS = frozenset({"ads", "free"})
+
+# Provider lookup outcomes used by the diff engine and state writer.
+PRESENCE_VERIFIED_PRESENT = "verified-present"
+PRESENCE_VERIFIED_ABSENT = "verified-absent"
+PRESENCE_UNKNOWN = "unknown"
+
+# Per-service confidence from measured accuracy, not MotN agreement.
+# confirmed: Netflix/Prime (TMDB 36/36 on blind audit).
+# probable: unaudited free/library catalogs (Tubi / YouTube Free / Hoopla).
+# disputed: removed; MotN Prime disagreements were mostly rent/buy/addon noise.
+CONFIDENCE_CONFIRMED = "confirmed"
+CONFIDENCE_PROBABLE = "probable"
+
+AUDITED_CONFIRMED_SERVICES = frozenset({"Netflix", "Amazon Prime Video"})
+UNAULTED_PROBABLE_SERVICES = frozenset({"Tubi", "YouTube Free", "Hoopla"})
 
 
 @dataclass(frozen=True)
@@ -37,6 +53,27 @@ class ProviderHit:
     raw_name: str
     bucket: str  # flatrate | free | ads | rent | buy
     tier: str  # subscription | library | pay
+    # confirmed | probable
+    confidence: str = CONFIDENCE_PROBABLE
+    # Always tmdb while MotN availability override is off.
+    sources: str = "tmdb"
+    motn_link: Optional[str] = None
+
+
+def confidence_for_provider(canonical_name: str) -> str:
+    """Assign confidence from audit evidence, not source agreement."""
+    if canonical_name in AUDITED_CONFIRMED_SERVICES:
+        return CONFIDENCE_CONFIRMED
+    return CONFIDENCE_PROBABLE
+
+
+def is_low_reliability_provider(hit: ProviderHit) -> bool:
+    """Unaudited free/library catalogs are treated as least reliable."""
+    return (
+        hit.canonical_name in UNAULTED_PROBABLE_SERVICES
+        or hit.bucket in ADS_FREE_BUCKETS
+        or hit.tier == "library"
+    )
 
 
 @dataclass
@@ -50,10 +87,30 @@ class FilmAvailability:
     on_my_services: list[ProviderHit] = field(default_factory=list)
     rent: list[ProviderHit] = field(default_factory=list)
     buy: list[ProviderHit] = field(default_factory=list)
+    # verified-present | verified-absent | unknown
+    presence_status: str = PRESENCE_UNKNOWN
+    unresolved_reason: str = ""
     expires_on: Optional[str] = None  # ISO date for earliest known expiry on my services
     days_left: Optional[int] = None
     expiry_by_service: dict[str, str] = field(default_factory=dict)
+    # Legacy field; MotN availability override no longer populates this.
+    stale_tmdb_services: list[str] = field(default_factory=list)
+    stale_source: str = ""
+    # expiry-enriched | checked | unverified | ""
+    verification_status: str = ""
+    motn_checked: bool = False
     last_changed: Optional[str] = None
+
+
+@dataclass
+class UnresolvedLookup:
+    """A film whose provider lookup could not be trusted this run."""
+
+    title: str
+    year: Optional[int]
+    tmdb_id: Optional[int]
+    letterboxd_uri: str
+    reason: str
 
 
 @dataclass
@@ -68,6 +125,8 @@ class DiffEvent:
     detail: str = ""
     days_left: Optional[int] = None
     threshold: Optional[int] = None
+    # True when a departure wiped every previously known my-service at once.
+    suspect: bool = False
 
 
 @dataclass

@@ -1,0 +1,1310 @@
+{
+  "https://boxd.it/17ue": {
+    "name": "The Social Network",
+    "source": "search",
+    "tmdb_id": 37799,
+    "year": 2010
+  },
+  "https://boxd.it/18U8": {
+    "name": "The Truman Show",
+    "source": "search",
+    "tmdb_id": 37165,
+    "year": 1998
+  },
+  "https://boxd.it/1Aq6": {
+    "name": "Scott Pilgrim vs. the World",
+    "source": "search",
+    "tmdb_id": 22538,
+    "year": 2010
+  },
+  "https://boxd.it/1EmM": {
+    "name": "(500) Days of Summer",
+    "source": "search",
+    "tmdb_id": 19913,
+    "year": 2009
+  },
+  "https://boxd.it/1JzG": {
+    "name": "Inglourious Basterds",
+    "source": "search",
+    "tmdb_id": 16869,
+    "year": 2009
+  },
+  "https://boxd.it/1Ly6": {
+    "name": "Swades",
+    "source": "search",
+    "tmdb_id": 15774,
+    "year": 2004
+  },
+  "https://boxd.it/1TNy": {
+    "name": "Red Eye",
+    "source": "search",
+    "tmdb_id": 11460,
+    "year": 2005
+  },
+  "https://boxd.it/1U82": {
+    "name": "Shutter Island",
+    "source": "search",
+    "tmdb_id": 11324,
+    "year": 2010
+  },
+  "https://boxd.it/1UNE": {
+    "name": "The Notebook",
+    "source": "search",
+    "tmdb_id": 11036,
+    "year": 2004
+  },
+  "https://boxd.it/1UlA": {
+    "name": "Cinema Paradiso",
+    "source": "search",
+    "tmdb_id": 11216,
+    "year": 1988
+  },
+  "https://boxd.it/1VfS": {
+    "name": "After Hours",
+    "source": "search",
+    "tmdb_id": 10843,
+    "year": 1985
+  },
+  "https://boxd.it/1WyQ": {
+    "name": "Fantastic Mr. Fox",
+    "source": "search",
+    "tmdb_id": 10315,
+    "year": 2009
+  },
+  "https://boxd.it/1Y2i": {
+    "name": "Children of Men",
+    "source": "search",
+    "tmdb_id": 9693,
+    "year": 2006
+  },
+  "https://boxd.it/1skk": {
+    "name": "Inception",
+    "source": "search",
+    "tmdb_id": 27205,
+    "year": 2010
+  },
+  "https://boxd.it/1w9q": {
+    "name": "Come and See",
+    "source": "search",
+    "tmdb_id": 25237,
+    "year": 1985
+  },
+  "https://boxd.it/20E4": {
+    "name": "Punch-Drunk Love",
+    "source": "search",
+    "tmdb_id": 8051,
+    "year": 2002
+  },
+  "https://boxd.it/20WM": {
+    "name": "Tropic Thunder",
+    "source": "search",
+    "tmdb_id": 7446,
+    "year": 2008
+  },
+  "https://boxd.it/20Z2": {
+    "name": "There Will Be Blood",
+    "source": "search",
+    "tmdb_id": 7345,
+    "year": 2007
+  },
+  "https://boxd.it/20hO": {
+    "name": "Superbad",
+    "source": "search",
+    "tmdb_id": 8363,
+    "year": 2007
+  },
+  "https://boxd.it/21ew": {
+    "name": "No Country for Old Men",
+    "source": "search",
+    "tmdb_id": 6977,
+    "year": 2007
+  },
+  "https://boxd.it/23AO": {
+    "name": "10 Things I Hate About You",
+    "source": "search",
+    "tmdb_id": 4951,
+    "year": 1999
+  },
+  "https://boxd.it/23Fk": {
+    "name": "The Curious Case of Benjamin Button",
+    "source": "search",
+    "tmdb_id": 4922,
+    "year": 2008
+  },
+  "https://boxd.it/248c": {
+    "name": "The Machinist",
+    "source": "search",
+    "tmdb_id": 4553,
+    "year": 2004
+  },
+  "https://boxd.it/24EC": {
+    "name": "Scream",
+    "source": "search",
+    "tmdb_id": 4232,
+    "year": 1996
+  },
+  "https://boxd.it/24u8": {
+    "name": "Pride & Prejudice",
+    "source": "search",
+    "tmdb_id": 4348,
+    "year": 2005
+  },
+  "https://boxd.it/25A2": {
+    "name": "Barry Lyndon",
+    "source": "search",
+    "tmdb_id": 3175,
+    "year": 1975
+  },
+  "https://boxd.it/27MO": {
+    "name": "Zodiac",
+    "source": "search",
+    "tmdb_id": 1949,
+    "year": 2007
+  },
+  "https://boxd.it/28F0": {
+    "name": "Collateral",
+    "source": "search",
+    "tmdb_id": 1538,
+    "year": 2004
+  },
+  "https://boxd.it/28MA": {
+    "name": "The Departed",
+    "source": "search",
+    "tmdb_id": 1422,
+    "year": 2006
+  },
+  "https://boxd.it/28Vs": {
+    "name": "American Psycho",
+    "source": "search",
+    "tmdb_id": 1359,
+    "year": 2000
+  },
+  "https://boxd.it/28Xy": {
+    "name": "Sunshine",
+    "source": "search",
+    "tmdb_id": 1272,
+    "year": 2007
+  },
+  "https://boxd.it/28yI": {
+    "name": "Raging Bull",
+    "source": "search",
+    "tmdb_id": 1578,
+    "year": 1980
+  },
+  "https://boxd.it/2924": {
+    "name": "The Talented Mr. Ripley",
+    "source": "search",
+    "tmdb_id": 1213,
+    "year": 1999
+  },
+  "https://boxd.it/293w": {
+    "name": "The Prestige",
+    "source": "search",
+    "tmdb_id": 1124,
+    "year": 2006
+  },
+  "https://boxd.it/294O": {
+    "name": "The Thing",
+    "source": "search",
+    "tmdb_id": 1091,
+    "year": 1982
+  },
+  "https://boxd.it/297o": {
+    "name": "Mulholland Drive",
+    "source": "search",
+    "tmdb_id": 1018,
+    "year": 2001
+  },
+  "https://boxd.it/29CG": {
+    "name": "Mr. & Mrs. Smith",
+    "source": "search",
+    "tmdb_id": 787,
+    "year": 2005
+  },
+  "https://boxd.it/29EW": {
+    "name": "Little Miss Sunshine",
+    "source": "search",
+    "tmdb_id": 773,
+    "year": 2006
+  },
+  "https://boxd.it/29FA": {
+    "name": "GoodFellas",
+    "source": "search",
+    "tmdb_id": 769,
+    "year": 1990
+  },
+  "https://boxd.it/29Nu": {
+    "name": "The Shining",
+    "source": "search",
+    "tmdb_id": 694,
+    "year": 1980
+  },
+  "https://boxd.it/29Pq": {
+    "name": "Pulp Fiction",
+    "source": "search",
+    "tmdb_id": 680,
+    "year": 1994
+  },
+  "https://boxd.it/29R2": {
+    "name": "Oldboy",
+    "source": "search",
+    "tmdb_id": 670,
+    "year": 2003
+  },
+  "https://boxd.it/29Ts": {
+    "name": "Paris, Texas",
+    "source": "search",
+    "tmdb_id": 655,
+    "year": 1984
+  },
+  "https://boxd.it/29VI": {
+    "name": "Requiem for a Dream",
+    "source": "search",
+    "tmdb_id": 641,
+    "year": 2000
+  },
+  "https://boxd.it/29VS": {
+    "name": "Catch Me If You Can",
+    "source": "search",
+    "tmdb_id": 640,
+    "year": 2002
+  },
+  "https://boxd.it/29Wm": {
+    "name": "Life Is Beautiful",
+    "source": "search",
+    "tmdb_id": 637,
+    "year": 1997
+  },
+  "https://boxd.it/29XE": {
+    "name": "The Usual Suspects",
+    "source": "search",
+    "tmdb_id": 629,
+    "year": 1995
+  },
+  "https://boxd.it/29XY": {
+    "name": "Trainspotting",
+    "source": "search",
+    "tmdb_id": 627,
+    "year": 1996
+  },
+  "https://boxd.it/29gA": {
+    "name": "Do the Right Thing",
+    "source": "search",
+    "tmdb_id": 925,
+    "year": 1989
+  },
+  "https://boxd.it/29oY": {
+    "name": "Singin' in the Rain",
+    "source": "search",
+    "tmdb_id": 872,
+    "year": 1952
+  },
+  "https://boxd.it/29ro": {
+    "name": "Saving Private Ryan",
+    "source": "search",
+    "tmdb_id": 857,
+    "year": 1998
+  },
+  "https://boxd.it/29tE": {
+    "name": "In the Mood for Love",
+    "source": "search",
+    "tmdb_id": 843,
+    "year": 2000
+  },
+  "https://boxd.it/29zs": {
+    "name": "Se7en",
+    "source": "search",
+    "tmdb_id": 807,
+    "year": 1995
+  },
+  "https://boxd.it/2DjO": {
+    "name": "Mad Max: Fury Road",
+    "source": "search",
+    "tmdb_id": 76341,
+    "year": 2015
+  },
+  "https://boxd.it/2ZA8": {
+    "name": "The Perks of Being a Wallflower",
+    "source": "search",
+    "tmdb_id": 84892,
+    "year": 2012
+  },
+  "https://boxd.it/2a1m": {
+    "name": "The Matrix",
+    "source": "search",
+    "tmdb_id": 603,
+    "year": 1999
+  },
+  "https://boxd.it/2a2a": {
+    "name": "City of God",
+    "source": "search",
+    "tmdb_id": 598,
+    "year": 2002
+  },
+  "https://boxd.it/2a2k": {
+    "name": "Titanic",
+    "source": "search",
+    "tmdb_id": 597,
+    "year": 1997
+  },
+  "https://boxd.it/2a9q": {
+    "name": "Fight Club",
+    "source": "search",
+    "tmdb_id": 550,
+    "year": 1999
+  },
+  "https://boxd.it/2aH8": {
+    "name": "Amadeus",
+    "source": "search",
+    "tmdb_id": 279,
+    "year": 1984
+  },
+  "https://boxd.it/2aHM": {
+    "name": "Fargo",
+    "source": "search",
+    "tmdb_id": 275,
+    "year": 1996
+  },
+  "https://boxd.it/2aHW": {
+    "name": "The Silence of the Lambs",
+    "source": "search",
+    "tmdb_id": 274,
+    "year": 1991
+  },
+  "https://boxd.it/2aHi": {
+    "name": "The Shawshank Redemption",
+    "source": "search",
+    "tmdb_id": 278,
+    "year": 1994
+  },
+  "https://boxd.it/2aNK": {
+    "name": "The Godfather",
+    "source": "search",
+    "tmdb_id": 238,
+    "year": 1972
+  },
+  "https://boxd.it/2aSg": {
+    "name": "Dead Poets Society",
+    "source": "search",
+    "tmdb_id": 207,
+    "year": 1989
+  },
+  "https://boxd.it/2aUc": {
+    "name": "Am\u00c3\u00a9lie",
+    "source": "letterboxd",
+    "tmdb_id": 194,
+    "year": 2001
+  },
+  "https://boxd.it/2aVE": {
+    "name": "A Clockwork Orange",
+    "source": "search",
+    "tmdb_id": 185,
+    "year": 1971
+  },
+  "https://boxd.it/2aVO": {
+    "name": "Jackie Brown",
+    "source": "search",
+    "tmdb_id": 184,
+    "year": 1997
+  },
+  "https://boxd.it/2aXU": {
+    "name": "28 Days Later",
+    "source": "search",
+    "tmdb_id": 170,
+    "year": 2002
+  },
+  "https://boxd.it/2ab2": {
+    "name": "Psycho",
+    "source": "search",
+    "tmdb_id": 539,
+    "year": 1960
+  },
+  "https://boxd.it/2ads": {
+    "name": "Casino",
+    "source": "search",
+    "tmdb_id": 524,
+    "year": 1995
+  },
+  "https://boxd.it/2agG": {
+    "name": "The Green Mile",
+    "source": "search",
+    "tmdb_id": 497,
+    "year": 1999
+  },
+  "https://boxd.it/2agc": {
+    "name": "Reservoir Dogs",
+    "source": "search",
+    "tmdb_id": 500,
+    "year": 1992
+  },
+  "https://boxd.it/2ahY": {
+    "name": "Good Will Hunting",
+    "source": "search",
+    "tmdb_id": 489,
+    "year": 1997
+  },
+  "https://boxd.it/2apI": {
+    "name": "Vertigo",
+    "source": "search",
+    "tmdb_id": 426,
+    "year": 1958
+  },
+  "https://boxd.it/2aq2": {
+    "name": "Schindler's List",
+    "source": "search",
+    "tmdb_id": 424,
+    "year": 1993
+  },
+  "https://boxd.it/2aqc": {
+    "name": "The Pianist",
+    "source": "search",
+    "tmdb_id": 423,
+    "year": 2002
+  },
+  "https://boxd.it/2as8": {
+    "name": "La Haine",
+    "source": "search",
+    "tmdb_id": 406,
+    "year": 1995
+  },
+  "https://boxd.it/2auI": {
+    "name": "12 Angry Men",
+    "source": "search",
+    "tmdb_id": 389,
+    "year": 1957
+  },
+  "https://boxd.it/2awE": {
+    "name": "The Devil Wears Prada",
+    "source": "search",
+    "tmdb_id": 350,
+    "year": 2006
+  },
+  "https://boxd.it/2awY": {
+    "name": "Alien",
+    "source": "search",
+    "tmdb_id": 348,
+    "year": 1979
+  },
+  "https://boxd.it/2axs": {
+    "name": "Eyes Wide Shut",
+    "source": "search",
+    "tmdb_id": 345,
+    "year": 1999
+  },
+  "https://boxd.it/2aze": {
+    "name": "Magnolia",
+    "source": "search",
+    "tmdb_id": 334,
+    "year": 1999
+  },
+  "https://boxd.it/2b0E": {
+    "name": "Lost in Translation",
+    "source": "search",
+    "tmdb_id": 153,
+    "year": 2003
+  },
+  "https://boxd.it/2b0k": {
+    "name": "The Dark Knight",
+    "source": "search",
+    "tmdb_id": 155,
+    "year": 2008
+  },
+  "https://boxd.it/2b2A": {
+    "name": "Donnie Darko",
+    "source": "search",
+    "tmdb_id": 141,
+    "year": 2001
+  },
+  "https://boxd.it/2b4m": {
+    "name": "Spirited Away",
+    "source": "search",
+    "tmdb_id": 129,
+    "year": 2001
+  },
+  "https://boxd.it/2b5E": {
+    "name": "The Lord of the Rings: The Two Towers",
+    "source": "search",
+    "tmdb_id": 121,
+    "year": 2002
+  },
+  "https://boxd.it/2b5O": {
+    "name": "The Lord of the Rings: The Fellowship of the Ring",
+    "source": "search",
+    "tmdb_id": 120,
+    "year": 2001
+  },
+  "https://boxd.it/2b7g": {
+    "name": "Scarface",
+    "source": "search",
+    "tmdb_id": 111,
+    "year": 1983
+  },
+  "https://boxd.it/2b8y": {
+    "name": "Taxi Driver",
+    "source": "search",
+    "tmdb_id": 103,
+    "year": 1976
+  },
+  "https://boxd.it/2b9m": {
+    "name": "Gladiator",
+    "source": "search",
+    "tmdb_id": 98,
+    "year": 2000
+  },
+  "https://boxd.it/2bcA": {
+    "name": "Blade Runner",
+    "source": "search",
+    "tmdb_id": 78,
+    "year": 1982
+  },
+  "https://boxd.it/2bcK": {
+    "name": "Memento",
+    "source": "search",
+    "tmdb_id": 77,
+    "year": 2000
+  },
+  "https://boxd.it/2bf0": {
+    "name": "2001: A Space Odyssey",
+    "source": "search",
+    "tmdb_id": 62,
+    "year": 1968
+  },
+  "https://boxd.it/2bg8": {
+    "name": "Heat",
+    "source": "search",
+    "tmdb_id": 949,
+    "year": 1995
+  },
+  "https://boxd.it/2cCk": {
+    "name": "Django Unchained",
+    "source": "search",
+    "tmdb_id": 68718,
+    "year": 2012
+  },
+  "https://boxd.it/3C1m": {
+    "name": "The Wolf of Wall Street",
+    "source": "search",
+    "tmdb_id": 106646,
+    "year": 2013
+  },
+  "https://boxd.it/3ZqO": {
+    "name": "The Grand Budapest Hotel",
+    "source": "search",
+    "tmdb_id": 120467,
+    "year": 2014
+  },
+  "https://boxd.it/3mDu": {
+    "name": "The Place Beyond the Pines",
+    "source": "search",
+    "tmdb_id": 97367,
+    "year": 2012
+  },
+  "https://boxd.it/43bI": {
+    "name": "About Time",
+    "source": "search",
+    "tmdb_id": 122906,
+    "year": 2013
+  },
+  "https://boxd.it/4E5i": {
+    "name": "Prisoners",
+    "source": "search",
+    "tmdb_id": 146233,
+    "year": 2013
+  },
+  "https://boxd.it/4O24": {
+    "name": "Her",
+    "source": "search",
+    "tmdb_id": 152601,
+    "year": 2013
+  },
+  "https://boxd.it/4VZ8": {
+    "name": "Interstellar",
+    "source": "search",
+    "tmdb_id": 157336,
+    "year": 2014
+  },
+  "https://boxd.it/4ive": {
+    "name": "Before Midnight",
+    "source": "search",
+    "tmdb_id": 132344,
+    "year": 2013
+  },
+  "https://boxd.it/5RFA": {
+    "name": "Birdman or (The Unexpected Virtue of Ignorance)",
+    "source": "search",
+    "tmdb_id": 194662,
+    "year": 2014
+  },
+  "https://boxd.it/5xtO": {
+    "name": "Enemy",
+    "source": "search",
+    "tmdb_id": 181886,
+    "year": 2013
+  },
+  "https://boxd.it/6YK": {
+    "name": "Eternal Sunshine of the Spotless Mind",
+    "source": "search",
+    "tmdb_id": 38,
+    "year": 2004
+  },
+  "https://boxd.it/6hQu": {
+    "name": "Gone Girl",
+    "source": "search",
+    "tmdb_id": 210577,
+    "year": 2014
+  },
+  "https://boxd.it/70w": {
+    "name": "Kill Bill: Vol. 1",
+    "source": "search",
+    "tmdb_id": 24,
+    "year": 2003
+  },
+  "https://boxd.it/71O": {
+    "name": "Citizen Kane",
+    "source": "search",
+    "tmdb_id": 15,
+    "year": 1941
+  },
+  "https://boxd.it/728": {
+    "name": "Forrest Gump",
+    "source": "search",
+    "tmdb_id": 13,
+    "year": 1994
+  },
+  "https://boxd.it/780m": {
+    "name": "Nightcrawler",
+    "source": "search",
+    "tmdb_id": 242582,
+    "year": 2014
+  },
+  "https://boxd.it/7N6A": {
+    "name": "Race Gurram",
+    "source": "search",
+    "tmdb_id": 262227,
+    "year": 2014
+  },
+  "https://boxd.it/7T2k": {
+    "name": "Ex Machina",
+    "source": "search",
+    "tmdb_id": 264660,
+    "year": 2015
+  },
+  "https://boxd.it/7bQA": {
+    "name": "Whiplash",
+    "source": "search",
+    "tmdb_id": 244786,
+    "year": 2014
+  },
+  "https://boxd.it/8SeG": {
+    "name": "The Martian",
+    "source": "search",
+    "tmdb_id": 286217,
+    "year": 2015
+  },
+  "https://boxd.it/8i7u": {
+    "name": "Sicario",
+    "source": "search",
+    "tmdb_id": 273481,
+    "year": 2015
+  },
+  "https://boxd.it/94Hg": {
+    "name": "The Nice Guys",
+    "source": "search",
+    "tmdb_id": 290250,
+    "year": 2016
+  },
+  "https://boxd.it/9vE4": {
+    "name": "Avengers: Endgame",
+    "source": "search",
+    "tmdb_id": 299534,
+    "year": 2019
+  },
+  "https://boxd.it/9vEe": {
+    "name": "Avengers: Infinity War",
+    "source": "search",
+    "tmdb_id": 299536,
+    "year": 2018
+  },
+  "https://boxd.it/9yzm": {
+    "name": "Annihilation",
+    "source": "search",
+    "tmdb_id": 300668,
+    "year": 2018
+  },
+  "https://boxd.it/ACJE": {
+    "name": "Spider-Man: Brand New Day",
+    "source": "search",
+    "tmdb_id": 969681,
+    "year": 2026
+  },
+  "https://boxd.it/AO8q": {
+    "name": "Conclave",
+    "source": "search",
+    "tmdb_id": 974576,
+    "year": 2024
+  },
+  "https://boxd.it/BfbQ": {
+    "name": "Thunderbolts*",
+    "source": "search",
+    "tmdb_id": 986056,
+    "year": 2025
+  },
+  "https://boxd.it/D5cI": {
+    "name": "Die My Love",
+    "source": "search",
+    "tmdb_id": 1033148,
+    "year": 2025
+  },
+  "https://boxd.it/D9A": {
+    "name": "Crazy, Stupid, Love.",
+    "source": "search",
+    "tmdb_id": 50646,
+    "year": 2011
+  },
+  "https://boxd.it/DQ": {
+    "name": "Take Shelter",
+    "source": "search",
+    "tmdb_id": 64720,
+    "year": 2011
+  },
+  "https://boxd.it/DUHM": {
+    "name": "One Battle After Another",
+    "source": "search",
+    "tmdb_id": 1054867,
+    "year": 2025
+  },
+  "https://boxd.it/E9IU": {
+    "name": "Superman",
+    "source": "search",
+    "tmdb_id": 1061474,
+    "year": 2025
+  },
+  "https://boxd.it/EMTM": {
+    "name": "Weapons",
+    "source": "search",
+    "tmdb_id": 1078605,
+    "year": 2025
+  },
+  "https://boxd.it/Ecsg": {
+    "name": "Frankenstein",
+    "source": "search",
+    "tmdb_id": 1062722,
+    "year": 2025
+  },
+  "https://boxd.it/GwcG": {
+    "name": "Sentimental Value",
+    "source": "search",
+    "tmdb_id": 1124566,
+    "year": 2025
+  },
+  "https://boxd.it/IG": {
+    "name": "Drive",
+    "source": "search",
+    "tmdb_id": 64690,
+    "year": 2011
+  },
+  "https://boxd.it/KQMM": {
+    "name": "Sinners",
+    "source": "search",
+    "tmdb_id": 1233413,
+    "year": 2025
+  },
+  "https://boxd.it/LYtK": {
+    "name": "Eternity",
+    "source": "search",
+    "tmdb_id": 1259102,
+    "year": 2025
+  },
+  "https://boxd.it/LdDo": {
+    "name": "Train Dreams",
+    "source": "search",
+    "tmdb_id": 1241983,
+    "year": 2025
+  },
+  "https://boxd.it/MZEw": {
+    "name": "The Last House",
+    "source": "search",
+    "tmdb_id": 1284041,
+    "year": 2026
+  },
+  "https://boxd.it/Msm": {
+    "name": "Incendies",
+    "source": "search",
+    "tmdb_id": 46738,
+    "year": 2010
+  },
+  "https://boxd.it/NhCI": {
+    "name": "Dhurandhar",
+    "source": "search",
+    "tmdb_id": 1291608,
+    "year": 2025
+  },
+  "https://boxd.it/OA2w": {
+    "name": "The Drama",
+    "source": "search",
+    "tmdb_id": 1325734,
+    "year": 2026
+  },
+  "https://boxd.it/Off0": {
+    "name": "Marty Supreme",
+    "source": "search",
+    "tmdb_id": 1317288,
+    "year": 2025
+  },
+  "https://boxd.it/PNqo": {
+    "name": "Obsession",
+    "source": "search",
+    "tmdb_id": 1339713,
+    "year": 2025
+  },
+  "https://boxd.it/Sw0": {
+    "name": "Black Swan",
+    "source": "search",
+    "tmdb_id": 44214,
+    "year": 2010
+  },
+  "https://boxd.it/a5fa": {
+    "name": "La La Land",
+    "source": "search",
+    "tmdb_id": 313369,
+    "year": 2016
+  },
+  "https://boxd.it/aNGk": {
+    "name": "Arrival",
+    "source": "search",
+    "tmdb_id": 329865,
+    "year": 2016
+  },
+  "https://boxd.it/ajZw": {
+    "name": "The Big Short",
+    "source": "search",
+    "tmdb_id": 318846,
+    "year": 2015
+  },
+  "https://boxd.it/azpY": {
+    "name": "Spider-Man: Into the Spider-Verse",
+    "source": "search",
+    "tmdb_id": 324857,
+    "year": 2018
+  },
+  "https://boxd.it/b2L0": {
+    "name": "Manchester by the Sea",
+    "source": "search",
+    "tmdb_id": 334541,
+    "year": 2016
+  },
+  "https://boxd.it/b8wK": {
+    "name": "Blade Runner 2049",
+    "source": "search",
+    "tmdb_id": 335984,
+    "year": 2017
+  },
+  "https://boxd.it/bCLK": {
+    "name": "Barbie",
+    "source": "search",
+    "tmdb_id": 346698,
+    "year": 2023
+  },
+  "https://boxd.it/bhF2": {
+    "name": "Baby Driver",
+    "source": "search",
+    "tmdb_id": 339403,
+    "year": 2017
+  },
+  "https://boxd.it/cPym": {
+    "name": "First Man",
+    "source": "search",
+    "tmdb_id": 369972,
+    "year": 2018
+  },
+  "https://boxd.it/cioI": {
+    "name": "Suspiria",
+    "source": "search",
+    "tmdb_id": 361292,
+    "year": 2018
+  },
+  "https://boxd.it/d6bE": {
+    "name": "Moonlight",
+    "source": "search",
+    "tmdb_id": 376867,
+    "year": 2016
+  },
+  "https://boxd.it/dGNE": {
+    "name": "Lady Bird",
+    "source": "search",
+    "tmdb_id": 391713,
+    "year": 2017
+  },
+  "https://boxd.it/e4uc": {
+    "name": "Phantom Thread",
+    "source": "search",
+    "tmdb_id": 400617,
+    "year": 2017
+  },
+  "https://boxd.it/eDGs": {
+    "name": "The Batman",
+    "source": "search",
+    "tmdb_id": 414906,
+    "year": 2022
+  },
+  "https://boxd.it/eOCm": {
+    "name": "Get Out",
+    "source": "search",
+    "tmdb_id": 419430,
+    "year": 2017
+  },
+  "https://boxd.it/efo": {
+    "name": "Zindagi Na Milegi Dobara",
+    "source": "search",
+    "tmdb_id": 61202,
+    "year": 2011
+  },
+  "https://boxd.it/fA7G": {
+    "name": "Dune",
+    "source": "search",
+    "tmdb_id": 438631,
+    "year": 2021
+  },
+  "https://boxd.it/fDsOIJ": {
+    "name": "Before Sunset",
+    "source": "search",
+    "tmdb_id": 80,
+    "year": 2004
+  },
+  "https://boxd.it/fcFY": {
+    "name": "Vice",
+    "source": "search",
+    "tmdb_id": 429197,
+    "year": 2018
+  },
+  "https://boxd.it/fcFu": {
+    "name": "Good Time",
+    "source": "search",
+    "tmdb_id": 429200,
+    "year": 2017
+  },
+  "https://boxd.it/fyYSEP": {
+    "name": "Before Sunrise",
+    "source": "search",
+    "tmdb_id": 76,
+    "year": 1995
+  },
+  "https://boxd.it/gH0O": {
+    "name": "Once Upon a Time... in Hollywood",
+    "source": "search",
+    "tmdb_id": 466272,
+    "year": 2019
+  },
+  "https://boxd.it/gHp0": {
+    "name": "Killers of the Flower Moon",
+    "source": "search",
+    "tmdb_id": 466420,
+    "year": 2023
+  },
+  "https://boxd.it/gXGc": {
+    "name": "Uncut Gems",
+    "source": "search",
+    "tmdb_id": 473033,
+    "year": 2019
+  },
+  "https://boxd.it/glS": {
+    "name": "Moneyball",
+    "source": "search",
+    "tmdb_id": 60308,
+    "year": 2011
+  },
+  "https://boxd.it/gnV6": {
+    "name": "Us",
+    "source": "search",
+    "tmdb_id": 458723,
+    "year": 2019
+  },
+  "https://boxd.it/h4cS": {
+    "name": "Joker",
+    "source": "search",
+    "tmdb_id": 475557,
+    "year": 2019
+  },
+  "https://boxd.it/hJAw": {
+    "name": "Marriage Story",
+    "source": "search",
+    "tmdb_id": 492188,
+    "year": 2019
+  },
+  "https://boxd.it/hNVe": {
+    "name": "Hereditary",
+    "source": "search",
+    "tmdb_id": 493922,
+    "year": 2018
+  },
+  "https://boxd.it/hTha": {
+    "name": "Parasite",
+    "source": "search",
+    "tmdb_id": 496243,
+    "year": 2019
+  },
+  "https://boxd.it/hxL8": {
+    "name": "BlacKkKlansman",
+    "source": "search",
+    "tmdb_id": 487558,
+    "year": 2018
+  },
+  "https://boxd.it/i4a": {
+    "name": "Midnight in Paris",
+    "source": "search",
+    "tmdb_id": 59436,
+    "year": 2011
+  },
+  "https://boxd.it/iEBG": {
+    "name": "Jojo Rabbit",
+    "source": "search",
+    "tmdb_id": 515001,
+    "year": 2019
+  },
+  "https://boxd.it/icFU": {
+    "name": "The Lighthouse",
+    "source": "search",
+    "tmdb_id": 503919,
+    "year": 2019
+  },
+  "https://boxd.it/jUk4": {
+    "name": "Everything Everywhere All at Once",
+    "source": "search",
+    "tmdb_id": 545611,
+    "year": 2022
+  },
+  "https://boxd.it/jWEA": {
+    "name": "Knives Out",
+    "source": "search",
+    "tmdb_id": 546554,
+    "year": 2019
+  },
+  "https://boxd.it/jhxe": {
+    "name": "Midsommar",
+    "source": "search",
+    "tmdb_id": 530385,
+    "year": 2019
+  },
+  "https://boxd.it/jj4y": {
+    "name": "1917",
+    "source": "search",
+    "tmdb_id": 530915,
+    "year": 2019
+  },
+  "https://boxd.it/jkPq": {
+    "name": "Portrait of a Lady on Fire",
+    "source": "search",
+    "tmdb_id": 531428,
+    "year": 2019
+  },
+  "https://boxd.it/jpmy": {
+    "name": "Waves",
+    "source": "search",
+    "tmdb_id": 533444,
+    "year": 2019
+  },
+  "https://boxd.it/kSz4": {
+    "name": "Spider-Man: Across the Spider-Verse",
+    "source": "search",
+    "tmdb_id": 569094,
+    "year": 2023
+  },
+  "https://boxd.it/kvsO": {
+    "name": "Monkey Man",
+    "source": "search",
+    "tmdb_id": 560016,
+    "year": 2024
+  },
+  "https://boxd.it/mL9M": {
+    "name": "Minari",
+    "source": "search",
+    "tmdb_id": 615643,
+    "year": 2020
+  },
+  "https://boxd.it/mM02": {
+    "name": "Babylon",
+    "source": "search",
+    "tmdb_id": 615777,
+    "year": 2022
+  },
+  "https://boxd.it/mViu": {
+    "name": "Don't Worry Darling",
+    "source": "search",
+    "tmdb_id": 619730,
+    "year": 2022
+  },
+  "https://boxd.it/nwRw": {
+    "name": "Spider-Man: No Way Home",
+    "source": "search",
+    "tmdb_id": 634649,
+    "year": 2021
+  },
+  "https://boxd.it/o0Hc": {
+    "name": "Don't Look Up",
+    "source": "search",
+    "tmdb_id": 646380,
+    "year": 2021
+  },
+  "https://boxd.it/o6MC": {
+    "name": "Eddington",
+    "source": "search",
+    "tmdb_id": 648878,
+    "year": 2025
+  },
+  "https://boxd.it/oBYa": {
+    "name": "A Complete Unknown",
+    "source": "search",
+    "tmdb_id": 661539,
+    "year": 2024
+  },
+  "https://boxd.it/oNB8": {
+    "name": "Past Lives",
+    "source": "search",
+    "tmdb_id": 666277,
+    "year": 2023
+  },
+  "https://boxd.it/oyws": {
+    "name": "The Worst Person in the World",
+    "source": "search",
+    "tmdb_id": 660120,
+    "year": 2021
+  },
+  "https://boxd.it/pEeQ": {
+    "name": "Project Hail Mary",
+    "source": "search",
+    "tmdb_id": 687163,
+    "year": 2026
+  },
+  "https://boxd.it/pUfA": {
+    "name": "Dune: Part Two",
+    "source": "search",
+    "tmdb_id": 693134,
+    "year": 2024
+  },
+  "https://boxd.it/q1Dk": {
+    "name": "Mickey 17",
+    "source": "search",
+    "tmdb_id": 696506,
+    "year": 2025
+  },
+  "https://boxd.it/qW26": {
+    "name": "Bullet Train",
+    "source": "search",
+    "tmdb_id": 718930,
+    "year": 2022
+  },
+  "https://boxd.it/qeWY": {
+    "name": "Bugonia",
+    "source": "search",
+    "tmdb_id": 701387,
+    "year": 2025
+  },
+  "https://boxd.it/rnUa": {
+    "name": "Happyend",
+    "source": "search",
+    "tmdb_id": 730251,
+    "year": 2024
+  },
+  "https://boxd.it/s0Bm": {
+    "name": "The Fall Guy",
+    "source": "search",
+    "tmdb_id": 746036,
+    "year": 2024
+  },
+  "https://boxd.it/s3ds": {
+    "name": "Asteroid City",
+    "source": "search",
+    "tmdb_id": 747188,
+    "year": 2023
+  },
+  "https://boxd.it/sDCe": {
+    "name": "Nope",
+    "source": "search",
+    "tmdb_id": 762504,
+    "year": 2022
+  },
+  "https://boxd.it/tABk": {
+    "name": "Furiosa: A Mad Max Saga",
+    "source": "search",
+    "tmdb_id": 786892,
+    "year": 2024
+  },
+  "https://boxd.it/uAKS": {
+    "name": "Wake Up Dead Man",
+    "source": "search",
+    "tmdb_id": 812583,
+    "year": 2025
+  },
+  "https://boxd.it/uNIA": {
+    "name": "T\u00c3\u0081R",
+    "source": "search",
+    "tmdb_id": 1004076,
+    "year": 2022
+  },
+  "https://boxd.it/vHza": {
+    "name": "The Holdovers",
+    "source": "search",
+    "tmdb_id": 840430,
+    "year": 2023
+  },
+  "https://boxd.it/wUow": {
+    "name": "Oppenheimer",
+    "source": "search",
+    "tmdb_id": 872585,
+    "year": 2023
+  },
+  "https://boxd.it/woVy": {
+    "name": "Hamnet",
+    "source": "search",
+    "tmdb_id": 858024,
+    "year": 2025
+  },
+  "https://boxd.it/y9aw": {
+    "name": "Society of the Snow",
+    "source": "search",
+    "tmdb_id": 906126,
+    "year": 2023
+  },
+  "https://boxd.it/yjVM": {
+    "name": "F1",
+    "source": "search",
+    "tmdb_id": 911430,
+    "year": 2025
+  },
+  "https://boxd.it/yuDE": {
+    "name": "Anatomy of a Fall",
+    "source": "search",
+    "tmdb_id": 915935,
+    "year": 2023
+  },
+  "https://boxd.it/zanS": {
+    "name": "The Substance",
+    "source": "search",
+    "tmdb_id": 933260,
+    "year": 2024
+  },
+  "https://boxd.it/zi5M": {
+    "name": "Michael",
+    "source": "search",
+    "tmdb_id": 936075,
+    "year": 2026
+  },
+  "https://letterboxd.com/film/fight-club": {
+    "name": "Fight Club",
+    "source": "search",
+    "tmdb_id": 550,
+    "year": 1999
+  },
+  "https://letterboxd.com/film/heat": {
+    "name": "Heat",
+    "source": "search",
+    "tmdb_id": 949,
+    "year": 1995
+  },
+  "https://letterboxd.com/film/parasite-2019": {
+    "name": "Parasite",
+    "source": "search",
+    "tmdb_id": 496243,
+    "year": 2019
+  }
+}

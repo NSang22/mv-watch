@@ -1,0 +1,147 @@
+run_date,title,year,tmdb_id,service,tmdb_says,streaming_availability_says,resolution,letterboxd_url
+2026-08-08,Inception,2010,27205,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/1skk
+2026-08-08,Inception,2010,27205,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/1skk
+2026-08-08,Nope,2022,762504,Netflix,available,unavailable,dropped_tmdb_claim,https://boxd.it/sDCe
+2026-08-08,Requiem for a Dream,2000,641,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/29VI
+2026-08-08,Requiem for a Dream,2000,641,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29VI
+2026-08-08,Catch Me If You Can,2002,640,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/29VS
+2026-08-08,Catch Me If You Can,2002,640,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29VS
+2026-08-08,Moonlight,2016,376867,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/d6bE
+2026-08-08,Nightcrawler,2014,242582,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/780m
+2026-08-08,There Will Be Blood,2007,7345,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/20Z2
+2026-08-08,"Paris, Texas",1984,655,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/29Ts
+2026-08-08,"Paris, Texas",1984,655,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29Ts
+2026-08-08,The Usual Suspects,1995,629,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/29XE
+2026-08-08,Lady Bird,2017,391713,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/dGNE
+2026-08-08,Lady Bird,2017,391713,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/dGNE
+2026-08-08,Lady Bird,2017,391713,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/dGNE
+2026-08-08,Lady Bird,2017,391713,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/dGNE
+2026-08-08,Titanic,1997,597,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/2a2k
+2026-08-08,Titanic,1997,597,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/2a2k
+2026-08-08,Titanic,1997,597,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/2a2k
+2026-08-08,Titanic,1997,597,Tubi,unavailable,available,logged_only_tmdb_miss,https://boxd.it/2a2k
+2026-08-08,Donnie Darko,2001,141,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/2b2A
+2026-08-08,Little Miss Sunshine,2006,773,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29EW
+2026-08-08,Scream,1996,4232,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/24EC
+2026-08-08,Scream,1996,4232,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/24EC
+2026-08-08,Scarface,1983,111,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/2b7g
+2026-08-08,The Thing,1982,1091,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/294O
+2026-08-08,Fargo,1996,275,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/2aHM
+2026-08-08,Ex Machina,2015,264660,Netflix,available,unavailable,dropped_tmdb_claim,https://boxd.it/7T2k
+2026-08-08,Ex Machina,2015,264660,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/7T2k
+2026-08-08,Midnight in Paris,2011,59436,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/i4a
+2026-08-08,The Curious Case of Benjamin Button,2008,4922,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/23Fk
+2026-08-08,Casino,1995,524,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/2ads
+2026-08-08,Casino,1995,524,Tubi,unavailable,available,logged_only_tmdb_miss,https://boxd.it/2ads
+2026-08-08,Raging Bull,1980,1578,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/28yI
+2026-08-08,Raging Bull,1980,1578,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/28yI
+2026-08-08,Raging Bull,1980,1578,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/28yI
+2026-08-08,Do the Right Thing,1989,925,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/29gA
+2026-08-08,Do the Right Thing,1989,925,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29gA
+2026-08-08,Enemy,2013,181886,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/5xtO
+2026-08-08,Enemy,2013,181886,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/5xtO
+2026-08-08,Enemy,2013,181886,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/5xtO
+2026-08-08,Tropic Thunder,2008,7446,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/20WM
+2026-08-08,Punch-Drunk Love,2002,8051,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/20E4
+2026-08-08,Punch-Drunk Love,2002,8051,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/20E4
+2026-08-08,The Notebook,2004,11036,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/1UNE
+2026-08-08,Superbad,2007,8363,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/20hO
+2026-08-08,Inception,2010,27205,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/1skk
+2026-08-08,Inception,2010,27205,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/1skk
+2026-08-08,Nope,2022,762504,Netflix,available,unavailable,dropped_tmdb_claim,https://boxd.it/sDCe
+2026-08-08,Requiem for a Dream,2000,641,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/29VI
+2026-08-08,Requiem for a Dream,2000,641,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29VI
+2026-08-08,Catch Me If You Can,2002,640,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/29VS
+2026-08-08,Catch Me If You Can,2002,640,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29VS
+2026-08-08,Moonlight,2016,376867,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/d6bE
+2026-08-08,Nightcrawler,2014,242582,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/780m
+2026-08-08,There Will Be Blood,2007,7345,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/20Z2
+2026-08-08,"Paris, Texas",1984,655,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/29Ts
+2026-08-08,"Paris, Texas",1984,655,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29Ts
+2026-08-08,The Usual Suspects,1995,629,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/29XE
+2026-08-08,Lady Bird,2017,391713,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/dGNE
+2026-08-08,Lady Bird,2017,391713,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/dGNE
+2026-08-08,Lady Bird,2017,391713,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/dGNE
+2026-08-08,Lady Bird,2017,391713,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/dGNE
+2026-08-08,Titanic,1997,597,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/2a2k
+2026-08-08,Titanic,1997,597,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/2a2k
+2026-08-08,Titanic,1997,597,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/2a2k
+2026-08-08,Titanic,1997,597,Tubi,unavailable,available,logged_only_tmdb_miss,https://boxd.it/2a2k
+2026-08-08,Donnie Darko,2001,141,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/2b2A
+2026-08-08,Little Miss Sunshine,2006,773,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29EW
+2026-08-08,Scream,1996,4232,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/24EC
+2026-08-08,Scream,1996,4232,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/24EC
+2026-08-08,Scarface,1983,111,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/2b7g
+2026-08-08,The Thing,1982,1091,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/294O
+2026-08-08,Fargo,1996,275,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/2aHM
+2026-08-08,Ex Machina,2015,264660,Netflix,available,unavailable,dropped_tmdb_claim,https://boxd.it/7T2k
+2026-08-08,Ex Machina,2015,264660,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/7T2k
+2026-08-08,Midnight in Paris,2011,59436,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/i4a
+2026-08-08,The Curious Case of Benjamin Button,2008,4922,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/23Fk
+2026-08-08,Casino,1995,524,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/2ads
+2026-08-08,Casino,1995,524,Tubi,unavailable,available,logged_only_tmdb_miss,https://boxd.it/2ads
+2026-08-08,Raging Bull,1980,1578,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/28yI
+2026-08-08,Raging Bull,1980,1578,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/28yI
+2026-08-08,Raging Bull,1980,1578,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/28yI
+2026-08-08,Do the Right Thing,1989,925,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/29gA
+2026-08-08,Do the Right Thing,1989,925,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29gA
+2026-08-08,Enemy,2013,181886,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/5xtO
+2026-08-08,Enemy,2013,181886,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/5xtO
+2026-08-08,Enemy,2013,181886,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/5xtO
+2026-08-08,Tropic Thunder,2008,7446,YouTube Free,available,unavailable,dropped_tmdb_claim,https://boxd.it/20WM
+2026-08-08,Punch-Drunk Love,2002,8051,Hoopla,available,unavailable,dropped_tmdb_claim,https://boxd.it/20E4
+2026-08-08,Punch-Drunk Love,2002,8051,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/20E4
+2026-08-08,The Notebook,2004,11036,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/1UNE
+2026-08-08,Superbad,2007,8363,Tubi,available,unavailable,dropped_tmdb_claim,https://boxd.it/20hO
+2026-08-09,Inception,2010,27205,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/1skk
+2026-08-09,Nope,2022,762504,Netflix,available,unavailable,dropped_tmdb_claim,https://boxd.it/sDCe
+2026-08-09,Requiem for a Dream,2000,641,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29VI
+2026-08-09,Catch Me If You Can,2002,640,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29VS
+2026-08-09,Nightcrawler,2014,242582,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/780m
+2026-08-09,"Paris, Texas",1984,655,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29Ts
+2026-08-09,Lady Bird,2017,391713,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/dGNE
+2026-08-09,Titanic,1997,597,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/2a2k
+2026-08-09,Little Miss Sunshine,2006,773,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29EW
+2026-08-09,Scream,1996,4232,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/24EC
+2026-08-09,Scarface,1983,111,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/2b7g
+2026-08-09,Ex Machina,2015,264660,Netflix,available,unavailable,dropped_tmdb_claim,https://boxd.it/7T2k
+2026-08-09,Midnight in Paris,2011,59436,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/i4a
+2026-08-09,Raging Bull,1980,1578,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/28yI
+2026-08-09,Do the Right Thing,1989,925,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29gA
+2026-08-09,Enemy,2013,181886,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/5xtO
+2026-08-09,Punch-Drunk Love,2002,8051,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/20E4
+2026-08-09,The Notebook,2004,11036,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/1UNE
+2026-08-10,Inception,2010,27205,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/1skk
+2026-08-10,Nope,2022,762504,Netflix,available,unavailable,dropped_tmdb_claim,https://boxd.it/sDCe
+2026-08-10,Requiem for a Dream,2000,641,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29VI
+2026-08-10,Catch Me If You Can,2002,640,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29VS
+2026-08-10,Nightcrawler,2014,242582,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/780m
+2026-08-10,"Paris, Texas",1984,655,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29Ts
+2026-08-10,Lady Bird,2017,391713,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/dGNE
+2026-08-10,Titanic,1997,597,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/2a2k
+2026-08-10,Little Miss Sunshine,2006,773,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29EW
+2026-08-10,Scream,1996,4232,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/24EC
+2026-08-10,Scarface,1983,111,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/2b7g
+2026-08-10,Midnight in Paris,2011,59436,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/i4a
+2026-08-10,Raging Bull,1980,1578,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/28yI
+2026-08-10,Do the Right Thing,1989,925,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/29gA
+2026-08-10,Enemy,2013,181886,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/5xtO
+2026-08-10,Punch-Drunk Love,2002,8051,Amazon Prime Video,unavailable,available,logged_only_tmdb_miss,https://boxd.it/20E4
+2026-08-10,The Notebook,2004,11036,Amazon Prime Video,available,unavailable,dropped_tmdb_claim,https://boxd.it/1UNE
+2026-08-11,Inception,2010,27205,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/1skk
+2026-08-11,Nope,2022,762504,Netflix,available,unavailable,marked_disputed,https://boxd.it/sDCe
+2026-08-11,Requiem for a Dream,2000,641,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/29VI
+2026-08-11,Catch Me If You Can,2002,640,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/29VS
+2026-08-11,Nightcrawler,2014,242582,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/780m
+2026-08-11,"Paris, Texas",1984,655,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/29Ts
+2026-08-11,Lady Bird,2017,391713,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/dGNE
+2026-08-11,Titanic,1997,597,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/2a2k
+2026-08-11,Little Miss Sunshine,2006,773,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/29EW
+2026-08-11,Scream,1996,4232,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/24EC
+2026-08-11,Scarface,1983,111,Amazon Prime Video,available,unavailable,marked_disputed,https://boxd.it/2b7g
+2026-08-11,Midnight in Paris,2011,59436,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/i4a
+2026-08-11,Raging Bull,1980,1578,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/28yI
+2026-08-11,Do the Right Thing,1989,925,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/29gA
+2026-08-11,Enemy,2013,181886,Amazon Prime Video,available,unavailable,marked_disputed,https://boxd.it/5xtO
+2026-08-11,Punch-Drunk Love,2002,8051,Amazon Prime Video,unavailable,available,marked_disputed,https://boxd.it/20E4
+2026-08-11,The Notebook,2004,11036,Amazon Prime Video,available,unavailable,marked_disputed,https://boxd.it/1UNE

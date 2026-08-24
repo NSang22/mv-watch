@@ -1,0 +1,104 @@
+# Copy to config.yaml and adjust. Secrets stay in environment variables:
+#   TMDB_API_KEY (required)
+#   NTFY_TOPIC (optional; skip push when unset)
+#   LETTERBOXD_USER (optional; used for scrape mode)
+#   STREAMING_AVAILABILITY_API_KEY or MOTN_API_KEY (optional; verifies availability + expiry)
+# Secrets may also live in a local .env file (gitignored).
+
+region: US
+
+# Delay between outbound HTTP calls (seconds). Be polite to Letterboxd and TMDB.
+request_delay_seconds: 0.35
+
+# Fail the run only when the fraction of failed TMDB provider lookups exceeds this.
+failure_rate_threshold: 0.2
+
+# Sanity gate: abort before state/notify when departures look anomalous.
+# A real catalog does not shed a dozen titles overnight across unrelated services.
+max_departure_films: 10
+max_departure_fraction: 0.05
+
+# Paths are relative to the working directory unless absolute.
+paths:
+  watchlist: watchlist.csv
+  state: state.json
+  id_cache: cache/id_cache.json
+  overrides: overrides.json
+  unmatched: unmatched.csv
+  csv_report: watchlist_streaming.csv
+  markdown_report: report.md
+  html_report: report.html
+  spin_html: spin.html
+  recommend_html: recommend.html
+  conflicts: conflicts.csv
+  unresolved: unresolved.csv
+  feedback: feedback.csv
+
+# Streaming Availability API (Movie of the Night) expiry enrichment only.
+# Free key: https://www.movieofthenight.com/about/api/
+# Availability override is OFF: MotN never adds/drops my-service hits.
+# MotN option types used for expiry/links: subscription and free only
+# (never rent/buy/addon; addon collapsed Amazon rent into Prime in audit).
+# If the API is missing or down, TMDB availability is kept without expiry.
+streaming_availability:
+  enabled: true
+  base_url: https://api.movieofthenight.com/v4
+  leaving_soon_days: [14, 3]
+  catalog_ids:
+    Netflix: netflix
+    Amazon Prime Video: prime
+    Tubi: tubi
+    YouTube Free: youtube
+    Hoopla: hoopla
+
+# Services you pay for (or get via library). Match patterns are case-insensitive
+# fnmatch globs against TMDB provider_name strings. Matched providers fold back
+# to the canonical `name` in all output.
+#
+# Confirmed TMDB US movie provider strings (queried from
+# GET /watch/providers/movie?watch_region=US at build time):
+#   Netflix
+#   Netflix basic with Ads
+#   Amazon Prime Video
+#   Amazon Prime Video with Ads
+#   Amazon Video          <- rent/buy storefront; NEVER treat as subscription
+#   Tubi TV
+#   YouTube               <- typically rent/buy
+#   YouTube Free          <- free with ads (our watchable target)
+#   Hoopla
+services:
+  - name: Netflix
+    match:
+      - "Netflix"
+      - "Netflix basic with Ads"
+      - "Netflix Standard with Ads"
+      - "Netflix Kids"
+    tier: subscription
+
+  - name: Amazon Prime Video
+    match:
+      - "Amazon Prime Video"
+      - "Amazon Prime Video with Ads"
+    # Explicitly exclude the rent/buy storefront. "Amazon Video" alone must
+    # never fold into this service.
+    exclude:
+      - "Amazon Video"
+    tier: subscription
+
+  - name: Tubi
+    match:
+      - "Tubi TV"
+      - "Tubi"
+    tier: subscription
+
+  - name: YouTube Free
+    match:
+      - "YouTube Free"
+    tier: subscription
+
+  - name: Hoopla
+    match:
+      - "Hoopla"
+    # Library card access with monthly borrow caps. Shown separately so a
+    # Hoopla-only hit never hides rent/buy options.
+    tier: library

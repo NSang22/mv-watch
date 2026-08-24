@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.env
+.env.*
+config.yaml
+*.tmp
+.DS_Store
+audit.html
+audit_sample.json
+audit_results.csv
+cache/taste_enrichment.json
+_site/

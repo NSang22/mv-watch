@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Watchlist Watcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #e7eaf0;
+      --ink: #12141a;
+      --ink-soft: #3a4250;
+      --mute: #6b7382;
+      --line: rgba(18, 20, 26, 0.12);
+      --ticket: #c81e2c;
+      --ticket-soft: rgba(200, 30, 44, 0.1);
+      --good: #0f6b4c;
+      --shadow: 0 18px 50px rgba(18, 20, 26, 0.08);
+      --radius: 2px;
+      --max: 1080px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Fraunces", Georgia, serif;
+      font-optical-sizing: auto;
+      background:
+        radial-gradient(1200px 500px at 10% -10%, rgba(200, 30, 44, 0.08), transparent 55%),
+        radial-gradient(900px 420px at 100% 0%, rgba(18, 20, 26, 0.06), transparent 50%),
+        linear-gradient(180deg, #f2f4f8 0%, var(--paper) 40%, #dde2ea 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 2rem, var(--max));
+      margin: 0 auto;
+      padding: 2.25rem 0 4rem;
+    }
+
+    .mast {
+      display: grid;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      animation: rise 0.7s ease both;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-family: "Syne", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 7vw, 4.4rem);
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      margin: 0;
+    }
+
+    .brand span {
+      color: var(--ticket);
+    }
+
+    .stub-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .stub {
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ticket);
+      border: 1px solid var(--ticket);
+      padding: 0.45rem 0.7rem;
+      background: var(--ticket-soft);
+    }
+
+    .spin-link {
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 0.45rem 0.7rem;
+      background: rgba(255, 255, 255, 0.45);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .spin-link:hover {
+      color: var(--ticket);
+      border-color: var(--ticket);
+    }
+
+    .lede {
+      margin: 0;
+      max-width: 36rem;
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      margin-top: 0.35rem;
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mute);
+      animation: rise 0.8s 0.08s ease both;
+    }
+
+    .stats strong {
+      color: var(--ink);
+      font-size: 1.05rem;
+      letter-spacing: 0;
+      margin-right: 0.25rem;
+    }
+
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: grid;
+      gap: 0.85rem;
+      padding: 1rem 0 1.1rem;
+      margin: 0.5rem 0 0.25rem;
+      background: linear-gradient(180deg, rgba(231, 234, 240, 0.96), rgba(231, 234, 240, 0.88));
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      animation: rise 0.85s 0.12s ease both;
+    }
+
+    .search {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.65);
+      color: var(--ink);
+      font: inherit;
+      font-size: 1.05rem;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search:focus {
+      border-color: rgba(200, 30, 44, 0.55);
+      box-shadow: 0 0 0 3px rgba(200, 30, 44, 0.12);
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.45);
+      color: var(--ink-soft);
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .chip:hover { transform: translateY(-1px); }
+    .chip[aria-pressed="true"] {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #f4f6fa;
+    }
+    .chip.ticket[aria-pressed="true"] {
+      background: var(--ticket);
+      border-color: var(--ticket);
+    }
+
+    .sort-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--mute);
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    select.sort {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.65);
+      color: var(--ink);
+      font: inherit;
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.6rem;
+    }
+
+    .events {
+      display: grid;
+      gap: 0.5rem;
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .event {
+      border-left: 3px solid var(--ticket);
+      padding: 0.65rem 0.85rem;
+      background: rgba(255,255,255,0.45);
+      font-size: 0.98rem;
+    }
+
+    .event .k {
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ticket);
+      margin-right: 0.5rem;
+    }
+
+    .section {
+      margin-top: 1.75rem;
+      animation: rise 0.75s 0.16s ease both;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.45rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .count {
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mute);
+    }
+
+    .list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0;
+    }
+
+    .film {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.75rem 1rem;
+      align-items: start;
+      padding: 0.95rem 0.15rem;
+      border-bottom: 1px solid var(--line);
+      transition: background 0.2s ease, padding-left 0.2s ease;
+    }
+
+    .film:hover {
+      background: rgba(255,255,255,0.4);
+      padding-left: 0.35rem;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 1.18rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .title a {
+      color: inherit;
+      text-decoration: none;
+      background-image: linear-gradient(var(--ticket), var(--ticket));
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0 2px;
+      transition: background-size 0.25s ease;
+    }
+
+    .title a:hover { background-size: 100% 2px; }
+
+    .meta {
+      margin: 0.3rem 0 0;
+      color: var(--mute);
+      font-size: 0.92rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      justify-content: flex-end;
+      max-width: 20rem;
+    }
+
+    .tag {
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.5rem;
+      border: 1px solid var(--ink);
+      background: #fff;
+    }
+
+    .tag.library {
+      border-style: dashed;
+    }
+
+    .tag.muted {
+      border-color: var(--line);
+      color: var(--mute);
+      font-weight: 700;
+    }
+
+    .tag.confirmed {
+      color: var(--good);
+      border-color: rgba(15, 107, 76, 0.45);
+      background: rgba(15, 107, 76, 0.08);
+    }
+
+    .tag.probable {
+      color: #7a5a12;
+      border-color: rgba(122, 90, 18, 0.4);
+      background: rgba(214, 168, 58, 0.14);
+    }
+
+    .confidence-key {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.2rem;
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mute);
+    }
+
+    .actions {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      align-items: center;
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .actions a, .actions button {
+      color: var(--ink-soft);
+      text-decoration: none;
+      border: 0;
+      background: none;
+      padding: 0;
+      font: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .actions a:hover, .actions button:hover {
+      color: var(--ticket);
+      border-color: var(--ticket);
+    }
+
+    .actions button.wrong {
+      color: var(--ticket);
+    }
+
+    .toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 5;
+      background: var(--ink);
+      color: #f4f6fa;
+      font-family: "Syne", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.7rem 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .toast.show { opacity: 1; }
+
+    .empty {
+      padding: 2rem 0.25rem;
+      color: var(--mute);
+      font-size: 1.05rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--mute);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .film { grid-template-columns: 1fr; }
+      .tags { justify-content: flex-start; max-width: none; }
+      .wrap { width: min(100% - 1.25rem, var(--max)); padding-top: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <div class="brand-row">
+        <h1 class="brand">Watchlist<br /><span>Watcher</span></h1>
+        <div class="stub-row">
+          <div class="stub">Now showing</div>
+          <a class="spin-link" href="recommend.html">Taste picks</a>
+          <a class="spin-link" href="spin.html">Tonight's spin</a>
+        </div>
+      </div>
+      <p class="lede">Films from your Letterboxd watchlist that look available on services you care about. Confirmed = Netflix/Prime (audited). Probable = unaudited free/library. High recall on purpose.</p>
+      <div class="stats" id="stats"></div>
+      <div class="confidence-key" id="confidence-key"></div>
+    </header>
+
+    <div class="controls">
+      <input class="search" id="search" type="search" placeholder="Search titles..." autocomplete="off" />
+      <div class="filters" id="filters" role="toolbar" aria-label="Service filters"></div>
+      <div class="sort-row">
+        <div id="visible-count"></div>
+        <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <button type="button" class="chip" id="export-feedback">Export feedback.csv</button>
+          <label>
+            Sort
+            <select class="sort" id="sort">
+              <option value="title">Title</option>
+              <option value="year-desc">Year (new)</option>
+              <option value="year-asc">Year (old)</option>
+              <option value="days">Leaving soonest</option>
+              <option value="confidence">Confidence</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="events" id="events" hidden></div>
+    <main id="main"></main>
+
+    <footer id="footer"></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script id="report-data" type="application/json">{"generated": true, "stats": {"total": 142, "on_my_services": 47, "confirmed": 24, "probable": 53, "cold_start": false}, "events": [], "films": [{"title": "Scream", "year": 1996, "tmdb_id": 4232, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/939827", "bucket": ""}, {"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/100054992/scream", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0NJY45EFTMIVUJVSEJJZGIMCML?ref_=atv_dp", "bucket": ""}], "streaming": ["Hoopla", "Kanopy", "Netflix", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "Tubi", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "JustWatch TV", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/24EC", "watch_link": "https://www.themoviedb.org/movie/4232-scream/watch?locale=US", "expires_on": "2026-08-24", "days_left": 13, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Eyes Wide Shut", "year": 1999, "tmdb_id": 345, "on_my_services": [{"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/599629/eyes-wide-shut", "bucket": ""}], "streaming": ["Tubi"], "rent": ["Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2axs", "watch_link": "https://www.themoviedb.org/movie/345-eyes-wide-shut/watch?locale=US", "expires_on": "2026-09-01", "days_left": 21, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Little Miss Sunshine", "year": 2006, "tmdb_id": 773, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/70043947", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0OCQYLJEBW5QY77CTF2E92SZ0Q?ref_=atv_dp", "bucket": ""}], "streaming": ["Netflix", "Peacock Premium", "Peacock Premium Plus"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29EW", "watch_link": "https://www.themoviedb.org/movie/773-little-miss-sunshine/watch?locale=US", "expires_on": "2026-09-01", "days_left": 21, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Moneyball", "year": 2011, "tmdb_id": 60308, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/70201437", "bucket": ""}], "streaming": ["Netflix", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/glS", "watch_link": "https://www.themoviedb.org/movie/60308-moneyball/watch?locale=US", "expires_on": "2026-09-01", "days_left": 21, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Schindler's List", "year": 1993, "tmdb_id": 424, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/60036359", "bucket": ""}], "streaming": ["Netflix"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aq2", "watch_link": "https://www.themoviedb.org/movie/424-schindler-s-list/watch?locale=US", "expires_on": "2026-09-01", "days_left": 21, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Incendies", "year": 2010, "tmdb_id": 46738, "on_my_services": [{"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/100007605/incendies", "bucket": ""}], "streaming": ["The Roku Channel", "Tubi"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/Msm", "watch_link": "https://www.themoviedb.org/movie/46738-incendies/watch?locale=US", "expires_on": "2026-10-01", "days_left": 51, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Midnight in Paris", "year": 2011, "tmdb_id": 59436, "on_my_services": [{"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/594106/midnight-in-paris", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0HG0HFRPXE338F22UK80BN9CLP?ref_=atv_dp", "bucket": ""}], "streaming": ["Sony Pictures Core Amazon Channel", "Tubi"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/i4a", "watch_link": "https://www.themoviedb.org/movie/59436-midnight-in-paris/watch?locale=US", "expires_on": "2026-10-01", "days_left": 51, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Raging Bull", "year": 1980, "tmdb_id": 1578, "on_my_services": [{"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/689648/raging-bull", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0JGHHFC3SIJCUJASUWRKABWPSE?ref_=atv_dp", "bucket": ""}], "streaming": ["Hoopla", "Kanopy", "MGM Plus", "MGM+ Amazon Channel", "Philo", "Tubi", "YouTube Free", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/28yI", "watch_link": "https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US", "expires_on": "2026-10-01", "days_left": 51, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Requiem for a Dream", "year": 2000, "tmdb_id": 641, "on_my_services": [{"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/399691/requiem-for-a-dream", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0IYST6VN0QDVNBUIFI247YOOKJ?ref_=atv_dp", "bucket": ""}], "streaming": ["Fandango at Home Free", "Hoopla", "Kanopy", "Peacock Premium", "Peacock Premium Plus", "Philo", "Plex", "Sundance Now", "Tubi", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29VI", "watch_link": "https://www.themoviedb.org/movie/641-requiem-for-a-dream/watch?locale=US", "expires_on": "2026-10-01", "days_left": 51, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "The Pianist", "year": 2002, "tmdb_id": 423, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.a0b82420-d96f-eddd-532a-51cbe9c9ecee", "bucket": ""}, {"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/400847/the-pianist", "bucket": ""}], "streaming": ["Amazon Prime Video", "Fandango at Home Free", "Fawesome", "Kanopy", "The Roku Channel", "Tubi", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aqc", "watch_link": "https://www.themoviedb.org/movie/423-the-pianist/watch?locale=US", "expires_on": "2026-10-01", "days_left": 51, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "The Worst Person in the World", "year": 2021, "tmdb_id": 660120, "on_my_services": [{"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/100040298/the-worst-person-in-the-world", "bucket": ""}], "streaming": ["Kanopy", "Tubi"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/oyws", "watch_link": "https://www.themoviedb.org/movie/660120-verdens-verste-menneske/watch?locale=US", "expires_on": "2027-06-14", "days_left": 307, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "10 Things I Hate About You", "year": 1999, "tmdb_id": 4951, "on_my_services": [], "streaming": ["Disney Plus", "FXNow", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/23AO", "watch_link": "https://www.themoviedb.org/movie/4951-10-things-i-hate-about-you/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "1917", "year": 2019, "tmdb_id": 530915, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/81140931", "bucket": ""}], "streaming": ["Netflix"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/jj4y", "watch_link": "https://www.themoviedb.org/movie/530915-1917/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "2001: A Space Odyssey", "year": 1968, "tmdb_id": 62, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "Philo", "TCM", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2bf0", "watch_link": "https://www.themoviedb.org/movie/62-2001-a-space-odyssey/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "28 Days Later", "year": 2002, "tmdb_id": 170, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aXU", "watch_link": "https://www.themoviedb.org/movie/170-28-days-later/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "A Clockwork Orange", "year": 1971, "tmdb_id": 185, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aVE", "watch_link": "https://www.themoviedb.org/movie/185-a-clockwork-orange/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "A Complete Unknown", "year": 2024, "tmdb_id": 661539, "on_my_services": [], "streaming": ["YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/oBYa", "watch_link": "https://www.themoviedb.org/movie/661539-a-complete-unknown/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Alien", "year": 1979, "tmdb_id": 348, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2awY", "watch_link": "https://www.themoviedb.org/movie/348-alien/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Amadeus", "year": 1984, "tmdb_id": 279, "on_my_services": [], "streaming": ["Criterion Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aH8", "watch_link": "https://www.themoviedb.org/movie/279-amadeus/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "AmÃ©lie", "year": 2001, "tmdb_id": 194, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aUc", "watch_link": "https://www.themoviedb.org/movie/194-le-fabuleux-destin-d-amelie-poulain/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Anatomy of a Fall", "year": 2023, "tmdb_id": 915935, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/81713297", "bucket": ""}], "streaming": ["Kanopy", "Netflix"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/yuDE", "watch_link": "https://www.themoviedb.org/movie/915935-anatomie-d-une-chute/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Annihilation", "year": 2018, "tmdb_id": 300668, "on_my_services": [], "streaming": ["MGM Plus", "MGM Plus Roku Premium Channel", "MGM+ Amazon Channel", "Philo", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "JustWatch TV", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/9yzm", "watch_link": "https://www.themoviedb.org/movie/300668-annihilation/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Asteroid City", "year": 2023, "tmdb_id": 747188, "on_my_services": [], "streaming": ["Peacock Premium", "Peacock Premium Plus"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/s3ds", "watch_link": "https://www.themoviedb.org/movie/747188-asteroid-city/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Baby Driver", "year": 2017, "tmdb_id": 339403, "on_my_services": [], "streaming": ["Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/bhF2", "watch_link": "https://www.themoviedb.org/movie/339403-baby-driver/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Barry Lyndon", "year": 1975, "tmdb_id": 3175, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/25A2", "watch_link": "https://www.themoviedb.org/movie/3175-barry-lyndon/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Birdman or (The Unexpected Virtue of Ignorance)", "year": 2014, "tmdb_id": 194662, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/5RFA", "watch_link": "https://www.themoviedb.org/movie/194662-birdman-or-the-unexpected-virtue-of-ignorance/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Black Swan", "year": 2010, "tmdb_id": 44214, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/Sw0", "watch_link": "https://www.themoviedb.org/movie/44214-black-swan/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "BlacKkKlansman", "year": 2018, "tmdb_id": 487558, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/hxL8", "watch_link": "https://www.themoviedb.org/movie/487558-blackkklansman/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Blade Runner", "year": 1982, "tmdb_id": 78, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2bcA", "watch_link": "https://www.themoviedb.org/movie/78-blade-runner/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Blade Runner 2049", "year": 2017, "tmdb_id": 335984, "on_my_services": [], "streaming": ["Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/b8wK", "watch_link": "https://www.themoviedb.org/movie/335984-blade-runner-2049/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Bullet Train", "year": 2022, "tmdb_id": 718930, "on_my_services": [], "streaming": ["Hulu", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/qW26", "watch_link": "https://www.themoviedb.org/movie/718930-bullet-train/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Casino", "year": 1995, "tmdb_id": 524, "on_my_services": [{"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["AMC", "AMC Plus Apple TV Channel", "AMC+", "AMC+ Roku Premium Channel", "Hulu", "Philo", "YouTube Free", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2ads", "watch_link": "https://www.themoviedb.org/movie/524-casino/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Catch Me If You Can", "year": 2002, "tmdb_id": 640, "on_my_services": [{"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0J1GTKKF8KAUQSBDHTCC7LOYS4?ref_=atv_dp", "bucket": ""}], "streaming": ["Fandango at Home Free", "Hoopla", "Kanopy", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "The Roku Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "JustWatch TV", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29VS", "watch_link": "https://www.themoviedb.org/movie/640-catch-me-if-you-can/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Children of Men", "year": 2006, "tmdb_id": 9693, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/1Y2i", "watch_link": "https://www.themoviedb.org/movie/9693-children-of-men/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Cinema Paradiso", "year": 1988, "tmdb_id": 11216, "on_my_services": [], "streaming": ["MGM Plus", "MGM+ Amazon Channel", "Philo", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/1UlA", "watch_link": "https://www.themoviedb.org/movie/11216-nuovo-cinema-paradiso/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Citizen Kane", "year": 1941, "tmdb_id": 15, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/71O", "watch_link": "https://www.themoviedb.org/movie/15-citizen-kane/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "City of God", "year": 2002, "tmdb_id": 598, "on_my_services": [], "streaming": ["Kanopy", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "JustWatch TV", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2a2a", "watch_link": "https://www.themoviedb.org/movie/598-cidade-de-deus/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Come and See", "year": 1985, "tmdb_id": 25237, "on_my_services": [], "streaming": ["Criterion Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/1w9q", "watch_link": "https://www.themoviedb.org/movie/25237/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Conclave", "year": 2024, "tmdb_id": 974576, "on_my_services": [], "streaming": ["Starz Amazon Channel", "Starz Apple TV Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/AO8q", "watch_link": "https://www.themoviedb.org/movie/974576-conclave/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Dead Poets Society", "year": 1989, "tmdb_id": 207, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aSg", "watch_link": "https://www.themoviedb.org/movie/207-dead-poets-society/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Die My Love", "year": 2025, "tmdb_id": 1033148, "on_my_services": [], "streaming": ["MUBI", "MUBI Amazon Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "letterboxd_url": "https://boxd.it/D5cI", "watch_link": "https://www.themoviedb.org/movie/1033148-die-my-love/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Django Unchained", "year": 2012, "tmdb_id": 68718, "on_my_services": [], "streaming": ["Philo", "Starz", "Starz Amazon Channel", "Starz Apple TV Channel", "YouTube TV"], "rent": ["Amazon Video", "Fandango At Home", "FlixFling", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2cCk", "watch_link": "https://www.themoviedb.org/movie/68718-django-unchained/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Do the Right Thing", "year": 1989, "tmdb_id": 925, "on_my_services": [{"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0RE7MY7704QN9TPE9EKCYKTRE8?ref_=atv_dp", "bucket": ""}], "streaming": ["ALLBLK Amazon channel", "ALLBLK Apple TV channel", "YouTube Free", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29gA", "watch_link": "https://www.themoviedb.org/movie/925-do-the-right-thing/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Don't Look Up", "year": 2021, "tmdb_id": 646380, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/81252357", "bucket": ""}], "streaming": ["Netflix"], "rent": [], "buy": [], "letterboxd_url": "https://boxd.it/o0Hc", "watch_link": "https://www.themoviedb.org/movie/646380-don-t-look-up/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Don't Worry Darling", "year": 2022, "tmdb_id": 619730, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/mViu", "watch_link": "https://www.themoviedb.org/movie/619730-don-t-worry-darling/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Donnie Darko", "year": 2001, "tmdb_id": 141, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.amazon.com/gp/video/detail/0T55LHHR58IXGTULM6CDHOYV7E?ref_=atv_dp", "bucket": ""}, {"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb+motn", "motn_link": "https://tubitv.com/movies/100010422/donnie-darko-director-s-cut", "bucket": ""}], "streaming": ["Amazon Prime Video", "Fawesome", "Hulu", "Kanopy", "Philo", "Plex", "Pluto TV", "Shout! Factory Amazon Channel", "Shout! Factory TV", "The Roku Channel", "Tubi", "YouTube Free", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2b2A", "watch_link": "https://www.themoviedb.org/movie/141-donnie-darko/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Eddington", "year": 2025, "tmdb_id": 648878, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/o6MC", "watch_link": "https://www.themoviedb.org/movie/648878-eddington/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Enemy", "year": 2013, "tmdb_id": 181886, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Amazon Prime Video", "Fandango at Home Free", "Hoopla", "Kanopy", "Plex", "The Roku Channel", "Tubi", "Xumo Play", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/5xtO", "watch_link": "https://www.themoviedb.org/movie/181886-enemy/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Ex Machina", "year": 2015, "tmdb_id": 264660, "on_my_services": [{"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Hulu", "YouTube Free"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/7T2k", "watch_link": "https://www.themoviedb.org/movie/264660-ex-machina/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "F1", "year": 2025, "tmdb_id": 911430, "on_my_services": [], "streaming": ["Apple TV", "Apple TV Amazon Channel"], "rent": ["Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/yjVM", "watch_link": "https://www.themoviedb.org/movie/911430-f1/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Fantastic Mr. Fox", "year": 2009, "tmdb_id": 10315, "on_my_services": [], "streaming": ["Peacock Premium", "Peacock Premium Plus", "The Roku Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/1WyQ", "watch_link": "https://www.themoviedb.org/movie/10315-fantastic-mr-fox/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Fargo", "year": 1996, "tmdb_id": 275, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/493387", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.amazon.com/gp/video/detail/0GM7I260FKWQZ9F89KHVDTCDPZ?ref_=atv_dp", "bucket": ""}, {"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Amazon Prime Video", "Netflix", "Tubi", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aHM", "watch_link": "https://www.themoviedb.org/movie/275-fargo/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "First Man", "year": 2018, "tmdb_id": 369972, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/cPym", "watch_link": "https://www.themoviedb.org/movie/369972-first-man/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Forrest Gump", "year": 1994, "tmdb_id": 13, "on_my_services": [], "streaming": ["Kanopy", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/728", "watch_link": "https://www.themoviedb.org/movie/13-forrest-gump/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Frankenstein", "year": 2025, "tmdb_id": 1062722, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/81507921", "bucket": ""}], "streaming": ["Netflix"], "rent": [], "buy": [], "letterboxd_url": "https://boxd.it/Ecsg", "watch_link": "https://www.themoviedb.org/movie/1062722-frankenstein/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Furiosa: A Mad Max Saga", "year": 2024, "tmdb_id": 786892, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/tABk", "watch_link": "https://www.themoviedb.org/movie/786892-furiosa-a-mad-max-saga/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Gladiator", "year": 2000, "tmdb_id": 98, "on_my_services": [], "streaming": ["Kanopy", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Philo", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "JustWatch TV", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2b9m", "watch_link": "https://www.themoviedb.org/movie/98-gladiator/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Gone Girl", "year": 2014, "tmdb_id": 210577, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/70305893", "bucket": ""}], "streaming": ["Netflix"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/6hQu", "watch_link": "https://www.themoviedb.org/movie/210577-gone-girl/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Good Time", "year": 2017, "tmdb_id": 429200, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/fcFu", "watch_link": "https://www.themoviedb.org/movie/429200-good-time/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "GoodFellas", "year": 1990, "tmdb_id": 769, "on_my_services": [], "streaming": ["AMC", "AMC+ Roku Premium Channel", "Philo"], "rent": ["Amazon Video", "Apple TV Store", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29FA", "watch_link": "https://www.themoviedb.org/movie/769-goodfellas/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Hamnet", "year": 2025, "tmdb_id": 858024, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/83077856", "bucket": ""}], "streaming": ["Netflix"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/woVy", "watch_link": "https://www.themoviedb.org/movie/858024-hamnet/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Happyend", "year": 2024, "tmdb_id": 730251, "on_my_services": [], "streaming": ["Criterion Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/rnUa", "watch_link": "https://www.themoviedb.org/movie/730251-happyend/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Hereditary", "year": 2018, "tmdb_id": 493922, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/hNVe", "watch_link": "https://www.themoviedb.org/movie/493922-hereditary/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "In the Mood for Love", "year": 2000, "tmdb_id": 843, "on_my_services": [], "streaming": ["Criterion Channel", "HBO Max", "HBO Max Amazon Channel", "Shout! Factory TV", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29tE", "watch_link": "https://www.themoviedb.org/movie/843/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Inception", "year": 2010, "tmdb_id": 27205, "on_my_services": [{"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0GJS5G3XPQ9TNGW4ER1SLYS4T4?ref_=atv_dp", "bucket": ""}], "streaming": ["MGM Plus Roku Premium Channel", "MGM+ Amazon Channel", "Philo", "YouTube Free", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/1skk", "watch_link": "https://www.themoviedb.org/movie/27205-inception/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Jackie Brown", "year": 1997, "tmdb_id": 184, "on_my_services": [], "streaming": ["Fawesome", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aVO", "watch_link": "https://www.themoviedb.org/movie/184-jackie-brown/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Jojo Rabbit", "year": 2019, "tmdb_id": 515001, "on_my_services": [], "streaming": ["FXNow", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/iEBG", "watch_link": "https://www.themoviedb.org/movie/515001-jojo-rabbit/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Joker", "year": 2019, "tmdb_id": 475557, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/h4cS", "watch_link": "https://www.themoviedb.org/movie/475557-joker/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Kill Bill: Vol. 1", "year": 2003, "tmdb_id": 24, "on_my_services": [], "streaming": ["YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies"], "letterboxd_url": "https://boxd.it/70w", "watch_link": "https://www.themoviedb.org/movie/24-kill-bill-vol-1/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Killers of the Flower Moon", "year": 2023, "tmdb_id": 466420, "on_my_services": [], "streaming": ["Apple TV", "Apple TV Amazon Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "JustWatch TV", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/gHp0", "watch_link": "https://www.themoviedb.org/movie/466420-killers-of-the-flower-moon/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "La Haine", "year": 1995, "tmdb_id": 406, "on_my_services": [], "streaming": ["Criterion Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "letterboxd_url": "https://boxd.it/2as8", "watch_link": "https://www.themoviedb.org/movie/406-la-haine/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Lady Bird", "year": 2017, "tmdb_id": 391713, "on_my_services": [{"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0PXVTAWSS0BDSHDX50F0GYDWFD?ref_=atv_dp", "bucket": ""}], "streaming": ["Cinemax Amazon Channel", "Cinemax Apple TV Channel", "Fandango at Home Free", "HBO Max", "HBO Max Amazon Channel", "Hoopla", "Hulu", "Kanopy", "Plex", "The Roku Channel", "Tubi", "Xumo Play", "YouTube Free", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/dGNE", "watch_link": "https://www.themoviedb.org/movie/391713-lady-bird/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Lost in Translation", "year": 2003, "tmdb_id": 153, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2b0E", "watch_link": "https://www.themoviedb.org/movie/153-lost-in-translation/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Mad Max: Fury Road", "year": 2015, "tmdb_id": 76341, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2DjO", "watch_link": "https://www.themoviedb.org/movie/76341-mad-max-fury-road/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Magnolia", "year": 1999, "tmdb_id": 334, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aze", "watch_link": "https://www.themoviedb.org/movie/334-magnolia/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Manchester by the Sea", "year": 2016, "tmdb_id": 334541, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.bb8954ab-87e3-491d-b8c9-b2ef11212f0b", "bucket": ""}], "streaming": ["Amazon Prime Video"], "rent": [], "buy": [], "letterboxd_url": "https://boxd.it/b2L0", "watch_link": "https://www.themoviedb.org/movie/334541-manchester-by-the-sea/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Marriage Story", "year": 2019, "tmdb_id": 492188, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/80223779", "bucket": ""}], "streaming": ["Netflix"], "rent": [], "buy": [], "letterboxd_url": "https://boxd.it/hJAw", "watch_link": "https://www.themoviedb.org/movie/492188-marriage-story/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Michael", "year": 2026, "tmdb_id": 936075, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Plex"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "letterboxd_url": "https://boxd.it/zi5M", "watch_link": "https://www.themoviedb.org/movie/936075-michael/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Mickey 17", "year": 2025, "tmdb_id": 696506, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/q1Dk", "watch_link": "https://www.themoviedb.org/movie/696506-mickey-17/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Midsommar", "year": 2019, "tmdb_id": 530385, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/jhxe", "watch_link": "https://www.themoviedb.org/movie/530385-midsommar/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Minari", "year": 2020, "tmdb_id": 615643, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "OnDemandKorea", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/mL9M", "watch_link": "https://www.themoviedb.org/movie/615643-minari/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Monkey Man", "year": 2024, "tmdb_id": 560016, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/kvsO", "watch_link": "https://www.themoviedb.org/movie/560016-monkey-man/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Moonlight", "year": 2016, "tmdb_id": 376867, "on_my_services": [{"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Hulu", "YouTube Free", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/d6bE", "watch_link": "https://www.themoviedb.org/movie/376867-moonlight/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Mulholland Drive", "year": 2001, "tmdb_id": 1018, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/297o", "watch_link": "https://www.themoviedb.org/movie/1018-mulholland-drive/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Nightcrawler", "year": 2014, "tmdb_id": 242582, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.netflix.com/title/70295182", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0HQQWN6TWME35OWKPL3E74WCVU?ref_=atv_dp", "bucket": ""}], "streaming": ["Kanopy", "Netflix", "Shout! Factory Amazon Channel", "Sundance Now"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/780m", "watch_link": "https://www.themoviedb.org/movie/242582-nightcrawler/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Nope", "year": 2022, "tmdb_id": 762504, "on_my_services": [{"name": "Netflix", "label": "Netflix", "tier": "subscription", "confidence": "disputed", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Netflix"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/sDCe", "watch_link": "https://www.themoviedb.org/movie/762504-nope/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Netflix"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Obsession", "year": 2025, "tmdb_id": 1339713, "on_my_services": [], "streaming": ["Peacock Premium", "Peacock Premium Plus"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/PNqo", "watch_link": "https://www.themoviedb.org/movie/1339713-obsession/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Oldboy", "year": 2003, "tmdb_id": 670, "on_my_services": [], "streaming": ["Kanopy", "Plex"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29R2", "watch_link": "https://www.themoviedb.org/movie/670/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Once Upon a Time... in Hollywood", "year": 2019, "tmdb_id": 466272, "on_my_services": [], "streaming": ["FXNow", "Hulu", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/gH0O", "watch_link": "https://www.themoviedb.org/movie/466272-once-upon-a-time-in-hollywood/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Paris, Texas", "year": 1984, "tmdb_id": 655, "on_my_services": [{"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0SNWSPSK8A29RM30U03F3545CD?ref_=atv_dp", "bucket": ""}], "streaming": ["Criterion Channel", "HBO Max", "HBO Max Amazon Channel", "Plex", "Shout! Factory TV", "Tubi", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "letterboxd_url": "https://boxd.it/29Ts", "watch_link": "https://www.themoviedb.org/movie/655-paris-texas/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Phantom Thread", "year": 2017, "tmdb_id": 400617, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/e4uc", "watch_link": "https://www.themoviedb.org/movie/400617-phantom-thread/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Portrait of a Lady on Fire", "year": 2019, "tmdb_id": 531428, "on_my_services": [], "streaming": ["HBO Max", "Kanopy", "YouTube TV"], "rent": ["Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/jkPq", "watch_link": "https://www.themoviedb.org/movie/531428-portrait-de-la-jeune-fille-en-feu/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Pride & Prejudice", "year": 2005, "tmdb_id": 4348, "on_my_services": [], "streaming": ["Britbox Apple TV Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/24u8", "watch_link": "https://www.themoviedb.org/movie/4348-pride-prejudice/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Prisoners", "year": 2013, "tmdb_id": 146233, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/4E5i", "watch_link": "https://www.themoviedb.org/movie/146233-prisoners/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Psycho", "year": 1960, "tmdb_id": 539, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2ab2", "watch_link": "https://www.themoviedb.org/movie/539-psycho/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Pulp Fiction", "year": 1994, "tmdb_id": 680, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.a391bb9d-4315-4b8a-a835-2a3159eeac73", "bucket": ""}], "streaming": ["Amazon Prime Video", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29Pq", "watch_link": "https://www.themoviedb.org/movie/680-pulp-fiction/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Punch-Drunk Love", "year": 2002, "tmdb_id": 8051, "on_my_services": [{"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0KVQTBB8NU0OFCRVWFLAJPCZ4W?ref_=atv_dp", "bucket": ""}], "streaming": ["Hoopla", "Kanopy", "Sony Pictures Core Amazon Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/20E4", "watch_link": "https://www.themoviedb.org/movie/8051-punch-drunk-love/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Reservoir Dogs", "year": 1992, "tmdb_id": 500, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.debb6b89-c99a-8b61-320d-95fb5075d48f", "bucket": ""}], "streaming": ["Amazon Prime Video", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2agc", "watch_link": "https://www.themoviedb.org/movie/500-reservoir-dogs/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Saving Private Ryan", "year": 1998, "tmdb_id": 857, "on_my_services": [], "streaming": ["Kanopy", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "The Roku Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "JustWatch TV", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29ro", "watch_link": "https://www.themoviedb.org/movie/857-saving-private-ryan/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Scarface", "year": 1983, "tmdb_id": 111, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["AMC Plus Apple TV Channel", "AMC+", "AMC+ Amazon Channel", "AMC+ Roku Premium Channel", "Amazon Prime Video", "Philo"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2b7g", "watch_link": "https://www.themoviedb.org/movie/111-scarface/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Scott Pilgrim vs. the World", "year": 2010, "tmdb_id": 22538, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/1Aq6", "watch_link": "https://www.themoviedb.org/movie/22538-scott-pilgrim-vs-the-world/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Se7en", "year": 1995, "tmdb_id": 807, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29zs", "watch_link": "https://www.themoviedb.org/movie/807-se7en/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Sentimental Value", "year": 2025, "tmdb_id": 1124566, "on_my_services": [], "streaming": ["Hulu", "Kanopy"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/GwcG", "watch_link": "https://www.themoviedb.org/movie/1124566-affeksjonsverdi/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Sicario", "year": 2015, "tmdb_id": 273481, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/8i7u", "watch_link": "https://www.themoviedb.org/movie/273481-sicario/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Singin' in the Rain", "year": 1952, "tmdb_id": 872, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29oY", "watch_link": "https://www.themoviedb.org/movie/872-singin-in-the-rain/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Spirited Away", "year": 2001, "tmdb_id": 129, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2b4m", "watch_link": "https://www.themoviedb.org/movie/129/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Sunshine", "year": 2007, "tmdb_id": 1272, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/28Xy", "watch_link": "https://www.themoviedb.org/movie/1272-sunshine/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Superbad", "year": 2007, "tmdb_id": 8363, "on_my_services": [{"name": "Tubi", "label": "Tubi", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Philo", "Starz Apple TV Channel", "Tubi"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/20hO", "watch_link": "https://www.themoviedb.org/movie/8363-superbad/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Suspiria", "year": 2018, "tmdb_id": 361292, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.947bbe12-9552-42e8-bb98-3d14601137df", "bucket": ""}], "streaming": ["Amazon Prime Video"], "rent": ["Amazon Video", "Apple TV Store", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/cioI", "watch_link": "https://www.themoviedb.org/movie/361292-suspiria/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Take Shelter", "year": 2011, "tmdb_id": 64720, "on_my_services": [], "streaming": ["The Roku Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/DQ", "watch_link": "https://www.themoviedb.org/movie/64720-take-shelter/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Curious Case of Benjamin Button", "year": 2008, "tmdb_id": 4922, "on_my_services": [{"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Hoopla", "Kanopy", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/23Fk", "watch_link": "https://www.themoviedb.org/movie/4922-the-curious-case-of-benjamin-button/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "The Devil Wears Prada", "year": 2006, "tmdb_id": 350, "on_my_services": [], "streaming": ["Disney Plus", "FXNow", "Hulu", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2awE", "watch_link": "https://www.themoviedb.org/movie/350-the-devil-wears-prada/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Drama", "year": 2026, "tmdb_id": 1325734, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/OA2w", "watch_link": "https://www.themoviedb.org/movie/1325734-the-drama/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Fall Guy", "year": 2024, "tmdb_id": 746036, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/s0Bm", "watch_link": "https://www.themoviedb.org/movie/746036-the-fall-guy/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Godfather", "year": 1972, "tmdb_id": 238, "on_my_services": [], "streaming": ["MGM Plus", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "JustWatch TV", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2aNK", "watch_link": "https://www.themoviedb.org/movie/238-the-godfather/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Grand Budapest Hotel", "year": 2014, "tmdb_id": 120467, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/3ZqO", "watch_link": "https://www.themoviedb.org/movie/120467-the-grand-budapest-hotel/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Green Mile", "year": 1999, "tmdb_id": 497, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2agG", "watch_link": "https://www.themoviedb.org/movie/497-the-green-mile/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Holdovers", "year": 2023, "tmdb_id": 840430, "on_my_services": [], "streaming": ["Fandango at Home Free", "Peacock Premium", "Peacock Premium Plus", "USA Network"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/vHza", "watch_link": "https://www.themoviedb.org/movie/840430-the-holdovers/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Lighthouse", "year": 2019, "tmdb_id": 503919, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/icFU", "watch_link": "https://www.themoviedb.org/movie/503919-the-lighthouse/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Lord of the Rings: The Fellowship of the Ring", "year": 2001, "tmdb_id": 120, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2b5O", "watch_link": "https://www.themoviedb.org/movie/120-the-lord-of-the-rings-the-fellowship-of-the-ring/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Lord of the Rings: The Two Towers", "year": 2002, "tmdb_id": 121, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2b5E", "watch_link": "https://www.themoviedb.org/movie/121-the-lord-of-the-rings-the-two-towers/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Machinist", "year": 2004, "tmdb_id": 4553, "on_my_services": [], "streaming": ["MGM Plus", "MGM+ Amazon Channel", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "Philo", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "JustWatch TV", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/248c", "watch_link": "https://www.themoviedb.org/movie/4553-the-machinist/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Martian", "year": 2015, "tmdb_id": 286217, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.26a9f717-f71e-b58b-6a4a-7a62543eab90", "bucket": ""}], "streaming": ["Amazon Prime Video", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/8SeG", "watch_link": "https://www.themoviedb.org/movie/286217-the-martian/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "The Matrix", "year": 1999, "tmdb_id": 603, "on_my_services": [], "streaming": ["Peacock Premium", "Peacock Premium Plus"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2a1m", "watch_link": "https://www.themoviedb.org/movie/603-the-matrix/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Notebook", "year": 2004, "tmdb_id": 11036, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Amazon Prime Video"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/1UNE", "watch_link": "https://www.themoviedb.org/movie/11036-the-notebook/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "The Perks of Being a Wallflower", "year": 2012, "tmdb_id": 84892, "on_my_services": [], "streaming": ["Kanopy", "MovieSphere+ Amazon Channel", "The CW", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2ZA8", "watch_link": "https://www.themoviedb.org/movie/84892-the-perks-of-being-a-wallflower/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Place Beyond the Pines", "year": 2012, "tmdb_id": 97367, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/3mDu", "watch_link": "https://www.themoviedb.org/movie/97367-the-place-beyond-the-pines/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Shining", "year": 1980, "tmdb_id": 694, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29Nu", "watch_link": "https://www.themoviedb.org/movie/694-the-shining/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Substance", "year": 2024, "tmdb_id": 933260, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel", "MUBI", "MUBI Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home"], "letterboxd_url": "https://boxd.it/zanS", "watch_link": "https://www.themoviedb.org/movie/933260-the-substance/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Talented Mr. Ripley", "year": 1999, "tmdb_id": 1213, "on_my_services": [], "streaming": ["Kanopy", "MGM Plus", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "JustWatch TV", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2924", "watch_link": "https://www.themoviedb.org/movie/1213-the-talented-mr-ripley/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "The Thing", "year": 1982, "tmdb_id": 1091, "on_my_services": [{"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["YouTube Free"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/294O", "watch_link": "https://www.themoviedb.org/movie/1091-the-thing/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "The Usual Suspects", "year": 1995, "tmdb_id": 629, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.amazon.com/gp/video/detail/0RF2I50OLJYAJMWMUI2FH4CRC1?ref_=atv_dp", "bucket": ""}, {"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Amazon Prime Video", "Cinemax Amazon Channel", "Cinemax Apple TV Channel", "HBO Max", "HBO Max Amazon Channel", "Hoopla", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/29XE", "watch_link": "https://www.themoviedb.org/movie/629-the-usual-suspects/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "There Will Be Blood", "year": 2007, "tmdb_id": 7345, "on_my_services": [{"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Hoopla", "Kanopy", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "YouTube TV", "fuboTV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/20Z2", "watch_link": "https://www.themoviedb.org/movie/7345-there-will-be-blood/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "Titanic", "year": 1997, "tmdb_id": 597, "on_my_services": [{"name": "Hoopla", "label": "Hoopla (library, limited)", "tier": "library", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}, {"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "disputed", "sources": "motn", "motn_link": "https://www.amazon.com/gp/video/detail/0STDF0IUOBZW3OMB47K5TNTOO0?ref_=atv_dp", "bucket": ""}], "streaming": ["Hoopla", "Kanopy", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "Starz Apple TV Channel", "YouTube Free", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "FlixFling", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2a2k", "watch_link": "https://www.themoviedb.org/movie/597-titanic/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-11T04:28:03+00:00", "stale_tmdb_services": ["Amazon Prime Video"], "stale_source": "disagreement", "verification": "checked", "motn_checked": true}, {"title": "Trainspotting", "year": 1996, "tmdb_id": 627, "on_my_services": [], "streaming": [], "rent": ["Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies"], "letterboxd_url": "https://boxd.it/29XY", "watch_link": "https://www.themoviedb.org/movie/627-trainspotting/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Tropic Thunder", "year": 2008, "tmdb_id": 7446, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.f610c9eb-b781-4501-bc3b-0e5615b57c87", "bucket": ""}, {"name": "YouTube Free", "label": "YouTube Free", "tier": "subscription", "confidence": "probable", "sources": "tmdb", "motn_link": "", "bucket": ""}], "streaming": ["Amazon Prime Video", "Kanopy", "Paramount Plus Essential", "Paramount Plus Premium", "Paramount+ Amazon Channel", "Paramount+ Roku Premium Channel", "YouTube Free", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "Spectrum On Demand", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/20WM", "watch_link": "https://www.themoviedb.org/movie/7446-tropic-thunder/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-09T04:28:10+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}, {"title": "TÃR", "year": 2022, "tmdb_id": 1004076, "on_my_services": [], "streaming": [], "rent": [], "buy": [], "letterboxd_url": "https://boxd.it/uNIA", "watch_link": "https://www.themoviedb.org/movie/1004076/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Us", "year": 2019, "tmdb_id": 458723, "on_my_services": [], "streaming": ["HBO Max", "HBO Max Amazon Channel"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/gnV6", "watch_link": "https://www.themoviedb.org/movie/458723-us/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Vertigo", "year": 1958, "tmdb_id": 426, "on_my_services": [], "streaming": ["TCM"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/2apI", "watch_link": "https://www.themoviedb.org/movie/426-vertigo/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Vice", "year": 2018, "tmdb_id": 429197, "on_my_services": [], "streaming": [], "rent": ["Apple TV Store", "Google Play Movies", "YouTube"], "buy": ["Apple TV Store", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/fcFY", "watch_link": "https://www.themoviedb.org/movie/429197-vice/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Waves", "year": 2019, "tmdb_id": 533444, "on_my_services": [], "streaming": [], "rent": ["Amazon Video", "Apple TV Store", "Google Play Movies", "Spectrum On Demand"], "buy": ["Amazon Video", "Apple TV Store", "Google Play Movies"], "letterboxd_url": "https://boxd.it/jpmy", "watch_link": "https://www.themoviedb.org/movie/533444-waves/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "", "motn_checked": false}, {"title": "Weapons", "year": 2025, "tmdb_id": 1078605, "on_my_services": [{"name": "Amazon Prime Video", "label": "Amazon Prime Video", "tier": "subscription", "confidence": "confirmed", "sources": "tmdb+motn", "motn_link": "https://www.amazon.com/gp/video/detail/0NUYZGCVPFY6LG1Z3TUTYQ1AZK?ref_=atv_dp", "bucket": ""}], "streaming": ["Amazon Prime Video", "HBO Max", "HBO Max Amazon Channel", "YouTube TV"], "rent": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "Plex", "YouTube"], "buy": ["Amazon Video", "Apple TV Store", "Fandango At Home", "Google Play Movies", "YouTube"], "letterboxd_url": "https://boxd.it/EMTM", "watch_link": "https://www.themoviedb.org/movie/1078605-weapons/watch?locale=US", "expires_on": null, "days_left": null, "last_changed": "2026-08-08T22:13:30+00:00", "stale_tmdb_services": [], "stale_source": "", "verification": "checked", "motn_checked": true}], "attribution": "Streaming availability data provided by JustWatch via The Movie Database (TMDB). No aggregator is authoritative; this tool prefers high recall over precision."}</script>
+  <script>
+    const data = JSON.parse(document.getElementById("report-data").textContent);
+
+    const state = {
+      query: "",
+      service: "available",
+      sort: "title",
+    };
+
+    const serviceSet = new Map();
+    for (const film of data.films) {
+      for (const svc of film.on_my_services || []) {
+        serviceSet.set(svc.name, svc.label);
+      }
+    }
+
+    function esc(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    const FEEDBACK_KEY = "watchlist-watcher-feedback";
+
+    function loadFeedback() {
+      try {
+        const raw = localStorage.getItem(FEEDBACK_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function saveFeedback(rows) {
+      localStorage.setItem(FEEDBACK_KEY, JSON.stringify(rows));
+    }
+
+    function csvEscape(value) {
+      const text = String(value ?? "");
+      if (/[",\n]/.test(text)) return `"${text.replaceAll('"', '""')}"`;
+      return text;
+    }
+
+    function feedbackCsv(rows) {
+      const header = "title,tmdb_id,provider,source,date";
+      const body = rows.map((row) => [
+        csvEscape(row.title),
+        csvEscape(row.tmdb_id),
+        csvEscape(row.provider),
+        csvEscape(row.source),
+        csvEscape(row.date),
+      ].join(","));
+      return [header, ...body].join("\n") + "\n";
+    }
+
+    function downloadFeedback(rows) {
+      const blob = new Blob([feedbackCsv(rows)], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "feedback.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function showToast(message) {
+      const el = document.getElementById("toast");
+      el.textContent = message;
+      el.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => el.classList.remove("show"), 1800);
+    }
+
+    function markWrong(film, providerName, source) {
+      const rows = loadFeedback();
+      rows.push({
+        title: film.title || "",
+        tmdb_id: film.tmdb_id || "",
+        provider: providerName || "",
+        source: source || "tmdb",
+        date: new Date().toISOString().slice(0, 10),
+      });
+      saveFeedback(rows);
+      downloadFeedback(rows);
+      showToast("Appended to feedback.csv");
+    }
+
+    function confidenceRank(film, serviceName) {
+      const order = { probable: 0, confirmed: 1 };
+      const hits = film.on_my_services || [];
+      const hit = serviceName
+        ? hits.find((s) => s.name === serviceName)
+        : hits.slice().sort((a, b) => (order[a.confidence] ?? 0) - (order[b.confidence] ?? 0))[0];
+      return order[hit?.confidence] ?? 0;
+    }
+
+    function renderStats() {
+      const el = document.getElementById("stats");
+      el.innerHTML = `
+        <div><strong>${data.stats.total}</strong> on watchlist</div>
+        <div><strong>${data.stats.on_my_services}</strong> on your services</div>
+        <div><strong>${data.stats.confirmed || 0}</strong> confirmed</div>
+        <div><strong>${data.stats.probable || 0}</strong> probable</div>
+      `;
+      const key = document.getElementById("confidence-key");
+      key.innerHTML = `
+        <span class="tag confirmed">confirmed · Netflix/Prime audited</span>
+        <span class="tag probable">probable · unaudited free/library</span>
+      `;
+    }
+
+    function renderFilters() {
+      const root = document.getElementById("filters");
+      const chips = [
+        ["available", "On my services", true],
+        ["confirmed", "Confirmed", true],
+        ["probable", "Probable", true],
+        ["all", "Entire list", false],
+        ...[...serviceSet.entries()]
+          .sort((a, b) => a[1].localeCompare(b[1]))
+          .map(([name, label]) => [name, label, true]),
+      ];
+      root.innerHTML = chips.map(([id, label, ticket]) => `
+        <button type="button" class="chip ${ticket && id !== "all" ? "ticket" : ""}"
+          data-service="${esc(id)}" aria-pressed="${id === state.service}">
+          ${esc(label)}
+        </button>
+      `).join("");
+      root.querySelectorAll(".chip").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.service = btn.dataset.service;
+          root.querySelectorAll(".chip").forEach((b) => {
+            b.setAttribute("aria-pressed", String(b.dataset.service === state.service));
+          });
+          render();
+        });
+      });
+    }
+
+    function renderEvents() {
+      const root = document.getElementById("events");
+      if (!data.events || !data.events.length) {
+        root.hidden = true;
+        return;
+      }
+      root.hidden = false;
+      const labels = {
+        arrival: "Arrived",
+        departure: "Left",
+        leaving_soon: "Leaving soon",
+        new_to_watchlist: "New",
+      };
+      root.innerHTML = data.events.slice(0, 12).map((ev) => `
+        <div class="event">
+          <span class="k">${esc(labels[ev.kind] || ev.kind)}${ev.suspect ? " · SUSPECT" : ""}</span>
+          <strong>${esc(ev.title)}${ev.year ? ` (${esc(ev.year)})` : ""}</strong>
+          ${ev.provider ? ` · ${esc(ev.provider)}` : ""}
+          ${ev.detail ? ` · ${esc(ev.detail)}` : ""}
+        </div>
+      `).join("");
+    }
+
+    function matches(film) {
+      const q = state.query.trim().toLowerCase();
+      if (q && !(`${film.title} ${film.year || ""}`.toLowerCase().includes(q))) {
+        return false;
+      }
+      const mine = film.on_my_services || [];
+      if (state.service === "available") return mine.length > 0;
+      if (state.service === "all") return true;
+      if (state.service === "confirmed" || state.service === "probable") {
+        return mine.some((s) => (s.confidence || "probable") === state.service);
+      }
+      return mine.some((s) => s.name === state.service);
+    }
+
+    function sortFilms(films) {
+      const copy = [...films];
+      const serviceName = (
+        state.service !== "available"
+        && state.service !== "all"
+        && state.service !== "confirmed"
+        && state.service !== "probable"
+      ) ? state.service : null;
+      if (state.sort === "year-desc") {
+        copy.sort((a, b) => (b.year || 0) - (a.year || 0) || a.title.localeCompare(b.title));
+      } else if (state.sort === "year-asc") {
+        copy.sort((a, b) => (a.year || 9999) - (b.year || 9999) || a.title.localeCompare(b.title));
+      } else if (state.sort === "days") {
+        copy.sort((a, b) => {
+          const da = a.days_left == null ? 1e9 : a.days_left;
+          const db = b.days_left == null ? 1e9 : b.days_left;
+          return da - db || a.title.localeCompare(b.title);
+        });
+      } else if (state.sort === "confidence") {
+        copy.sort((a, b) => confidenceRank(a, serviceName) - confidenceRank(b, serviceName)
+          || a.title.localeCompare(b.title));
+      } else {
+        copy.sort((a, b) => a.title.localeCompare(b.title));
+      }
+      return copy;
+    }
+
+    function groupFilms(films) {
+      if (
+        state.service !== "available"
+        && state.service !== "all"
+        && state.service !== "confirmed"
+        && state.service !== "probable"
+      ) {
+        return [[serviceSet.get(state.service) || state.service, films]];
+      }
+      if (state.service === "all") {
+        const available = films.filter((f) => (f.on_my_services || []).length);
+        const rest = films.filter((f) => !(f.on_my_services || []).length);
+        const groups = [];
+        if (available.length) groups.push(["On your services", available]);
+        if (rest.length) groups.push(["Not on your services", rest]);
+        return groups;
+      }
+      if (state.service === "confirmed" || state.service === "probable") {
+        return [[state.service[0].toUpperCase() + state.service.slice(1), films]];
+      }
+      const buckets = new Map();
+      for (const film of films) {
+        for (const svc of film.on_my_services || []) {
+          if (!buckets.has(svc.label)) buckets.set(svc.label, []);
+          buckets.get(svc.label).push(film);
+        }
+      }
+      return [...buckets.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+    }
+
+    function filmItem(film, groupLabel) {
+      const year = film.year ? ` (${esc(film.year)})` : "";
+      const expiry = film.expires_on
+        ? `Expires ${esc(film.expires_on)}${film.days_left != null ? ` · ${esc(film.days_left)}d left` : ""}`
+        : "Expiry unknown";
+      let contextHit = null;
+      if (groupLabel && serviceSet.size) {
+        contextHit = (film.on_my_services || []).find((s) => s.label === groupLabel || s.name === groupLabel);
+      }
+      if (!contextHit && (state.service === "confirmed" || state.service === "probable")) {
+        contextHit = (film.on_my_services || []).find((s) => (s.confidence || "probable") === state.service);
+      }
+      if (!contextHit) contextHit = (film.on_my_services || [])[0] || null;
+
+      const tags = (film.on_my_services || []).map((s) => {
+        const conf = s.confidence || "probable";
+        const lib = s.tier === "library" ? " library" : "";
+        return `<span class="tag ${esc(conf)}${lib}">${esc(s.label)} · ${esc(conf)}</span>`;
+      }).join("");
+      const streamingHint = !(film.on_my_services || []).length && film.streaming?.length
+        ? `<span class="tag muted">${esc(film.streaming.slice(0, 2).join(" · "))}${film.streaming.length > 2 ? " +" : ""}</span>`
+        : "";
+      const motn = contextHit?.motn_link
+        ? `<a href="${esc(contextHit.motn_link)}" target="_blank" rel="noopener">MotN link</a>`
+        : "";
+      const provider = contextHit?.name || "";
+      const source = contextHit?.sources || "tmdb";
+      return `
+        <li class="film">
+          <div>
+            <h3 class="title">
+              <a href="${esc(film.letterboxd_url)}" target="_blank" rel="noopener">${esc(film.title)}${year}</a>
+            </h3>
+            <p class="meta">${expiry}</p>
+          </div>
+          <div class="tags">${tags || streamingHint || `<span class="tag muted">Rent / buy only</span>`}</div>
+          <div class="actions">
+            <a href="${esc(film.letterboxd_url)}" target="_blank" rel="noopener">Letterboxd</a>
+            <a href="${esc(film.watch_link)}" target="_blank" rel="noopener">TMDB watch page</a>
+            ${motn}
+            ${provider ? `<button type="button" class="wrong" data-provider="${esc(provider)}" data-source="${esc(source)}">Wrong</button>` : ""}
+          </div>
+        </li>
+      `;
+    }
+
+    function bindWrongButtons(root, filmsByTitle) {
+      root.querySelectorAll("button.wrong").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const item = btn.closest(".film");
+          const titleLink = item?.querySelector(".title a");
+          const title = titleLink ? titleLink.textContent.replace(/\s*\(\d{4}\)\s*$/, "").trim() : "";
+          const film = filmsByTitle.get(title) || data.films.find((f) => f.title === title);
+          if (!film) return;
+          markWrong(film, btn.dataset.provider, btn.dataset.source);
+        });
+      });
+    }
+
+    function render() {
+      const filtered = sortFilms(data.films.filter(matches));
+      document.getElementById("visible-count").textContent = `${filtered.length} titles`;
+      const main = document.getElementById("main");
+      if (!filtered.length) {
+        main.innerHTML = `<p class="empty">No films match this filter.</p>`;
+        return;
+      }
+      const groups = groupFilms(filtered);
+      const filmsByTitle = new Map(filtered.map((f) => [f.title, f]));
+      main.innerHTML = groups.map(([label, films]) => `
+        <section class="section">
+          <div class="section-head">
+            <h2>${esc(label)}</h2>
+            <div class="count">${films.length} films</div>
+          </div>
+          <ul class="list">${films.map((film) => filmItem(film, label)).join("")}</ul>
+        </section>
+      `).join("");
+      bindWrongButtons(main, filmsByTitle);
+    }
+
+    document.getElementById("search").addEventListener("input", (e) => {
+      state.query = e.target.value;
+      render();
+    });
+    document.getElementById("sort").addEventListener("change", (e) => {
+      state.sort = e.target.value;
+      render();
+    });
+    document.getElementById("export-feedback").addEventListener("click", () => {
+      const rows = loadFeedback();
+      downloadFeedback(rows);
+      showToast(rows.length ? `Exported ${rows.length} rows` : "feedback.csv is empty");
+    });
+    document.getElementById("footer").textContent =
+      `${data.attribution} MotN deep links appear when MotN returns a watchable option. ` +
+      `Wrong only appends to feedback.csv (via download); it does not change overrides.`;
+
+    renderStats();
+    renderFilters();
+    renderEvents();
+    render();
+  </script>
+</body>
+</html>

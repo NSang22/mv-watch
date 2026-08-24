@@ -19,7 +19,7 @@ JUSTWATCH_ATTRIBUTION = (
     "Streaming availability data provided by JustWatch via The Movie Database (TMDB)."
 )
 MOTN_ATTRIBUTION = (
-    "Expiry dates provided by Movie of the Night "
+    "Cross-check and expiry dates provided by Movie of the Night "
     "(https://www.movieofthenight.com/about/api/) when enrichment is enabled."
 )
 
@@ -49,6 +49,9 @@ def write_csv(path: Path, films: list[FilmAvailability]) -> None:
         "tmdb_id",
         "streaming",
         "on_my_services",
+        "confidence",
+        "sources",
+        "motn_links",
         "rent",
         "buy",
         "letterboxd_url",
@@ -56,14 +59,23 @@ def write_csv(path: Path, films: list[FilmAvailability]) -> None:
         "last_changed",
         "expires_on",
         "days_left",
+        "verification",
+        "stale_source",
+        "stale_tmdb_services",
+        "presence_status",
     ]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         for item in sorted(films, key=sort_key):
-            on_my = []
+            # Preserve hit order alignment across parallel columns.
+            on_hits = []
+            seen: set[str] = set()
             for hit in item.on_my_services:
-                on_my.append(_service_label(hit.canonical_name, hit.tier))
+                if hit.canonical_name in seen:
+                    continue
+                seen.add(hit.canonical_name)
+                on_hits.append(hit)
             writer.writerow(
                 {
                     "title": item.film.name,
@@ -72,7 +84,12 @@ def write_csv(path: Path, films: list[FilmAvailability]) -> None:
                     "streaming": _fmt_providers(
                         sorted({h.canonical_name for h in item.streaming})
                     ),
-                    "on_my_services": _fmt_providers(sorted(set(on_my))),
+                    "on_my_services": _fmt_providers(
+                        [_service_label(h.canonical_name, h.tier) for h in on_hits]
+                    ),
+                    "confidence": _fmt_providers([h.confidence for h in on_hits]),
+                    "sources": _fmt_providers([h.sources for h in on_hits]),
+                    "motn_links": _fmt_providers([h.motn_link or "" for h in on_hits]),
                     "rent": _fmt_providers(sorted({h.canonical_name for h in item.rent})),
                     "buy": _fmt_providers(sorted({h.canonical_name for h in item.buy})),
                     "letterboxd_url": item.film.letterboxd_uri,
@@ -80,6 +97,10 @@ def write_csv(path: Path, films: list[FilmAvailability]) -> None:
                     "last_changed": item.last_changed or "",
                     "expires_on": item.expires_on or "unknown",
                     "days_left": item.days_left if item.days_left is not None else "unknown",
+                    "verification": item.verification_status or "",
+                    "stale_source": item.stale_source or "",
+                    "stale_tmdb_services": _fmt_providers(item.stale_tmdb_services),
+                    "presence_status": item.presence_status,
                 }
             )
 
@@ -139,14 +160,17 @@ def write_report(
                 lines.append("### Departures (detected after the fact)")
                 lines.append("")
                 lines.append(
-                    "These films disappeared from a TMDB snapshot after the previous run. "
-                    "They are a backstop for catalogs that do not publish expiry dates."
+                    "Grouped by film. These disappeared from a verified TMDB snapshot "
+                    "after the previous run. Lines flagged SUSPECT lost every prior "
+                    "my-service at once and usually mean a bad lookup, not a removal."
                 )
                 lines.append("")
-                for event in diff.departures:
+                for event in sorted(diff.departures, key=lambda e: e.title.lower()):
                     year = f" ({event.year})" if event.year else ""
+                    flag = " **[SUSPECT]**" if event.suspect else ""
                     lines.append(
-                        f"- **{event.title}{year}** left **{event.provider}** (postmortem)"
+                        f"- **{event.title}{year}** left **{event.provider}**"
+                        f"{flag} (postmortem)"
                     )
                 lines.append("")
             if diff.new_to_watchlist:
@@ -157,8 +181,27 @@ def write_report(
                     lines.append(f"- **{event.title}{year}**: {event.detail}")
                 lines.append("")
 
+    disputed_films = [f for f in films if f.stale_tmdb_services]
+    if disputed_films:
+        # Legacy rows only; MotN availability override no longer writes these.
+        lines.extend(
+            [
+                "## Legacy MotN disagreements (informational)",
+                "",
+                "Availability override is off; these are not used for ranking.",
+                "",
+            ]
+        )
+        for film in sorted(disputed_films, key=lambda item: item.film.name.lower()):
+            year = f" ({film.film.year})" if film.film.year else ""
+            services = ", ".join(film.stale_tmdb_services)
+            lines.append(f"- **{film.film.name}{year}**: {services}")
+        lines.append("")
+
     # Group by my services, sorted by film count descending.
-    by_service: dict[str, list[FilmAvailability]] = defaultdict(list)
+    by_service: dict[str, list[tuple[FilmAvailability, str, Optional[str]]]] = defaultdict(
+        list
+    )
     tiers: dict[str, str] = {}
     for film in films:
         seen_for_film: set[str] = set()
@@ -166,10 +209,18 @@ def write_report(
             if hit.canonical_name in seen_for_film:
                 continue
             seen_for_film.add(hit.canonical_name)
-            by_service[hit.canonical_name].append(film)
+            by_service[hit.canonical_name].append(
+                (film, hit.confidence, hit.motn_link)
+            )
             tiers[hit.canonical_name] = hit.tier
 
     lines.append("## Available on your services")
+    lines.append("")
+    lines.append(
+        "Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · "
+        "**probable** (Tubi / YouTube Free / Hoopla until audited). "
+        "Nothing is dropped for low confidence."
+    )
     lines.append("")
     if not by_service:
         lines.append("Nothing on your configured services right now.")
@@ -182,11 +233,15 @@ def write_report(
             lines.append(f"### {label} ({len(group)})")
             lines.append("")
 
-            def film_sort(item: FilmAvailability) -> tuple:
+            def film_sort(
+                row: tuple[FilmAvailability, str, Optional[str]],
+            ) -> tuple:
+                item, confidence, _link = row
                 days = item.days_left if item.days_left is not None else 10**9
-                return (days, item.film.name.lower())
+                rank = {"probable": 0, "confirmed": 1}.get(confidence, 0)
+                return (rank, days, item.film.name.lower())
 
-            for film in sorted(group, key=film_sort):
+            for film, confidence, motn_link in sorted(group, key=film_sort):
                 year = f" ({film.film.year})" if film.film.year else ""
                 if film.expires_on:
                     expiry = f" - expires {film.expires_on} ({film.days_left}d)"
@@ -196,10 +251,11 @@ def write_report(
                 has_library_only = all(h.tier == "library" for h in film.on_my_services)
                 if has_library_only and (film.rent or film.buy):
                     rent_note = " (also rent/buy elsewhere; Hoopla is limited)"
+                motn_note = f" ([MotN]({motn_link}))" if motn_link else ""
                 lines.append(
                     f"- [{film.film.name}{year}]({film.film.letterboxd_uri})"
-                    f"{expiry}{rent_note} "
-                    f"([TMDB watch]({film.watch_link}))"
+                    f" `{confidence}`{expiry}{rent_note} "
+                    f"([TMDB watch]({film.watch_link})){motn_note}"
                 )
             lines.append("")
 
@@ -209,6 +265,11 @@ def write_report(
     if enrichment_used:
         lines.append("")
         lines.append(MOTN_ATTRIBUTION)
+    lines.append("")
+    lines.append(
+        "No aggregator is authoritative. Free ad-supported catalogs are the least "
+        "reliable. This tool prefers high recall over precision."
+    )
     lines.append("")
 
     path.write_text("\n".join(lines), encoding="utf-8")
@@ -245,7 +306,8 @@ def build_notification_body(diff: DiffResult, film_count: int) -> tuple[str, str
     for event in diff.arrivals[:5]:
         lines.append(f"Arrived: {event.title} on {event.provider}")
     for event in diff.departures[:5]:
-        lines.append(f"Left: {event.title} from {event.provider}")
+        flag = " [SUSPECT]" if event.suspect else ""
+        lines.append(f"Left: {event.title} from {event.provider}{flag}")
     remaining = (
         max(0, len(diff.leaving_soon) - 5)
         + max(0, len(diff.arrivals) - 5)

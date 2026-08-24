@@ -122,37 +122,47 @@ class IdResolver:
 
     def resolve_one(self, film: WatchlistFilm) -> ResolvedFilm:
         """Resolve a single film through overrides, cache, search, then scrape."""
-        uri = film.letterboxd_uri.rstrip("/")
+        uri = (film.letterboxd_uri or "").rstrip("/")
+        has_uri = bool(uri)
 
-        if uri in self.overrides:
+        if has_uri and uri in self.overrides:
             tmdb_id = self.overrides[uri]
             self._remember(uri, tmdb_id, "override", film)
             return ResolvedFilm(film=film, tmdb_id=tmdb_id, resolve_source="override")
 
-        cached = self.cache.get(uri)
-        if isinstance(cached, dict) and cached.get("tmdb_id"):
-            return ResolvedFilm(
-                film=film,
-                tmdb_id=int(cached["tmdb_id"]),
-                resolve_source=str(cached.get("source") or "cache"),
-            )
-        if cached is False or (isinstance(cached, dict) and cached.get("tmdb_id") is None):
-            self.unmatched.append(film)
-            return ResolvedFilm(film=film, tmdb_id=None, resolve_source="unmatched")
+        if has_uri:
+            cached = self.cache.get(uri)
+            if isinstance(cached, dict) and cached.get("tmdb_id"):
+                return ResolvedFilm(
+                    film=film,
+                    tmdb_id=int(cached["tmdb_id"]),
+                    resolve_source=str(cached.get("source") or "cache"),
+                )
+            if cached is False or (
+                isinstance(cached, dict) and cached.get("tmdb_id") is None
+            ):
+                self.unmatched.append(film)
+                return ResolvedFilm(film=film, tmdb_id=None, resolve_source="unmatched")
 
         tmdb_id = self._search_tmdb(film)
         if tmdb_id is not None:
-            self._remember(uri, tmdb_id, "search", film)
+            if has_uri:
+                self._remember(uri, tmdb_id, "search", film)
             return ResolvedFilm(film=film, tmdb_id=tmdb_id, resolve_source="search")
 
-        tmdb_id = self._scrape_letterboxd_tmdb_id(uri)
-        if tmdb_id is not None:
-            self._remember(uri, tmdb_id, "letterboxd", film)
-            return ResolvedFilm(film=film, tmdb_id=tmdb_id, resolve_source="letterboxd")
+        # Favorites / partial export rows may lack a Letterboxd URL. Never hit
+        # HTTP with an empty string; fall through to unmatched after search.
+        if has_uri:
+            tmdb_id = self._scrape_letterboxd_tmdb_id(uri)
+            if tmdb_id is not None:
+                self._remember(uri, tmdb_id, "letterboxd", film)
+                return ResolvedFilm(
+                    film=film, tmdb_id=tmdb_id, resolve_source="letterboxd"
+                )
+            self._remember(uri, None, "unmatched", film)
 
-        self._remember(uri, None, "unmatched", film)
         self.unmatched.append(film)
-        logger.warning("Unmatched: %s (%s) %s", film.name, film.year, uri)
+        logger.warning("Unmatched: %s (%s) %s", film.name, film.year, uri or "(no uri)")
         return ResolvedFilm(film=film, tmdb_id=None, resolve_source="unmatched")
 
     def _remember(
@@ -200,6 +210,8 @@ class IdResolver:
         return None
 
     def _scrape_letterboxd_tmdb_id(self, letterboxd_uri: str) -> Optional[int]:
+        if not (letterboxd_uri or "").strip():
+            return None
         html = self.http.get_text(letterboxd_uri)
         soup = BeautifulSoup(html, "lxml")
 

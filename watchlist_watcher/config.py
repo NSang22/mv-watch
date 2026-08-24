@@ -22,12 +22,14 @@ class ServiceConfig:
 
 @dataclass
 class StreamingAvailabilityConfig:
-    """Optional Movie of the Night enrichment settings."""
+    """Optional Movie of the Night expiry enrichment settings."""
 
     enabled: bool = False
     base_url: str = "https://api.movieofthenight.com/v4"
     leaving_soon_days: list[int] = field(default_factory=lambda: [14, 3])
     catalog_ids: dict[str, str] = field(default_factory=dict)
+    # Deprecated: MotN availability override is disabled. Kept for config compat.
+    cross_check_services: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -41,6 +43,12 @@ class PathsConfig:
     unmatched: Path
     csv_report: Path
     markdown_report: Path
+    html_report: Path
+    spin_html: Path
+    recommend_html: Path
+    conflicts: Path
+    unresolved: Path
+    feedback: Path
 
 
 @dataclass
@@ -50,6 +58,9 @@ class AppConfig:
     region: str
     request_delay_seconds: float
     failure_rate_threshold: float
+    # Abort before state/notify when departures look like a bad run.
+    max_departure_films: int
+    max_departure_fraction: float
     paths: PathsConfig
     services: list[ServiceConfig]
     streaming_availability: StreamingAvailabilityConfig
@@ -93,6 +104,14 @@ def load_config(config_path: Path | str = "config.yaml") -> AppConfig:
         unmatched=_as_path(paths_raw.get("unmatched", "unmatched.csv"), base),
         csv_report=_as_path(paths_raw.get("csv_report", "watchlist_streaming.csv"), base),
         markdown_report=_as_path(paths_raw.get("markdown_report", "report.md"), base),
+        html_report=_as_path(paths_raw.get("html_report", "report.html"), base),
+        spin_html=_as_path(paths_raw.get("spin_html", "spin.html"), base),
+        recommend_html=_as_path(
+            paths_raw.get("recommend_html", "recommend.html"), base
+        ),
+        conflicts=_as_path(paths_raw.get("conflicts", "conflicts.csv"), base),
+        unresolved=_as_path(paths_raw.get("unresolved", "unresolved.csv"), base),
+        feedback=_as_path(paths_raw.get("feedback", "feedback.csv"), base),
     )
 
     services: list[ServiceConfig] = []
@@ -112,22 +131,30 @@ def load_config(config_path: Path | str = "config.yaml") -> AppConfig:
         base_url=sa_raw.get("base_url", "https://api.movieofthenight.com/v4"),
         leaving_soon_days=list(sa_raw.get("leaving_soon_days") or [14, 3]),
         catalog_ids=dict(sa_raw.get("catalog_ids") or {}),
+        cross_check_services=list(sa_raw.get("cross_check_services") or []),
     )
 
     tmdb_api_key = os.environ.get("TMDB_API_KEY", "").strip()
     if not tmdb_api_key:
         raise ValueError("TMDB_API_KEY environment variable is required.")
 
+    streaming_key = (
+        os.environ.get("STREAMING_AVAILABILITY_API_KEY", "").strip()
+        or os.environ.get("MOTN_API_KEY", "").strip()
+        or None
+    )
+
     return AppConfig(
         region=str(raw.get("region", "US")).upper(),
         request_delay_seconds=float(raw.get("request_delay_seconds", 0.35)),
         failure_rate_threshold=float(raw.get("failure_rate_threshold", 0.2)),
+        max_departure_films=int(raw.get("max_departure_films", 10)),
+        max_departure_fraction=float(raw.get("max_departure_fraction", 0.05)),
         paths=paths,
         services=services,
         streaming_availability=sa,
         tmdb_api_key=tmdb_api_key,
         ntfy_topic=os.environ.get("NTFY_TOPIC") or None,
         letterboxd_user=os.environ.get("LETTERBOXD_USER") or None,
-        streaming_availability_api_key=os.environ.get("STREAMING_AVAILABILITY_API_KEY")
-        or None,
+        streaming_availability_api_key=streaming_key,
     )

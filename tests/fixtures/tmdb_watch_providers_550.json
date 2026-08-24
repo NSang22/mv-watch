@@ -1,0 +1,63 @@
+{
+  "id": 550,
+  "results": {
+    "US": {
+      "link": "https://www.themoviedb.org/movie/550-fight-club/watch?locale=US",
+      "flatrate": [
+        {
+          "provider_id": 8,
+          "provider_name": "Netflix",
+          "display_priority": 0
+        },
+        {
+          "provider_id": 9,
+          "provider_name": "Amazon Prime Video",
+          "display_priority": 1
+        },
+        {
+          "provider_id": 2100,
+          "provider_name": "Amazon Prime Video with Ads",
+          "display_priority": 2
+        }
+      ],
+      "ads": [
+        {
+          "provider_id": 73,
+          "provider_name": "Tubi TV",
+          "display_priority": 10
+        },
+        {
+          "provider_id": 192,
+          "provider_name": "YouTube Free",
+          "display_priority": 20
+        }
+      ],
+      "free": [
+        {
+          "provider_id": 212,
+          "provider_name": "Hoopla",
+          "display_priority": 15
+        }
+      ],
+      "rent": [
+        {
+          "provider_id": 10,
+          "provider_name": "Amazon Video",
+          "display_priority": 3
+        }
+      ],
+      "buy": [
+        {
+          "provider_id": 10,
+          "provider_name": "Amazon Video",
+          "display_priority": 3
+        },
+        {
+          "provider_id": 192,
+          "provider_name": "YouTube",
+          "display_priority": 30
+        }
+      ]
+    }
+  }
+}

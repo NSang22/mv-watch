@@ -1,0 +1,95 @@
+name: Daily watchlist check
+
+on:
+  schedule:
+    # TMDB/JustWatch data lags by a day or more, so a daily cadence is enough.
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  site:
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: github.event_name != 'push'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        if: github.event_name != 'push'
+        run: pip install -r requirements.txt
+
+      - name: Ensure config.yaml exists
+        if: github.event_name != 'push'
+        run: |
+          if [ ! -f config.yaml ]; then
+            cp config.example.yaml config.yaml
+          fi
+
+      - name: Run watchlist watcher
+        if: github.event_name != 'push'
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          STREAMING_AVAILABILITY_API_KEY: ${{ secrets.STREAMING_AVAILABILITY_API_KEY }}
+          LETTERBOXD_USER: ${{ secrets.LETTERBOXD_USER }}
+        run: python -m watchlist_watcher --watchlist watchlist.csv
+
+      - name: Commit updated state and reports
+        if: github.event_name != 'push' && success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json watchlist_streaming.csv report.md report.html index.html spin.html recommend.html conflicts.csv unresolved.csv unmatched.csv cache/id_cache.json || true
+          if git diff --staged --quiet; then
+            echo "No output changes to commit."
+          else
+            git commit -m "chore: update watchlist streaming state"
+            git push
+          fi
+
+      - name: Stage GitHub Pages site
+        run: |
+          mkdir -p _site
+          for f in index.html report.html spin.html recommend.html; do
+            if [ -f "$f" ]; then
+              cp "$f" _site/
+            fi
+          done
+          if [ ! -f _site/index.html ] && [ -f _site/report.html ]; then
+            cp _site/report.html _site/index.html
+          fi
+          touch _site/.nojekyll
+          test -f _site/index.html
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

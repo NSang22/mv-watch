@@ -1,0 +1,21 @@
+{
+  "id": "movie/550",
+  "tmdbId": "movie/550",
+  "title": "Fight Club",
+  "streamingOptions": {
+    "us": [
+      {
+        "service": {"id": "netflix", "name": "Netflix"},
+        "type": "subscription",
+        "link": "https://www.netflix.com/title/81130361",
+        "expiresOn": 1773532800,
+        "expiresSoon": true
+      },
+      {
+        "service": {"id": "prime", "name": "Prime Video"},
+        "type": "subscription",
+        "link": "https://www.amazon.com/gp/video/detail/example"
+      }
+    ]
+  }
+}
