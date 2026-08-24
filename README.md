@@ -19,16 +19,18 @@ Live site: **https://nsang22.github.io/mv-watch/**
 GitHub Pages serves `index.html` (same cinema viewer as `report.html`), plus
 `spin.html` and `recommend.html`. The daily Action:
 
-- scrapes your public Letterboxd watchlist (when `LETTERBOXD_USER` is set) so
-  watched/removed titles drop off the site
+- syncs watched titles off the site via your public Letterboxd **diary RSS**
+  (HTML watchlist scraping is blocked by Letterboxd; RSS still works)
 - refreshes TMDB availability
 - rebuilds Tonight's Spin with length / genre / decade / service filters
 - redeploys Pages
 
-Taste picks still update when you run `recommend` locally and push.
+For a full watchlist reset (manual removals, not just watches), drop a fresh
+Letterboxd export as `watchlist.csv` and push. Taste picks still update when
+you run `recommend` locally and push.
 
-The published site is public. Keep the Letterboxd watchlist public too if you
-want automatic sync.
+The published site is public. Keep the Letterboxd profile/diary public for
+automatic sync.
 
 ## Quick start
 

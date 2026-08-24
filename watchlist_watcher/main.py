@@ -28,7 +28,13 @@ from .notify import notify, write_csv, write_report
 from .providers import ProviderClient, write_unresolved_csv
 from .resolve import IdResolver
 from .spin import build_spin_films, write_spin_html
-from .watchlist import load_watchlist, scrape_looks_usable, write_watchlist_csv
+from .watchlist import (
+    fetch_diary_rss,
+    load_watchlist,
+    prune_watched_films,
+    scrape_looks_usable,
+    write_watchlist_csv,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +76,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--dry-run",
         action="store_true",
         help="Compute reports without writing state.json or sending notifications",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Write state even when the departure anomaly gate would abort",
     )
     parser.add_argument(
         "--render-html",
@@ -205,7 +216,7 @@ def run_render_html(config_path: Path) -> int:
 
 
 def _load_watchlist_films(config, args, http) -> list:
-    """Prefer a live public Letterboxd scrape; fall back to the committed CSV."""
+    """Prefer a live Letterboxd scrape; else CSV + diary RSS pruning."""
     watchlist_path = Path(args.watchlist) if args.watchlist else config.paths.watchlist
     csv_films = []
     if watchlist_path.exists():
@@ -229,11 +240,44 @@ def _load_watchlist_films(config, args, http) -> list:
                 len(csv_films),
             )
 
-    if csv_films:
-        return csv_films
+    films = list(csv_films)
+    if username and films:
+        try:
+            watched = fetch_diary_rss(username, http)
+            films, removed = prune_watched_films(films, watched)
+            if removed:
+                write_watchlist_csv(watchlist_path, films)
+                logger.info(
+                    "Pruned %d watched title(s) via diary RSS: %s",
+                    len(removed),
+                    ", ".join(f.name for f in removed[:12])
+                    + ("…" if len(removed) > 12 else ""),
+                )
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("Diary RSS sync failed; keeping committed CSV: %s", exc)
+
+    if films:
+        return films
     raise ValueError(
         "No watchlist available. Commit watchlist.csv or set LETTERBOXD_USER."
     )
+
+
+def _state_is_stale(previous: dict, *, max_age_days: int = 7) -> bool:
+    """True when the last successful state write is older than max_age_days."""
+    from datetime import datetime, timezone
+
+    raw = previous.get("last_run")
+    if not raw:
+        return True
+    try:
+        stamp = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    if stamp.tzinfo is None:
+        stamp = stamp.replace(tzinfo=timezone.utc)
+    age = datetime.now(timezone.utc) - stamp
+    return age.total_seconds() > max_age_days * 86400
 
 
 def run(argv: list[str] | None = None) -> int:
@@ -314,13 +358,22 @@ def run(argv: list[str] | None = None) -> int:
         max_departure_films=config.max_departure_films,
         max_departure_fraction=config.max_departure_fraction,
     )
-    if anomaly.anomalous:
+    stale_state = _state_is_stale(previous)
+    if anomaly.anomalous and not (args.force or stale_state):
         write_unresolved_csv(config.paths.unresolved, providers.unresolved)
         if conflicts:
             write_conflicts_csv(config.paths.conflicts, conflicts)
         logger.error("%s", anomaly.message)
         print(anomaly.message, file=sys.stderr)
         return 3
+    if anomaly.anomalous and (args.force or stale_state):
+        reason = "--force" if args.force else "stale state (>7d)"
+        logger.warning(
+            "Departure anomaly bypassed (%s): %d films / %.1f%%. Continuing.",
+            reason,
+            anomaly.departure_films,
+            anomaly.fraction * 100,
+        )
 
     run_ts = utc_now_iso()
     apply_last_changed(availability, previous, diff, run_ts)

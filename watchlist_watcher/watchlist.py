@@ -6,9 +6,11 @@ import csv
 import io
 import logging
 import zipfile
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 from urllib.parse import urljoin
+from xml.etree import ElementTree as ET
 
 from bs4 import BeautifulSoup
 
@@ -18,6 +20,17 @@ from .models import WatchlistFilm
 logger = logging.getLogger(__name__)
 
 LETTERBOXD_BASE = "https://letterboxd.com"
+LETTERBOXD_NS = {"lb": "https://letterboxd.com"}
+
+
+@dataclass(frozen=True)
+class WatchedFilm:
+    """One recently logged diary entry from Letterboxd RSS."""
+
+    name: str
+    year: Optional[int]
+    watched_date: Optional[str] = None
+    link: Optional[str] = None
 
 
 def load_watchlist(
@@ -140,6 +153,73 @@ def scrape_looks_usable(scraped: list[WatchlistFilm], previous_count: int) -> bo
     if previous_count <= 0:
         return True
     return len(scraped) >= max(5, int(previous_count * 0.2))
+
+
+def fetch_diary_rss(username: str, http: HttpClient) -> list[WatchedFilm]:
+    """Load recent diary entries from the public Letterboxd RSS feed.
+
+    Letterboxd blocks HTML scrapes from many hosts, but the diary RSS feed still
+    works and is enough to drop titles you just watched.
+    """
+    url = f"{LETTERBOXD_BASE}/{username.strip().strip('/')}/rss/"
+    xml_text = http.get_text(url)
+    root = ET.fromstring(xml_text)
+    watched: list[WatchedFilm] = []
+    for item in root.findall("./channel/item"):
+        name = item.findtext("lb:filmTitle", default="", namespaces=LETTERBOXD_NS).strip()
+        year_raw = item.findtext("lb:filmYear", default="", namespaces=LETTERBOXD_NS)
+        if not name:
+            # Fallback for non-diary activity items.
+            title = (item.findtext("title") or "").strip()
+            if " - " in title:
+                title = title.rsplit(" - ", 1)[0].strip()
+            if "," in title:
+                maybe_name, maybe_year = title.rsplit(",", 1)
+                maybe_year = maybe_year.strip()
+                if maybe_year.isdigit():
+                    name = maybe_name.strip()
+                    year_raw = maybe_year
+        if not name:
+            continue
+        year = int(year_raw) if year_raw and str(year_raw).isdigit() else None
+        watched.append(
+            WatchedFilm(
+                name=name,
+                year=year,
+                watched_date=item.findtext(
+                    "lb:watchedDate", default=None, namespaces=LETTERBOXD_NS
+                ),
+                link=item.findtext("link"),
+            )
+        )
+    logger.info("Loaded %d recent diary entries from RSS for %s.", len(watched), username)
+    return watched
+
+
+def film_was_watched(film: WatchlistFilm, watched: list[WatchedFilm]) -> bool:
+    """Match watchlist rows to diary entries by title, with optional year."""
+    name = film.name.casefold()
+    for entry in watched:
+        if entry.name.casefold() != name:
+            continue
+        if film.year is None or entry.year is None or film.year == entry.year:
+            return True
+    return False
+
+
+def prune_watched_films(
+    films: list[WatchlistFilm],
+    watched: list[WatchedFilm],
+) -> tuple[list[WatchlistFilm], list[WatchlistFilm]]:
+    """Drop watchlist rows that appear in recent diary RSS."""
+    remaining: list[WatchlistFilm] = []
+    removed: list[WatchlistFilm] = []
+    for film in films:
+        if film_was_watched(film, watched):
+            removed.append(film)
+        else:
+            remaining.append(film)
+    return remaining, removed
 
 
 def scrape_watchlist(username: str, http: HttpClient) -> list[WatchlistFilm]:
