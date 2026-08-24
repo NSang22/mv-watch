@@ -199,16 +199,6 @@
       "title": "The Drama",
       "year": 2026
     },
-    "1339713": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
-      "letterboxd_uri": "https://boxd.it/PNqo",
-      "presence_status": "verified-absent",
-      "providers": [],
-      "title": "Obsession",
-      "year": 2025
-    },
     "141": {
       "expires_on": null,
       "expiry_by_service": {},
@@ -258,11 +248,10 @@
       "expiry_by_service": {
         "Tubi": "2026-10-01"
       },
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/28yI",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Hoopla",
         "Tubi",
         "YouTube Free"
@@ -283,14 +272,10 @@
     "181886": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/5xtO",
-      "presence_status": "verified-present",
-      "providers": [
-        "Amazon Prime Video",
-        "Hoopla",
-        "Tubi"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "Enemy",
       "year": 2013
     },
@@ -389,11 +374,10 @@
     "242582": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/780m",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Netflix"
       ],
       "title": "Nightcrawler",
@@ -409,26 +393,13 @@
       "title": "Come and See",
       "year": 1985
     },
-    "264660": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-08-09T04:28:10+00:00",
-      "letterboxd_uri": "https://boxd.it/7T2k",
-      "presence_status": "verified-present",
-      "providers": [
-        "YouTube Free"
-      ],
-      "title": "Ex Machina",
-      "year": 2015
-    },
     "27205": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/1skk",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "YouTube Free"
       ],
       "title": "Inception",
@@ -613,11 +584,10 @@
     "391713": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/dGNE",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Hoopla",
         "Tubi",
         "YouTube Free"
@@ -666,11 +636,10 @@
         "Netflix": "2026-08-24",
         "Tubi": "2026-09-01"
       },
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/24EC",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Hoopla",
         "Netflix",
         "Tubi"
@@ -981,11 +950,10 @@
       "expiry_by_service": {
         "Tubi": "2026-10-01"
       },
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/i4a",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Tubi"
       ],
       "title": "Midnight in Paris",
@@ -994,11 +962,10 @@
     "597": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/2a2k",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Hoopla",
         "YouTube Free"
       ],
@@ -1095,11 +1062,10 @@
     "640": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/29VS",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Hoopla"
       ],
       "title": "Catch Me If You Can",
@@ -1110,11 +1076,10 @@
       "expiry_by_service": {
         "Tubi": "2026-10-01"
       },
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/29VI",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Hoopla",
         "Tubi"
       ],
@@ -1154,13 +1119,14 @@
       "year": 2025
     },
     "655": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "expires_on": "2030-11-01",
+      "expiry_by_service": {
+        "Tubi": "2030-11-01"
+      },
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/29Ts",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Tubi"
       ],
       "title": "Paris, Texas",
@@ -1344,11 +1310,10 @@
       "expiry_by_service": {
         "Netflix": "2026-09-01"
       },
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/29EW",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Netflix"
       ],
       "title": "Little Miss Sunshine",
@@ -1377,11 +1342,10 @@
     "8051": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/20E4",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "Hoopla"
       ],
       "title": "Punch-Drunk Love",
@@ -1496,11 +1460,10 @@
     "925": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-08-24T05:08:14+00:00",
       "letterboxd_uri": "https://boxd.it/29gA",
       "presence_status": "verified-present",
       "providers": [
-        "Amazon Prime Video",
         "YouTube Free"
       ],
       "title": "Do the Right Thing",
@@ -1567,8 +1530,14 @@
       "year": 2000
     }
   },
-  "last_run": "2026-08-11T04:28:03+00:00",
+  "last_run": "2026-08-24T05:08:36+00:00",
   "leaving_soon_alerts": {
-    "4232:Netflix:14": "2026-08-10"
+    "345:Tubi:14": "2026-08-24",
+    "4232:Netflix:14": "2026-08-10",
+    "4232:Netflix:3": "2026-08-24",
+    "4232:Tubi:14": "2026-08-24",
+    "424:Netflix:14": "2026-08-24",
+    "60308:Netflix:14": "2026-08-24",
+    "773:Netflix:14": "2026-08-24"
   }
 }
