@@ -2,44 +2,20 @@
 
 ## Changes
 
-### Leaving soon (advance warning)
+### New to watchlist
 
-- **Scream (1996)** on Netflix: Leaving Netflix in 0 day(s) (2026-08-24)
-- **Eyes Wide Shut (1999)** on Tubi: Leaving Tubi in 8 day(s) (2026-09-01)
-- **Little Miss Sunshine (2006)** on Netflix: Leaving Netflix in 8 day(s) (2026-09-01)
-- **Moneyball (2011)** on Netflix: Leaving Netflix in 8 day(s) (2026-09-01)
-- **Schindler's List (1993)** on Netflix: Leaving Netflix in 8 day(s) (2026-09-01)
-- **Scream (1996)** on Tubi: Leaving Tubi in 8 day(s) (2026-09-01)
-
-### Departures (detected after the fact)
-
-Grouped by film. These disappeared from a verified TMDB snapshot after the previous run. Lines flagged SUSPECT lost every prior my-service at once and usually mean a bad lookup, not a removal.
-
-- **Catch Me If You Can (2002)** left **Amazon Prime Video** (postmortem)
-- **Do the Right Thing (1989)** left **Amazon Prime Video** (postmortem)
-- **Enemy (2013)** left **Amazon Prime Video, Hoopla, Tubi** **[SUSPECT]** (postmortem)
-- **Inception (2010)** left **Amazon Prime Video** (postmortem)
-- **Lady Bird (2017)** left **Amazon Prime Video** (postmortem)
-- **Little Miss Sunshine (2006)** left **Amazon Prime Video** (postmortem)
-- **Midnight in Paris (2011)** left **Amazon Prime Video** (postmortem)
-- **Nightcrawler (2014)** left **Amazon Prime Video** (postmortem)
-- **Paris, Texas (1984)** left **Amazon Prime Video** (postmortem)
-- **Punch-Drunk Love (2002)** left **Amazon Prime Video** (postmortem)
-- **Raging Bull (1980)** left **Amazon Prime Video** (postmortem)
-- **Requiem for a Dream (2000)** left **Amazon Prime Video** (postmortem)
-- **Scream (1996)** left **Amazon Prime Video** (postmortem)
-- **Titanic (1997)** left **Amazon Prime Video** (postmortem)
+- **TÁR (2022)**: Now on watchlist. Available on: Netflix
 
 ## Available on your services
 
 Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (Tubi / YouTube Free / Hoopla until audited). Nothing is dropped for low confidence.
 
-### Netflix (14)
+### Netflix (15)
 
-- [Scream (1996)](https://boxd.it/24EC) `confirmed` - expires 2026-08-24 (0d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US)) ([MotN](https://www.netflix.com/title/939827))
 - [Little Miss Sunshine (2006)](https://boxd.it/29EW) `confirmed` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/773-little-miss-sunshine/watch?locale=US)) ([MotN](https://www.netflix.com/title/70043947))
 - [Moneyball (2011)](https://boxd.it/glS) `confirmed` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/60308-moneyball/watch?locale=US)) ([MotN](https://www.netflix.com/title/70201437))
 - [Schindler's List (1993)](https://boxd.it/2aq2) `confirmed` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/424-schindler-s-list/watch?locale=US)) ([MotN](https://www.netflix.com/title/60036359))
+- [Scream (1996)](https://boxd.it/24EC) `confirmed` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US))
 - [1917 (2019)](https://boxd.it/jj4y) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/530915-1917/watch?locale=US)) ([MotN](https://www.netflix.com/title/81140931))
 - [Anatomy of a Fall (2023)](https://boxd.it/yuDE) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/915935-anatomie-d-une-chute/watch?locale=US)) ([MotN](https://www.netflix.com/title/81713297))
 - [Don't Look Up (2021)](https://boxd.it/o0Hc) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/646380-don-t-look-up/watch?locale=US)) ([MotN](https://www.netflix.com/title/81252357))
@@ -50,6 +26,7 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 - [Marriage Story (2019)](https://boxd.it/hJAw) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/492188-marriage-story/watch?locale=US)) ([MotN](https://www.netflix.com/title/80223779))
 - [Nightcrawler (2014)](https://boxd.it/780m) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/242582-nightcrawler/watch?locale=US)) ([MotN](https://www.netflix.com/title/70295182))
 - [Nope (2022)](https://boxd.it/sDCe) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/762504-nope/watch?locale=US)) ([MotN](https://www.netflix.com/title/81573297))
+- [TÁR (2022)](https://boxd.it/uNIA) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/817758-tar/watch?locale=US)) ([MotN](https://www.netflix.com/title/81594976))
 
 ### Amazon Prime Video (13)
 
@@ -69,8 +46,8 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 
 ### Tubi (13)
 
-- [Scream (1996)](https://boxd.it/24EC) `probable` - expires 2026-08-24 (0d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US)) ([MotN](https://tubitv.com/movies/100054992/scream))
 - [Eyes Wide Shut (1999)](https://boxd.it/2axs) `probable` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/345-eyes-wide-shut/watch?locale=US)) ([MotN](https://tubitv.com/movies/599629/eyes-wide-shut))
+- [Scream (1996)](https://boxd.it/24EC) `probable` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US)) ([MotN](https://tubitv.com/movies/100054992/scream))
 - [Incendies (2010)](https://boxd.it/Msm) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/46738-incendies/watch?locale=US)) ([MotN](https://tubitv.com/movies/100007605/incendies))
 - [Midnight in Paris (2011)](https://boxd.it/i4a) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/59436-midnight-in-paris/watch?locale=US)) ([MotN](https://tubitv.com/movies/594106/midnight-in-paris))
 - [Raging Bull (1980)](https://boxd.it/28yI) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US)) ([MotN](https://tubitv.com/movies/689648/raging-bull))
@@ -85,7 +62,7 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 
 ### Hoopla (library, limited) (10)
 
-- [Scream (1996)](https://boxd.it/24EC) `probable` - expires 2026-08-24 (0d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US))
+- [Scream (1996)](https://boxd.it/24EC) `probable` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US))
 - [Raging Bull (1980)](https://boxd.it/28yI) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US))
 - [Requiem for a Dream (2000)](https://boxd.it/29VI) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/641-requiem-for-a-dream/watch?locale=US))
 - [Catch Me If You Can (2002)](https://boxd.it/29VS) `probable` - expiry unknown (also rent/buy elsewhere; Hoopla is limited) ([TMDB watch](https://www.themoviedb.org/movie/640-catch-me-if-you-can/watch?locale=US))

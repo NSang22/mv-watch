@@ -390,7 +390,7 @@
     "year": 1989
   },
   "https://boxd.it/2aUc": {
-    "name": "AmÃ©lie",
+    "name": "Am\u00c3\u00a9lie",
     "source": "letterboxd",
     "tmdb_id": 194,
     "year": 2001
@@ -1236,9 +1236,9 @@
     "year": 2025
   },
   "https://boxd.it/uNIA": {
-    "tmdb_id": 817758,
+    "name": "T\u00c1R",
     "source": "override",
-    "name": "TÁR",
+    "tmdb_id": 817758,
     "year": 2022
   },
   "https://boxd.it/vHza": {

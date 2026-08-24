@@ -1,14 +1,5 @@
 {
   "films": {
-    "1004076": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
-      "letterboxd_uri": "https://boxd.it/uNIA",
-      "providers": [],
-      "title": "T\u00c3\u0081R",
-      "year": 2022
-    },
     "1018": {
       "expires_on": null,
       "expiry_by_service": {},
@@ -631,9 +622,8 @@
       "year": 2002
     },
     "4232": {
-      "expires_on": "2026-08-24",
+      "expires_on": "2026-09-01",
       "expiry_by_service": {
-        "Netflix": "2026-08-24",
         "Tubi": "2026-09-01"
       },
       "last_changed": "2026-08-24T05:08:14+00:00",
@@ -1361,6 +1351,18 @@
       "title": "Se7en",
       "year": 1995
     },
+    "817758": {
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-08-24T14:42:39+00:00",
+      "letterboxd_uri": "https://boxd.it/uNIA",
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
+      "title": "T\u00c1R",
+      "year": 2022
+    },
     "8363": {
       "expires_on": null,
       "expiry_by_service": {},
@@ -1530,7 +1532,7 @@
       "year": 2000
     }
   },
-  "last_run": "2026-08-24T05:08:36+00:00",
+  "last_run": "2026-08-24T14:42:39+00:00",
   "leaving_soon_alerts": {
     "345:Tubi:14": "2026-08-24",
     "4232:Netflix:14": "2026-08-10",
