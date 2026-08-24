@@ -205,6 +205,7 @@ def run_render_html(config_path: Path) -> int:
             id_cache_path=id_cache if id_cache.exists() else None,
             meta_path=spin_meta,
             taste_cache_path=taste_cache if taste_cache.exists() else None,
+            overrides_path=base / paths.get("overrides", "overrides.json"),
             tmdb_api_key=api_key,
             http=http,
         )
@@ -398,6 +399,7 @@ def run(argv: list[str] | None = None) -> int:
             id_cache_path=config.paths.id_cache,
             meta_path=spin_meta,
             taste_cache_path=taste_cache if taste_cache.exists() else None,
+            overrides_path=config.paths.overrides,
             tmdb_api_key=config.tmdb_api_key,
             http=http,
         )

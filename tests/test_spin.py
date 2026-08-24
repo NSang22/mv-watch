@@ -86,6 +86,19 @@ def test_film_matches_runtime_genre_and_services() -> None:
     assert not film_matches(film, services=["Tubi"])
 
 
+def test_as_spin_films_drops_absurd_runtimes() -> None:
+    from watchlist_watcher.spin import as_spin_films
+
+    films = as_spin_films(
+        [
+            {"title": "TÁR", "runtime": 11, "genres": [], "year": 2022},
+            {"title": "Fantastic Mr. Fox", "runtime": 87, "genres": ["Comedy"], "year": 2009},
+        ]
+    )
+    assert films[0]["runtime"] is None
+    assert films[1]["runtime"] == 87
+
+
 def test_build_spin_films_joins_streaming_and_meta(tmp_path: Path) -> None:
     streaming = tmp_path / "watchlist_streaming.csv"
     streaming.write_text(

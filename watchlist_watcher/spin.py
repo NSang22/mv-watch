@@ -96,6 +96,15 @@ def extract_titles_from_csv_path(path: Path) -> list[str]:
     return extract_titles_from_csv_text(text)
 
 
+def _sanitize_runtime(runtime: Any) -> Optional[int]:
+    """Drop absurdly short runtimes (usually a wrong TMDB match)."""
+    if not isinstance(runtime, int) or runtime <= 0:
+        return None
+    if runtime < 40:
+        return None
+    return runtime
+
+
 def as_spin_films(items: list[Any]) -> list[dict[str, Any]]:
     """Normalize title strings or film dicts into the spin payload shape."""
     films: list[dict[str, Any]] = []
@@ -116,12 +125,12 @@ def as_spin_films(items: list[Any]) -> list[dict[str, Any]]:
         elif isinstance(item, dict):
             title = str(item.get("title") or "").strip()
             year = item.get("year")
-            runtime = item.get("runtime")
+            runtime = _sanitize_runtime(item.get("runtime"))
             decade = item.get("decade")
             film = {
                 "title": title,
                 "year": int(year) if isinstance(year, int) else None,
-                "runtime": int(runtime) if isinstance(runtime, int) else None,
+                "runtime": runtime,
                 "genres": [str(g) for g in (item.get("genres") or []) if g],
                 "decade": int(decade) if isinstance(decade, int) else None,
                 "services": [str(s) for s in (item.get("services") or []) if s],
@@ -236,7 +245,7 @@ def _meta_from_caches(
     if decade is None and isinstance(year, int):
         decade = (year // 10) * 10
     return {
-        "runtime": int(runtime) if isinstance(runtime, int) and runtime > 0 else None,
+        "runtime": _sanitize_runtime(runtime),
         "genres": [str(g) for g in (entry.get("genres") or []) if g],
         "decade": int(decade) if isinstance(decade, int) else None,
         "year": int(year) if isinstance(year, int) else None,
@@ -254,7 +263,7 @@ def _fetch_tmdb_spin_meta(
     if len(release) >= 4 and release[:4].isdigit():
         year = int(release[:4])
     runtime = detail.get("runtime")
-    runtime_i = int(runtime) if isinstance(runtime, int) and runtime > 0 else None
+    runtime_i = _sanitize_runtime(runtime)
     genres = [str(g.get("name")) for g in (detail.get("genres") or []) if g.get("name")]
     decade = (year // 10) * 10 if year is not None else None
     return {
@@ -272,12 +281,14 @@ def build_spin_films(
     id_cache_path: Optional[Path] = None,
     meta_path: Optional[Path] = None,
     taste_cache_path: Optional[Path] = None,
+    overrides_path: Optional[Path] = None,
     tmdb_api_key: Optional[str] = None,
     http: Optional[HttpClient] = None,
 ) -> list[dict[str, Any]]:
     """Join watchlist rows with availability and TMDB runtime/genre metadata."""
     streaming = _streaming_index(streaming_csv) if streaming_csv else {}
     id_cache = _load_json_dict(id_cache_path) if id_cache_path else {}
+    overrides = _load_json_dict(overrides_path) if overrides_path else {}
     spin_meta = _load_json_dict(meta_path) if meta_path else {}
     taste_cache = _load_json_dict(taste_cache_path) if taste_cache_path else {}
     dirty = False
@@ -290,7 +301,14 @@ def build_spin_films(
             year_key = str(item.year) if item.year is not None else "?"
             stream = streaming.get(f"title:{item.name.casefold()}|{year_key}")
         stream = stream or {}
-        tmdb_id = stream.get("tmdb_id")
+        tmdb_id = None
+        override = overrides.get(uri) or overrides.get(item.letterboxd_uri)
+        if isinstance(override, int):
+            tmdb_id = override
+        elif isinstance(override, dict) and override.get("tmdb_id"):
+            tmdb_id = int(override["tmdb_id"])
+        if tmdb_id is None:
+            tmdb_id = stream.get("tmdb_id")
         if tmdb_id is None:
             cached = id_cache.get(uri) or id_cache.get(item.letterboxd_uri)
             if isinstance(cached, dict) and cached.get("tmdb_id"):
@@ -298,7 +316,8 @@ def build_spin_films(
         meta: dict[str, Any] = {}
         if isinstance(tmdb_id, int):
             meta = _meta_from_caches(tmdb_id, spin_meta=spin_meta, taste_cache=taste_cache)
-            if not meta.get("genres") and tmdb_api_key and http is not None:
+            needs_fetch = not meta.get("genres") or meta.get("runtime") is None
+            if needs_fetch and tmdb_api_key and http is not None:
                 try:
                     meta = _fetch_tmdb_spin_meta(tmdb_id, http, tmdb_api_key)
                     spin_meta[str(tmdb_id)] = meta

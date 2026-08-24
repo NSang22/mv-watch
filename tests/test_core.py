@@ -18,7 +18,7 @@ from watchlist_watcher.models import (
     WatchlistFilm,
 )
 from watchlist_watcher.providers import match_service, validate_service_matches
-from watchlist_watcher.resolve import year_within_tolerance
+from watchlist_watcher.resolve import titles_compatible, year_within_tolerance
 
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -79,6 +79,17 @@ class TestYearTolerance:
         assert year_within_tolerance(None, 1999) is False
         assert year_within_tolerance(1999, None) is False
         assert year_within_tolerance(None, None) is False
+
+
+class TestTitleCompatibility:
+    def test_accented_titles_match(self) -> None:
+        assert titles_compatible("TÁR", "TÁR") is True
+
+    def test_unrelated_titles_rejected(self) -> None:
+        assert titles_compatible("TÁR", "A-Su-Ra-Bal-Bal-Ta") is False
+
+    def test_subtitle_containment_allowed(self) -> None:
+        assert titles_compatible("Blade Runner", "Blade Runner 2049") is True
 
     def test_fixture_search_results(self) -> None:
         payload = json.loads((FIXTURES / "tmdb_search_fight_club.json").read_text(encoding="utf-8"))

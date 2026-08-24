@@ -39,11 +39,40 @@ def year_within_tolerance(
     return abs(letterboxd_year - tmdb_year) <= tolerance
 
 
+def normalize_title(value: str) -> str:
+    """Fold accents/punctuation so 'TÁR' and noisy variants can be compared."""
+    import unicodedata
+
+    decomposed = unicodedata.normalize("NFKD", value or "")
+    stripped = "".join(ch for ch in decomposed if not unicodedata.combining(ch))
+    return "".join(ch for ch in stripped.casefold() if ch.isalnum())
+
+
+def titles_compatible(letterboxd_title: str, tmdb_title: str) -> bool:
+    """Reject year-only TMDB hits whose titles are clearly unrelated."""
+    left = normalize_title(letterboxd_title)
+    right = normalize_title(tmdb_title)
+    if not left or not right:
+        return True
+    if left == right:
+        return True
+    # Allow light subtitle differences: "Blade Runner" vs "Blade Runner 2049"
+    # only when one fully contains the other as a token-ish substring.
+    shorter, longer = (left, right) if len(left) <= len(right) else (right, left)
+    if len(shorter) >= 4 and shorter in longer:
+        return True
+    return False
+
+
 def _tmdb_release_year(result: dict[str, Any]) -> Optional[int]:
     date = (result.get("release_date") or "").strip()
     if len(date) >= 4 and date[:4].isdigit():
         return int(date[:4])
     return None
+
+
+def _result_title(result: dict[str, Any]) -> str:
+    return str(result.get("title") or result.get("original_title") or "")
 
 
 class IdResolver:
@@ -194,7 +223,9 @@ class IdResolver:
 
         for result in results:
             tmdb_year = _tmdb_release_year(result)
-            if year_within_tolerance(film.year, tmdb_year):
+            if year_within_tolerance(film.year, tmdb_year) and titles_compatible(
+                film.name, _result_title(result)
+            ):
                 return int(result["id"])
 
         # Retry without the year filter when Letterboxd year is present but
@@ -204,7 +235,9 @@ class IdResolver:
             data = self.http.get_json(f"{TMDB_BASE}/search/movie", params=params)
             for result in data.get("results") or []:
                 tmdb_year = _tmdb_release_year(result)
-                if year_within_tolerance(film.year, tmdb_year):
+                if year_within_tolerance(film.year, tmdb_year) and titles_compatible(
+                    film.name, _result_title(result)
+                ):
                     return int(result["id"])
 
         return None
