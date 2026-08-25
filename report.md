@@ -2,9 +2,9 @@
 
 ## Changes
 
-### New to watchlist
+### Leaving soon (advance warning)
 
-- **TÁR (2022)**: Now on watchlist. Available on: Netflix
+- **Tropic Thunder (2008)** on Amazon Prime Video: Leaving Amazon Prime Video in 7 day(s) (2026-09-01)
 
 ## Available on your services
 
@@ -12,10 +12,10 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 
 ### Netflix (15)
 
-- [Little Miss Sunshine (2006)](https://boxd.it/29EW) `confirmed` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/773-little-miss-sunshine/watch?locale=US)) ([MotN](https://www.netflix.com/title/70043947))
-- [Moneyball (2011)](https://boxd.it/glS) `confirmed` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/60308-moneyball/watch?locale=US)) ([MotN](https://www.netflix.com/title/70201437))
-- [Schindler's List (1993)](https://boxd.it/2aq2) `confirmed` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/424-schindler-s-list/watch?locale=US)) ([MotN](https://www.netflix.com/title/60036359))
-- [Scream (1996)](https://boxd.it/24EC) `confirmed` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US))
+- [Little Miss Sunshine (2006)](https://boxd.it/29EW) `confirmed` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/773-little-miss-sunshine/watch?locale=US)) ([MotN](https://www.netflix.com/title/70043947))
+- [Moneyball (2011)](https://boxd.it/glS) `confirmed` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/60308-moneyball/watch?locale=US)) ([MotN](https://www.netflix.com/title/70201437))
+- [Schindler's List (1993)](https://boxd.it/2aq2) `confirmed` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/424-schindler-s-list/watch?locale=US)) ([MotN](https://www.netflix.com/title/60036359))
+- [Scream (1996)](https://boxd.it/24EC) `confirmed` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US))
 - [1917 (2019)](https://boxd.it/jj4y) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/530915-1917/watch?locale=US)) ([MotN](https://www.netflix.com/title/81140931))
 - [Anatomy of a Fall (2023)](https://boxd.it/yuDE) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/915935-anatomie-d-une-chute/watch?locale=US)) ([MotN](https://www.netflix.com/title/81713297))
 - [Don't Look Up (2021)](https://boxd.it/o0Hc) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/646380-don-t-look-up/watch?locale=US)) ([MotN](https://www.netflix.com/title/81252357))
@@ -30,7 +30,8 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 
 ### Amazon Prime Video (13)
 
-- [The Pianist (2002)](https://boxd.it/2aqc) `confirmed` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/423-the-pianist/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.a0b82420-d96f-eddd-532a-51cbe9c9ecee))
+- [Tropic Thunder (2008)](https://boxd.it/20WM) `confirmed` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/7446-tropic-thunder/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.f610c9eb-b781-4501-bc3b-0e5615b57c87))
+- [The Pianist (2002)](https://boxd.it/2aqc) `confirmed` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/423-the-pianist/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.a0b82420-d96f-eddd-532a-51cbe9c9ecee))
 - [Donnie Darko (2001)](https://boxd.it/2b2A) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/141-donnie-darko/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.1cc91c10-55f0-4f8f-9c23-e4195012b509))
 - [Fargo (1996)](https://boxd.it/2aHM) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/275-fargo/watch?locale=US)) ([MotN](https://www.amazon.com/gp/video/detail/0GM7I260FKWQZ9F89KHVDTCDPZ?ref_=atv_dp))
 - [Manchester by the Sea (2016)](https://boxd.it/b2L0) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/334541-manchester-by-the-sea/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.bb8954ab-87e3-491d-b8c9-b2ef11212f0b))
@@ -41,20 +42,19 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 - [The Martian (2015)](https://boxd.it/8SeG) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/286217-the-martian/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.26a9f717-f71e-b58b-6a4a-7a62543eab90))
 - [The Notebook (2004)](https://boxd.it/1UNE) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/11036-the-notebook/watch?locale=US))
 - [The Usual Suspects (1995)](https://boxd.it/29XE) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/629-the-usual-suspects/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.3a8c40d7-f1ad-44fb-8fd4-779c33743593))
-- [Tropic Thunder (2008)](https://boxd.it/20WM) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/7446-tropic-thunder/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.f610c9eb-b781-4501-bc3b-0e5615b57c87))
 - [Weapons (2025)](https://boxd.it/EMTM) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/1078605-weapons/watch?locale=US)) ([MotN](https://app.primevideo.com/detail?gti=amzn1.dv.gti.930793f1-4a5c-4998-b335-7150770e5fe0))
 
 ### Tubi (13)
 
-- [Eyes Wide Shut (1999)](https://boxd.it/2axs) `probable` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/345-eyes-wide-shut/watch?locale=US)) ([MotN](https://tubitv.com/movies/599629/eyes-wide-shut))
-- [Scream (1996)](https://boxd.it/24EC) `probable` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US)) ([MotN](https://tubitv.com/movies/100054992/scream))
-- [Incendies (2010)](https://boxd.it/Msm) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/46738-incendies/watch?locale=US)) ([MotN](https://tubitv.com/movies/100007605/incendies))
-- [Midnight in Paris (2011)](https://boxd.it/i4a) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/59436-midnight-in-paris/watch?locale=US)) ([MotN](https://tubitv.com/movies/594106/midnight-in-paris))
-- [Raging Bull (1980)](https://boxd.it/28yI) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US)) ([MotN](https://tubitv.com/movies/689648/raging-bull))
-- [Requiem for a Dream (2000)](https://boxd.it/29VI) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/641-requiem-for-a-dream/watch?locale=US)) ([MotN](https://tubitv.com/movies/399691/requiem-for-a-dream))
-- [The Pianist (2002)](https://boxd.it/2aqc) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/423-the-pianist/watch?locale=US)) ([MotN](https://tubitv.com/movies/400847/the-pianist))
-- [The Worst Person in the World (2021)](https://boxd.it/oyws) `probable` - expires 2027-06-14 (294d) ([TMDB watch](https://www.themoviedb.org/movie/660120-verdens-verste-menneske/watch?locale=US)) ([MotN](https://tubitv.com/movies/100040298/the-worst-person-in-the-world))
-- [Paris, Texas (1984)](https://boxd.it/29Ts) `probable` - expires 2030-11-01 (1530d) ([TMDB watch](https://www.themoviedb.org/movie/655-paris-texas/watch?locale=US)) ([MotN](https://tubitv.com/movies/100049508/paris-texas))
+- [Eyes Wide Shut (1999)](https://boxd.it/2axs) `probable` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/345-eyes-wide-shut/watch?locale=US)) ([MotN](https://tubitv.com/movies/599629/eyes-wide-shut))
+- [Scream (1996)](https://boxd.it/24EC) `probable` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US)) ([MotN](https://tubitv.com/movies/100054992/scream))
+- [Incendies (2010)](https://boxd.it/Msm) `probable` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/46738-incendies/watch?locale=US)) ([MotN](https://tubitv.com/movies/100007605/incendies))
+- [Midnight in Paris (2011)](https://boxd.it/i4a) `probable` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/59436-midnight-in-paris/watch?locale=US)) ([MotN](https://tubitv.com/movies/594106/midnight-in-paris))
+- [Raging Bull (1980)](https://boxd.it/28yI) `probable` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US)) ([MotN](https://tubitv.com/movies/689648/raging-bull))
+- [Requiem for a Dream (2000)](https://boxd.it/29VI) `probable` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/641-requiem-for-a-dream/watch?locale=US)) ([MotN](https://tubitv.com/movies/399691/requiem-for-a-dream))
+- [The Pianist (2002)](https://boxd.it/2aqc) `probable` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/423-the-pianist/watch?locale=US)) ([MotN](https://tubitv.com/movies/400847/the-pianist))
+- [The Worst Person in the World (2021)](https://boxd.it/oyws) `probable` - expires 2027-06-14 (293d) ([TMDB watch](https://www.themoviedb.org/movie/660120-verdens-verste-menneske/watch?locale=US)) ([MotN](https://tubitv.com/movies/100040298/the-worst-person-in-the-world))
+- [Paris, Texas (1984)](https://boxd.it/29Ts) `probable` - expires 2030-11-01 (1529d) ([TMDB watch](https://www.themoviedb.org/movie/655-paris-texas/watch?locale=US)) ([MotN](https://tubitv.com/movies/100049508/paris-texas))
 - [Donnie Darko (2001)](https://boxd.it/2b2A) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/141-donnie-darko/watch?locale=US)) ([MotN](https://tubitv.com/movies/100010422/donnie-darko-director-s-cut))
 - [Fargo (1996)](https://boxd.it/2aHM) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/275-fargo/watch?locale=US))
 - [Lady Bird (2017)](https://boxd.it/dGNE) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/391713-lady-bird/watch?locale=US))
@@ -62,9 +62,9 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 
 ### Hoopla (library, limited) (10)
 
-- [Scream (1996)](https://boxd.it/24EC) `probable` - expires 2026-09-01 (8d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US))
-- [Raging Bull (1980)](https://boxd.it/28yI) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US))
-- [Requiem for a Dream (2000)](https://boxd.it/29VI) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/641-requiem-for-a-dream/watch?locale=US))
+- [Scream (1996)](https://boxd.it/24EC) `probable` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US))
+- [Raging Bull (1980)](https://boxd.it/28yI) `probable` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US))
+- [Requiem for a Dream (2000)](https://boxd.it/29VI) `probable` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/641-requiem-for-a-dream/watch?locale=US))
 - [Catch Me If You Can (2002)](https://boxd.it/29VS) `probable` - expiry unknown (also rent/buy elsewhere; Hoopla is limited) ([TMDB watch](https://www.themoviedb.org/movie/640-catch-me-if-you-can/watch?locale=US))
 - [Lady Bird (2017)](https://boxd.it/dGNE) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/391713-lady-bird/watch?locale=US))
 - [Punch-Drunk Love (2002)](https://boxd.it/20E4) `probable` - expiry unknown (also rent/buy elsewhere; Hoopla is limited) ([TMDB watch](https://www.themoviedb.org/movie/8051-punch-drunk-love/watch?locale=US))
@@ -75,7 +75,8 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 
 ### YouTube Free (10)
 
-- [Raging Bull (1980)](https://boxd.it/28yI) `probable` - expires 2026-10-01 (38d) ([TMDB watch](https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US))
+- [Tropic Thunder (2008)](https://boxd.it/20WM) `probable` - expires 2026-09-01 (7d) ([TMDB watch](https://www.themoviedb.org/movie/7446-tropic-thunder/watch?locale=US))
+- [Raging Bull (1980)](https://boxd.it/28yI) `probable` - expires 2026-10-01 (37d) ([TMDB watch](https://www.themoviedb.org/movie/1578-raging-bull/watch?locale=US))
 - [Casino (1995)](https://boxd.it/2ads) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/524-casino/watch?locale=US))
 - [Do the Right Thing (1989)](https://boxd.it/29gA) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/925-do-the-right-thing/watch?locale=US))
 - [Donnie Darko (2001)](https://boxd.it/2b2A) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/141-donnie-darko/watch?locale=US))
@@ -84,7 +85,6 @@ Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (T
 - [Moonlight (2016)](https://boxd.it/d6bE) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/376867-moonlight/watch?locale=US))
 - [The Thing (1982)](https://boxd.it/294O) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/1091-the-thing/watch?locale=US))
 - [Titanic (1997)](https://boxd.it/2a2k) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/597-titanic/watch?locale=US))
-- [Tropic Thunder (2008)](https://boxd.it/20WM) `probable` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/7446-tropic-thunder/watch?locale=US))
 
 ## Attribution
 
