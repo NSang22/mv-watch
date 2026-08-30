@@ -2,18 +2,21 @@
 
 ## Changes
 
-No arrivals, departures, or leaving-soon warnings this run.
+### Departures (detected after the fact)
+
+Grouped by film. These disappeared from a verified TMDB snapshot after the previous run. Lines flagged SUSPECT lost every prior my-service at once and usually mean a bad lookup, not a removal.
+
+- **Scream (1996)** left **Netflix** (postmortem)
 
 ## Available on your services
 
 Confidence: **confirmed** (Netflix/Prime; TMDB measured n=36) · **probable** (Tubi / YouTube Free / Hoopla until audited). Nothing is dropped for low confidence.
 
-### Netflix (15)
+### Netflix (14)
 
 - [Little Miss Sunshine (2006)](https://boxd.it/29EW) `confirmed` - expires 2026-09-01 (2d) ([TMDB watch](https://www.themoviedb.org/movie/773-little-miss-sunshine/watch?locale=US)) ([MotN](https://www.netflix.com/title/70043947))
 - [Moneyball (2011)](https://boxd.it/glS) `confirmed` - expires 2026-09-01 (2d) ([TMDB watch](https://www.themoviedb.org/movie/60308-moneyball/watch?locale=US)) ([MotN](https://www.netflix.com/title/70201437))
 - [Schindler's List (1993)](https://boxd.it/2aq2) `confirmed` - expires 2026-09-01 (2d) ([TMDB watch](https://www.themoviedb.org/movie/424-schindler-s-list/watch?locale=US)) ([MotN](https://www.netflix.com/title/60036359))
-- [Scream (1996)](https://boxd.it/24EC) `confirmed` - expires 2026-09-01 (2d) ([TMDB watch](https://www.themoviedb.org/movie/4232-scream/watch?locale=US))
 - [Anatomy of a Fall (2023)](https://boxd.it/yuDE) `confirmed` - expires 2026-09-23 (24d) ([TMDB watch](https://www.themoviedb.org/movie/915935-anatomie-d-une-chute/watch?locale=US)) ([MotN](https://www.netflix.com/title/81713297))
 - [1917 (2019)](https://boxd.it/jj4y) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/530915-1917/watch?locale=US)) ([MotN](https://www.netflix.com/title/81140931))
 - [Don't Look Up (2021)](https://boxd.it/o0Hc) `confirmed` - expiry unknown ([TMDB watch](https://www.themoviedb.org/movie/646380-don-t-look-up/watch?locale=US)) ([MotN](https://www.netflix.com/title/81252357))
