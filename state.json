@@ -81,12 +81,10 @@
     "111": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-09-01T17:39:52+00:00",
       "letterboxd_uri": "https://boxd.it/2b7g",
-      "presence_status": "verified-present",
-      "providers": [
-        "Amazon Prime Video"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "Scarface",
       "year": 1983
     },
@@ -507,9 +505,9 @@
       "year": 2017
     },
     "345": {
-      "expires_on": "2026-09-01",
+      "expires_on": "2027-03-01",
       "expiry_by_service": {
-        "Tubi": "2026-09-01"
+        "Tubi": "2027-03-01"
       },
       "last_changed": "2026-08-08T22:13:30+00:00",
       "letterboxd_uri": "https://boxd.it/2axs",
@@ -575,10 +573,8 @@
       "year": 2016
     },
     "391713": {
-      "expires_on": "2026-09-01",
-      "expiry_by_service": {
-        "Tubi": "2026-09-01"
-      },
+      "expires_on": null,
+      "expiry_by_service": {},
       "last_changed": "2026-08-31T19:52:08+00:00",
       "letterboxd_uri": "https://boxd.it/dGNE",
       "presence_status": "verified-present",
@@ -625,10 +621,8 @@
       "year": 2002
     },
     "4232": {
-      "expires_on": "2026-09-01",
-      "expiry_by_service": {
-        "Tubi": "2026-09-01"
-      },
+      "expires_on": null,
+      "expiry_by_service": {},
       "last_changed": "2026-08-30T17:57:40+00:00",
       "letterboxd_uri": "https://boxd.it/24EC",
       "presence_status": "verified-present",
@@ -640,16 +634,12 @@
       "year": 1996
     },
     "424": {
-      "expires_on": "2026-09-01",
-      "expiry_by_service": {
-        "Netflix": "2026-09-01"
-      },
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-09-01T17:39:52+00:00",
       "letterboxd_uri": "https://boxd.it/2aq2",
-      "presence_status": "verified-present",
-      "providers": [
-        "Netflix"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "Schindler's List",
       "year": 1993
     },
@@ -985,16 +975,12 @@
       "year": 1999
     },
     "60308": {
-      "expires_on": "2026-09-01",
-      "expiry_by_service": {
-        "Netflix": "2026-09-01"
-      },
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-09-01T17:39:52+00:00",
       "letterboxd_uri": "https://boxd.it/glS",
-      "presence_status": "verified-present",
-      "providers": [
-        "Netflix"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "Moneyball",
       "year": 2011
     },
@@ -1285,16 +1271,12 @@
       "year": 1990
     },
     "773": {
-      "expires_on": "2026-09-01",
-      "expiry_by_service": {
-        "Netflix": "2026-09-01"
-      },
-      "last_changed": "2026-08-24T05:08:14+00:00",
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-09-01T17:39:52+00:00",
       "letterboxd_uri": "https://boxd.it/29EW",
-      "presence_status": "verified-present",
-      "providers": [
-        "Netflix"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "Little Miss Sunshine",
       "year": 2006
     },
@@ -1523,7 +1505,7 @@
       "year": 2000
     }
   },
-  "last_run": "2026-08-31T19:52:08+00:00",
+  "last_run": "2026-09-01T17:39:52+00:00",
   "leaving_soon_alerts": {
     "345:Tubi:14": "2026-08-24",
     "345:Tubi:3": "2026-08-29",
