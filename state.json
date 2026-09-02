@@ -57,10 +57,11 @@
     "1091": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-09T04:28:10+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/294O",
       "presence_status": "verified-present",
       "providers": [
+        "Amazon Prime Video",
         "YouTube Free"
       ],
       "title": "The Thing",
@@ -69,22 +70,22 @@
     "11036": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-11T04:28:03+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/1UNE",
-      "presence_status": "verified-present",
-      "providers": [
-        "Amazon Prime Video"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "The Notebook",
       "year": 2004
     },
     "111": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-09-01T17:39:52+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/2b7g",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
       "title": "Scarface",
       "year": 1983
     },
@@ -237,10 +238,11 @@
       "expiry_by_service": {
         "Tubi": "2026-10-01"
       },
-      "last_changed": "2026-08-24T05:08:14+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/28yI",
       "presence_status": "verified-present",
       "providers": [
+        "Amazon Prime Video",
         "Hoopla",
         "Tubi",
         "YouTube Free"
@@ -261,10 +263,12 @@
     "181886": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-24T05:08:14+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/5xtO",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Hoopla"
+      ],
       "title": "Enemy",
       "year": 2013
     },
@@ -505,26 +509,24 @@
       "year": 2017
     },
     "345": {
-      "expires_on": "2027-03-01",
-      "expiry_by_service": {
-        "Tubi": "2027-03-01"
-      },
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "expires_on": null,
+      "expiry_by_service": {},
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/2axs",
-      "presence_status": "verified-present",
-      "providers": [
-        "Tubi"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "Eyes Wide Shut",
       "year": 1999
     },
     "348": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/2awY",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
       "title": "Alien",
       "year": 1979
     },
@@ -575,11 +577,10 @@
     "391713": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-31T19:52:08+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/dGNE",
       "presence_status": "verified-present",
       "providers": [
-        "Tubi",
         "YouTube Free"
       ],
       "title": "Lady Bird",
@@ -588,10 +589,12 @@
     "400617": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/e4uc",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
       "title": "Phantom Thread",
       "year": 2017
     },
@@ -623,23 +626,26 @@
     "4232": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-30T17:57:40+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/24EC",
       "presence_status": "verified-present",
       "providers": [
-        "Hoopla",
-        "Tubi"
+        "Hoopla"
       ],
       "title": "Scream",
       "year": 1996
     },
     "424": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-09-01T17:39:52+00:00",
+      "expires_on": "2027-09-01",
+      "expiry_by_service": {
+        "Netflix": "2027-09-01"
+      },
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/2aq2",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
       "title": "Schindler's List",
       "year": 1993
     },
@@ -666,10 +672,12 @@
     "429200": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/fcFu",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Hoopla"
+      ],
       "title": "Good Time",
       "year": 2017
     },
@@ -957,10 +965,12 @@
     "598": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/2a2a",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Hoopla"
+      ],
       "title": "City of God",
       "year": 2002
     },
@@ -977,10 +987,12 @@
     "60308": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-09-01T17:39:52+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/glS",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
       "title": "Moneyball",
       "year": 2011
     },
@@ -1079,10 +1091,12 @@
     "64720": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/DQ",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Amazon Prime Video"
+      ],
       "title": "Take Shelter",
       "year": 2011
     },
@@ -1273,10 +1287,12 @@
     "773": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-09-01T17:39:52+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/29EW",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Netflix"
+      ],
       "title": "Little Miss Sunshine",
       "year": 2006
     },
@@ -1337,12 +1353,10 @@
     "8363": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-09T04:28:10+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/20hO",
-      "presence_status": "verified-present",
-      "providers": [
-        "Tubi"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "Superbad",
       "year": 2007
     },
@@ -1379,10 +1393,12 @@
     "857": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/29ro",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Hoopla"
+      ],
       "title": "Saving Private Ryan",
       "year": 1998
     },
@@ -1477,10 +1493,12 @@
     "97367": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/3mDu",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "YouTube Free"
+      ],
       "title": "The Place Beyond the Pines",
       "year": 2012
     },
@@ -1505,7 +1523,7 @@
       "year": 2000
     }
   },
-  "last_run": "2026-09-01T17:39:52+00:00",
+  "last_run": "2026-09-02T17:39:10+00:00",
   "leaving_soon_alerts": {
     "345:Tubi:14": "2026-08-24",
     "345:Tubi:3": "2026-08-29",
