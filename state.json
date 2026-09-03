@@ -206,10 +206,12 @@
     "146233": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "last_changed": "2026-09-03T17:33:42+00:00",
       "letterboxd_uri": "https://boxd.it/4E5i",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "YouTube Free"
+      ],
       "title": "Prisoners",
       "year": 2013
     },
@@ -261,13 +263,16 @@
       "year": 2002
     },
     "181886": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-09-02T17:39:10+00:00",
+      "expires_on": "2026-11-01",
+      "expiry_by_service": {
+        "Tubi": "2026-11-01"
+      },
+      "last_changed": "2026-09-03T17:33:42+00:00",
       "letterboxd_uri": "https://boxd.it/5xtO",
       "presence_status": "verified-present",
       "providers": [
-        "Hoopla"
+        "Hoopla",
+        "Tubi"
       ],
       "title": "Enemy",
       "year": 2013
@@ -323,8 +328,10 @@
       "year": 1989
     },
     "210577": {
-      "expires_on": null,
-      "expiry_by_service": {},
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Netflix": "2026-10-01"
+      },
       "last_changed": "2026-08-08T22:13:30+00:00",
       "letterboxd_uri": "https://boxd.it/6hQu",
       "presence_status": "verified-present",
@@ -411,6 +418,7 @@
     "275": {
       "expires_on": "2026-10-01",
       "expiry_by_service": {
+        "Netflix": "2026-10-01",
         "Tubi": "2026-10-01"
       },
       "last_changed": "2026-08-09T04:28:10+00:00",
@@ -636,10 +644,8 @@
       "year": 1996
     },
     "424": {
-      "expires_on": "2027-09-01",
-      "expiry_by_service": {
-        "Netflix": "2027-09-01"
-      },
+      "expires_on": null,
+      "expiry_by_service": {},
       "last_changed": "2026-09-02T17:39:10+00:00",
       "letterboxd_uri": "https://boxd.it/2aq2",
       "presence_status": "verified-present",
@@ -670,13 +676,16 @@
       "year": 2018
     },
     "429200": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-09-02T17:39:10+00:00",
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Tubi": "2026-10-01"
+      },
+      "last_changed": "2026-09-03T17:33:42+00:00",
       "letterboxd_uri": "https://boxd.it/fcFu",
       "presence_status": "verified-present",
       "providers": [
-        "Hoopla"
+        "Hoopla",
+        "Tubi"
       ],
       "title": "Good Time",
       "year": 2017
@@ -862,12 +871,15 @@
       "year": 2019
     },
     "524": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-08-09T04:28:10+00:00",
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Tubi": "2026-10-01"
+      },
+      "last_changed": "2026-09-03T17:33:42+00:00",
       "letterboxd_uri": "https://boxd.it/2ads",
       "presence_status": "verified-present",
       "providers": [
+        "Tubi",
         "YouTube Free"
       ],
       "title": "Casino",
@@ -987,12 +999,10 @@
     "60308": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-09-02T17:39:10+00:00",
+      "last_changed": "2026-09-03T17:33:42+00:00",
       "letterboxd_uri": "https://boxd.it/glS",
-      "presence_status": "verified-present",
-      "providers": [
-        "Netflix"
-      ],
+      "presence_status": "verified-absent",
+      "providers": [],
       "title": "Moneyball",
       "year": 2011
     },
@@ -1171,12 +1181,16 @@
       "year": 1994
     },
     "68718": {
-      "expires_on": null,
-      "expiry_by_service": {},
-      "last_changed": "2026-08-08T22:13:30+00:00",
+      "expires_on": "2026-10-01",
+      "expiry_by_service": {
+        "Tubi": "2026-10-01"
+      },
+      "last_changed": "2026-09-03T17:33:42+00:00",
       "letterboxd_uri": "https://boxd.it/2cCk",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Tubi"
+      ],
       "title": "Django Unchained",
       "year": 2012
     },
@@ -1353,10 +1367,12 @@
     "8363": {
       "expires_on": null,
       "expiry_by_service": {},
-      "last_changed": "2026-09-02T17:39:10+00:00",
+      "last_changed": "2026-09-03T17:33:42+00:00",
       "letterboxd_uri": "https://boxd.it/20hO",
-      "presence_status": "verified-absent",
-      "providers": [],
+      "presence_status": "verified-present",
+      "providers": [
+        "Tubi"
+      ],
       "title": "Superbad",
       "year": 2007
     },
@@ -1523,7 +1539,7 @@
       "year": 2000
     }
   },
-  "last_run": "2026-09-02T17:39:10+00:00",
+  "last_run": "2026-09-03T17:33:42+00:00",
   "leaving_soon_alerts": {
     "345:Tubi:14": "2026-08-24",
     "345:Tubi:3": "2026-08-29",
